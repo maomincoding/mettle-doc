@@ -6,7 +6,7 @@
 
 ## 数据绑定
 
-Strve 允许开发人员以声明方式将 DOM 绑定到底层实例的数据。
+Mettle 允许开发人员以声明方式将 DOM 绑定到底层实例的数据。
 
 ### 文本
 
@@ -83,7 +83,7 @@ defineComponent(({ setData }) => {
   return () => (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Strve.js</p> : <null></null>}</div>
+      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
 });
@@ -118,7 +118,7 @@ defineComponent(({ setData }) => {
 ```
 
 ::: warning
-同一个父元素下的子元素必须具有唯一的 key。重复的 key 将会导致渲染异常。key 这个特殊的 attribute 主要作为 Strve 的虚拟 DOM 算法提示，在比较新旧节点列表时用于识别 vnode。
+同一个父元素下的子元素必须具有唯一的 key。重复的 key 将会导致渲染异常。key 这个特殊的 attribute 主要作为 Mettle 的虚拟 DOM 算法提示，在比较新旧节点列表时用于识别 vnode。
 :::
 
 ## 事件处理
@@ -144,9 +144,9 @@ defineComponent(() => {
 
 ## 组件化
 
-Strve 应用程序是由 组件 组成的。一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。
+Mettle 应用程序是由 组件 组成的。一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。
 
-在 Strve 中，组件就是一个函数。
+在 Mettle 中，组件就是一个函数。
 
 ```jsx
 const MyComponent = defineComponent(({ setData }) => {
@@ -190,9 +190,9 @@ defineComponent(
 );
 ```
 
-Strve 内部的渲染系统是基于虚拟 DOM 构建的，虚拟 DOM (Virtual DOM，简称 VDOM) 是一种编程概念，意为将目标所需的 UI 通过数据结构“虚拟”地表示出来，保存在内存中，然后利用 Diff 算法来比对新老数据，将真实的 DOM 与之保持同步。
+Mettle 内部的渲染系统是基于虚拟 DOM 构建的，虚拟 DOM (Virtual DOM，简称 VDOM) 是一种编程概念，意为将目标所需的 UI 通过数据结构“虚拟”地表示出来，保存在内存中，然后利用 Diff 算法来比对新老数据，将真实的 DOM 与之保持同步。
 
-如何虚拟 DOM 树过于庞大，使得 Diff 计算时间大于 16.6ms，那么就可能造成性能的卡顿。组件有一个特性就是 **”孤岛“**。何为“孤岛”，孤岛就是在 Strve 应用中我们可以理解成一个独立的模块。将一个庞大的虚拟 DOM 树分解成很多独立的模块，这样 Diff 计算时间就会控制在模块级别，大大缩减了计算的时间，提高了性能。
+如何虚拟 DOM 树过于庞大，使得 Diff 计算时间大于 16.6ms，那么就可能造成性能的卡顿。组件有一个特性就是 **”孤岛“**。何为“孤岛”，孤岛就是在 Mettle 应用中我们可以理解成一个独立的模块。将一个庞大的虚拟 DOM 树分解成很多独立的模块，这样 Diff 计算时间就会控制在模块级别，大大缩减了计算的时间，提高了性能。
 
 ## 内置属性
 
@@ -271,7 +271,7 @@ defineComponent(({ setData }) => {
   return () => (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Strve.js</p> : <null></null>}</div>
+      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
 });

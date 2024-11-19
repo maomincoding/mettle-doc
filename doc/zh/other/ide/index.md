@@ -1,7 +1,7 @@
 # IDE 支持
 
 ::: tip
-如果你使用标签模版来编写 Strve 应用，下面内容会帮到你。
+如果你使用标签模版来编写 Mettle 应用，下面内容会帮到你。
 :::
 
 ## Visual Studio Code

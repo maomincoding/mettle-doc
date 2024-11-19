@@ -1,7 +1,7 @@
 # 安装
 
 ::: tip
-上一篇，我们简单快速地了解 Strve 的使用，那么我们在这一篇详细说明下 Strve 有哪些安装方法。
+上一篇，我们简单快速地了解 Mettle 的使用，那么我们在这一篇详细说明下 Mettle 有哪些安装方法。
 :::
 
 ## CDN
@@ -17,7 +17,7 @@
   import {
     html,
     defineComponent,
-  } from 'https://cdn.jsdelivr.net/npm/strve-js@6.7.1/dist/strve.full-esm.js';
+  } from 'https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full-esm.js';
 
   defineComponent(
     {
@@ -41,13 +41,13 @@
 如果你觉得上述方式有点麻烦，也可以直接在 `<script>` 标签中导入。
 
 ::: tip
-该版本的所有顶层 API 都以属性的形式暴露在了全局的 Strve 对象上。
+该版本的所有顶层 API 都以属性的形式暴露在了全局的 Mettle 对象上。
 :::
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/strve-js@6.7.1/dist/strve.full.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full.prod.js"></script>
 <script>
-  const { html, defineComponent } = Strve;
+  const { html, defineComponent } = Mettle;
 
   defineComponent(
     {
@@ -74,26 +74,26 @@
 
 ## 包管理器
 
-在用 Strve 构建大型应用时，推荐使用包管理器安装。
+在用 Mettle 构建大型应用时，推荐使用包管理器安装。
 
 ```bash
-> npm install strve-js
+> npm install mettle
 ```
 
 ## 命令行工具
 
-当你构建大型应用时，推荐使用 Strve 提供的官方项目脚手架 [CreateStrveApp](/tool/createStrveApp/) 来搭建项目。为单页面应用 (SPA) 快速搭建繁杂的脚手架。它为现代前端工作流提供了开箱即用的构建设置。
+当你构建大型应用时，推荐使用 Mettle 提供的官方项目脚手架 [createMettleApp](/zh/tool/createMettleApp/) 来搭建项目。为单页面应用 (SPA) 快速搭建繁杂的脚手架。它为现代前端工作流提供了开箱即用的构建设置。
 
 ## 对不同构建版本的解释
 
-在 NPM 包的 `dist/` 目录你将会找到很多不同的 Strve 构建版本。这里列出了它们之间的差别：
+在 NPM 包的 `dist/` 目录你将会找到很多不同的 Mettle 构建版本。这里列出了它们之间的差别：
 
-|                    | ES Module (基于构建工具使用) | ES Module (直接用于浏览器) | UMD                |
-| ------------------ | ---------------------------- | -------------------------- | ------------------ |
-| 完整版             | -                            | strve.full-esm.js          | strve.full.js      |
-| 完整版(生产环境)   | -                            | strve.full-esm.prod.js     | strve.full.prod.js |
-| 运行时版           | strve.runtime-esm.js         | -                          | -                  |
-| 运行时版(生产环境) | strve.runtime-esm.prod.js    | -                          | -                  |
+|                    | ES Module (基于构建工具使用) | ES Module (直接用于浏览器) | UMD                 |
+| ------------------ | ---------------------------- | -------------------------- | ------------------- |
+| 完整版             | -                            | mettle.full-esm.js         | mettle.full.js      |
+| 完整版(生产环境)   | -                            | mettle.full-esm.prod.js    | mettle.full.prod.js |
+| 运行时版           | mettle.runtime-esm.js        | -                          | -                   |
+| 运行时版(生产环境) | mettle.runtime-esm.prod.js   | -                          | -                   |
 
 不同的版本：
 

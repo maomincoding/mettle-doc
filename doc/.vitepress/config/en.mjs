@@ -49,28 +49,28 @@ export const en = defineConfig({
         collapsible: false,
         items: [
           {
-            text: 'CreateStrveApp',
-            link: '/tool/createStrveApp/',
+            text: 'CreateMettleApp',
+            link: '/tool/createMettleApp/',
           },
           {
-            text: 'StrveRouter',
-            link: '/tool/strveRouter/',
+            text: 'MettleRouter',
+            link: '/tool/mettleRouter/',
           },
           {
-            text: 'BabelPluginStrve',
-            link: '/tool/babelPluginStrve/',
+            text: 'BabelPluginMettle',
+            link: '/tool/babelPluginMettle/',
           },
           {
-            text: 'BabelPluginJsxToStrve',
-            link: '/tool/babelPluginJsxToStrve/',
+            text: 'BabelPluginJsxToMettle',
+            link: '/tool/babelPluginJsxToMettle/',
           },
           {
-            text: 'StrveReactivity',
-            link: '/tool/strveReactivity/',
+            text: 'MettleWebComponents',
+            link: '/tool/mettleWebComponents/',
           },
           {
-            text: 'StrveRv',
-            link: '/tool/strveRv/',
+            text: 'MettleReactivity',
+            link: '/tool/mettleReactivity/',
           },
         ],
       },

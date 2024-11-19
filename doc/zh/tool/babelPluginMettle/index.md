@@ -1,15 +1,15 @@
-# babelPluginStrve
+# babelPluginMettle
 
-[babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve) 是一款 babel 插件，将 HTML 模板字符串转化为 Virtual Dom。从之前的运行时转移到编译时，大幅度提高渲染性能。
+[babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle) 是一款 babel 插件，将 HTML 模板字符串转化为 Virtual Dom。从之前的运行时转移到编译时，大幅度提高渲染性能。
 
 ## 安装
 
 ```bash
-npm install babel-plugin-strve
+npm install babel-plugin-mettle
 ```
 
 ::: tip
-[CreateStrveApp](/tool/createStrveApp/) 项目脚手架工具已默认安装。
+[createMettleApp](/tool/createMettleApp/) 项目脚手架工具已默认安装。
 :::
 
 ## 用法
@@ -18,7 +18,7 @@ npm install babel-plugin-strve
 
 ```json
 {
-  "plugins": [["babel-plugin-strve"]]
+  "plugins": [["babel-plugin-mettle"]]
 }
 ```
 
@@ -26,13 +26,13 @@ npm install babel-plugin-strve
 
 ### tag=html
 
-默认情况下，[babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve) 将处理所有带有名为 `html` 的标记函数的标记模板。 要使用不同的名称，请在 `Babel` 配置中使用 `tag` 选项：
+默认情况下，[babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle) 将处理所有带有名为 `html` 的标记函数的标记模板。 要使用不同的名称，请在 `Babel` 配置中使用 `tag` 选项：
 
 ```json
 {
   "plugins": [
     [
-      "babel-plugin-strve",
+      "babel-plugin-mettle",
       {
         "tag": "html"
       }

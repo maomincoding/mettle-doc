@@ -43,28 +43,28 @@ export const zh = defineConfig({
         collapsible: false,
         items: [
           {
-            text: 'CreateStrveApp',
-            link: '/zh/tool/createStrveApp/',
+            text: 'CreateMettleApp',
+            link: '/zh/tool/createMettleApp/',
           },
           {
-            text: 'StrveRouter',
-            link: '/zh/tool/strveRouter/',
+            text: 'MettleRouter',
+            link: '/zh/tool/mettleRouter/',
           },
           {
-            text: 'BabelPluginStrve',
-            link: '/zh/tool/babelPluginStrve/',
+            text: 'BabelPluginMettle',
+            link: '/zh/tool/babelPluginMettle/',
           },
           {
-            text: 'BabelPluginJsxToStrve',
-            link: '/zh/tool/babelPluginJsxToStrve/',
+            text: 'BabelPluginJsxToMettle',
+            link: '/zh/tool/babelPluginJsxToMettle/',
           },
           {
-            text: 'StrveReactivity',
-            link: '/zh/tool/strveReactivity/',
+            text: 'MettleWebComponents',
+            link: '/zh/tool/mettleWebComponents/',
           },
           {
-            text: 'StrveRv',
-            link: '/zh/tool/strveRv/',
+            text: 'MettleReactivity',
+            link: '/zh/tool/mettleReactivity/',
           },
         ],
       },

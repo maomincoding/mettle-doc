@@ -1,10 +1,10 @@
-# strveRouter
+# mettleRouter
 
 ::: tip
 为了更好的阅读体验，下面的代码示例都使用 JSX 语法编写。
 :::
 
-StrveRouter 是 Strve 的官方路由管理器。 它与 Strve 的核心深度集成，轻松构建单页应用程序。
+`mettleRouter` 是 Mettle 的官方路由管理器。 它与 Mettle 的核心深度集成，轻松构建单页应用程序。
 
 ## 开始
 
@@ -14,8 +14,8 @@ StrveRouter 是 Strve 的官方路由管理器。 它与 Strve 的核心深度�
 
 ```jsx
 // home.jsx
-import { defineComponent } from 'strve-js';
-import { linkTo } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo } from 'mettle-router';
 import logo from '../assets/logo.png';
 
 const home = () =>
@@ -68,8 +68,8 @@ export default home;
 
 ```jsx
 // about.jsx
-import { defineComponent } from 'strve-js';
-import { linkTo, toParse } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo, toParse } from 'mettle-router';
 
 const about = () =>
   defineComponent(() => {
@@ -98,8 +98,8 @@ export default about;
 
 ```js
 // router/index.js
-import { resetView } from 'strve-js';
-import { initRouter } from 'strve-router';
+import { resetView } from 'mettle';
+import { initRouter } from 'mettle-router';
 
 import home from '../template/home';
 import about from '../template/about';
@@ -125,7 +125,7 @@ export default router;
 
 ```jsx
 // main.js
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import router from './router/index';
 import './styles/app.css';
 
@@ -142,12 +142,12 @@ defineComponent(
 ## 安装
 
 ```bash
-npm install strve-router
+npm install mettle-router
 ```
 
 ## 使用
 
-你可以使用[CreateStrveApp](/tool/createStrveApp/)，选择 **strve-apps** 或者 **strve-jsx-apps** 模板。
+你可以使用[createMettleApp](/zh/tool/createMettleApp/)，选择 **mettle-apps** 或者 **mettle-jsx-apps** 模板。
 
 ## API
 
@@ -159,8 +159,8 @@ npm install strve-router
 
 ```js
 // router/index.js
-import { resetView } from 'strve-js';
-import { initRouter } from 'strve-router';
+import { resetView } from 'mettle';
+import { initRouter } from 'mettle-router';
 
 import home from '../template/home';
 import about from '../template/about';
@@ -186,7 +186,7 @@ export default router;
 
 ```jsx
 // main.js
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import router from './router/index';
 import './styles/app.css';
 
@@ -205,8 +205,8 @@ defineComponent(
 如果需要跳转到对应的页面，使用`linkTo()`方法，可以传递对应的路径和要传递的参数，也可以直接传递路径字符串。
 
 ```jsx
-import { defineComponent } from 'strve-js';
-import { linkTo } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo } from 'mettle-router';
 
 const about = () =>
   defineComponent(() => {
@@ -243,8 +243,8 @@ export default about;
 如果执行路由参数的操作，则要获取参数对象。 直接执行`toParse()`方法可以获取对象信息。
 
 ```jsx
-import { defineComponent } from 'strve-js';
-import { linkTo, toParse } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo, toParse } from 'mettle-router';
 
 const about = () =>
   defineComponent(() => {
@@ -271,4 +271,4 @@ export default about;
 
 ### routerVersion
 
-可以获取 StrveRouter 的版本信息。
+可以获取 `mettleRouter` 的版本信息。

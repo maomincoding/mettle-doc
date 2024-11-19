@@ -4,12 +4,12 @@
 为了更好的阅读体验，下面的代码示例都使用 JSX 语法编写。
 :::
 
-如果想看到页面效果，可以访问[源代码仓库](https://github.com/strveJs/strve-examples)。
+如果想看到页面效果，可以访问[源代码仓库](https://github.com/maomincoding/mettle-examples)。
 
 ## 双向绑定
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const TwoWay = () => {
   return defineComponent(({ setData }) => {
@@ -35,7 +35,7 @@ export default TwoWay;
 ## 父组件传值给子组件
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Son = () => {
   return defineComponent(({ setData, content }) => {
@@ -94,7 +94,7 @@ export default Father;
 ## 子组件传值给父组件
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Son = () => {
   return defineComponent(({ content }) => {
@@ -136,7 +136,7 @@ export default Father;
 ## 插槽
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Son = () => {
   return defineComponent(({ setData, content }) => {
@@ -192,7 +192,7 @@ export default Slot;
 ## 嵌套组件
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const NestedComponents = () => {
   const subComponent = defineComponent(({ setData }) => {
@@ -222,7 +222,7 @@ export default NestedComponents;
 ## 计时器
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Timer = () => {
   return defineComponent(({ setData }) => {
@@ -272,7 +272,7 @@ export default Timer;
 ## 状态存储
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import store from './store.js';
 
 const Son = () => {
@@ -409,7 +409,7 @@ export default store;
 ## 画圆
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import './index.less';
 
 function clone(circles) {
@@ -489,7 +489,7 @@ circle {
 ## 黑白格
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import './index.less';
 
 const BlackWhiteGum = () => {

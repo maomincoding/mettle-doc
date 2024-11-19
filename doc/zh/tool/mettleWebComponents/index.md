@@ -1,14 +1,14 @@
-# strveReactivity
+# mettleWebComponents
 
 ::: tip
 为了更好的阅读体验，下面的代码示例都使用 JSX 语法编写。
 :::
 
-独立运行的可响应性 Strve。
+用于创建 Web 的快速、轻量级的 Web Components。
 
 ## 介绍
 
-由 [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) 和 [strve-js](https://github.com/strveJs/strve) 提供支持的自定义元素 JavaScript 库。
+由 [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) 和 [mettle](https://github.com/maomincoding/mettle) 提供支持的自定义元素 JavaScript 库。
 
 主要特性有以下几个：
 
@@ -25,7 +25,7 @@
 ## API
 
 ```js
-// strve-reactivity API
+// mettle-web-components API
 export {
   resetView,
   createApp,
@@ -47,7 +47,7 @@ export * from './reactivity.js';
 
 ```js
 // main.js
-import { createApp } from 'strve-reactivity';
+import { createApp } from 'mettle-web-components';
 import register from './components/register';
 
 import App from './App';
@@ -67,7 +67,7 @@ export default () => <my-component></my-component>;
 
 ```jsx
 // MyComponent.jsx
-import { ref, defineComponent, reactive } from 'strve-reactivity';
+import { ref, defineComponent, reactive } from 'mettle-web-components';
 
 export const MyComponent = defineComponent(() => {
   const items = reactive([
@@ -110,7 +110,7 @@ export const MyComponent = defineComponent(() => {
 
 ```jsx
 // MyChild.jsx
-import { defineComponent, reactive, onMounted, onUnmounted } from 'strve-reactivity';
+import { defineComponent, reactive, onMounted, onUnmounted } from 'mettle-web-components';
 
 export const MyChild = defineComponent(() => {
   const state = reactive({ count: 0, msg: '' });
@@ -140,7 +140,7 @@ export const MyChild = defineComponent(() => {
 
 ```js
 // register.js
-import { registerComponent } from 'strve-reactivity';
+import { registerComponent } from 'mettle-web-components';
 import { MyComponent } from './MyComponent';
 import { MyChild } from './MyChild';
 
@@ -153,4 +153,4 @@ export default function register() {
 
 ## 其他示例
 
-还有其他关于`strve-reactivity`的用法，可以前往[example](https://github.com/strveJs/strve-reactivity/tree/main/example)。
+还有其他关于`mettleWebComponents`的用法，可以前往[mettle-web-components-examples](https://github.com/maomincoding/mettle-web-components-examples)。

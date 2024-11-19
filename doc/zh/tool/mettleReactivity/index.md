@@ -1,4 +1,4 @@
-# strveRv
+# mettleReactivity
 
 ::: tip
 为了更好的阅读体验，下面的代码示例都使用 JSX 语法编写。
@@ -6,16 +6,16 @@
 
 ## 介绍
 
-Strve-rv 是一个用于在 Web 上构建用户界面的响应性库。
+一个用于在 Web 上构建用户界面的响应性库。
 
 - 声明式渲染：我们可以声明式地描述最终输出的 HTML 和 JavaScript 状态之间的关系。
 - 响应性：自动跟踪 JavaScript 状态并在其发生变化时响应式地更新 DOM。
 - 组件化： 一个函数就是一个组件，可以根据应用规模任意组合。并且组件特有的 “孤岛特性”，使得将虚拟 DOM 树计算的级别控制在组件级别。
 - 轻量级： 压缩后的文件大小不足 10k。
 - 支持 [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) 所有 API。
-- 支持 [StrveRouter](/tool/createStrveApp/)。
+- 支持 [mettleRouter](/tool/mettleRouter/)。
 
-由 [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) 和 [strve-js](https://github.com/strveJs/strve) 提供支持。所以在使用 StrveRv 之前必须熟悉使用两者的用法。
+由 [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) 和 [mettle](https://github.com/maomincoding/mettle) 提供支持。所以在使用 `mettleReactivity` 之前必须熟悉使用两者的用法。
 
 ## API
 
@@ -60,17 +60,17 @@ defineComponent(
 ```jsx
 const app = defineComponent(({ content }) => {
   content.data = {
-    name: 'Strve',
+    name: 'mettle-reactivity',
   };
 
   return () => (
     <div>
-      <h1>Hello Strve</h1>
+      <h1>Hello mettle-reactivity</h1>
     </div>
   );
 });
 
-console.log(app.data); // {name:'Strve'}
+console.log(app.data); // {name:'mettle-reactivity'}
 ```
 
 ### onMounted
@@ -136,7 +136,7 @@ defineComponent(() => {
 ### 单组件环境
 
 ```jsx
-import { defineComponent, ref, reactive, watch, domInfo, computed } from 'strve-rv';
+import { defineComponent, ref, reactive, watch, domInfo, computed } from 'mettle-reactivity';
 
 const Component1 = defineComponent(() => {
   const count = ref(1);
@@ -223,8 +223,8 @@ defineComponent(
 
 ```jsx
 // home.jsx
-import { defineComponent, ref, onMounted, onUnmounted } from 'strve-rv';
-import { linkTo } from 'strve-router';
+import { defineComponent, ref, onMounted, onUnmounted } from 'mettle-reactivity';
+import { linkTo } from 'mettle-router';
 import { useMouse } from './mouse.js';
 
 const component1 = () =>
@@ -293,8 +293,8 @@ export default home;
 
 ```jsx
 // about.jsx
-import { defineComponent, onMounted, onUnmounted, ref } from 'strve-rv';
-import { linkTo, toParse } from 'strve-router';
+import { defineComponent, onMounted, onUnmounted, ref } from 'mettle-reactivity';
+import { linkTo, toParse } from 'mettle-router';
 
 const about = () =>
   defineComponent(({ content }) => {
@@ -341,7 +341,7 @@ export default about;
 
 ```js
 // mouse.js
-import { ref, onMounted, onUnmounted } from 'strve-rv';
+import { ref, onMounted, onUnmounted } from 'mettle-reactivity';
 
 export function useMouse() {
   const x = ref(0);
