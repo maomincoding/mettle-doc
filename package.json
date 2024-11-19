@@ -1,0 +1,22 @@
+{
+  "name": "mettle-doc",
+  "version": "1.0.0",
+  "description": "Documentation for mettle.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maomincoding/mettle-doc"
+  },
+  "author": "maomincoding",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "devDependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress": "^1.5.0"
+  },
+  "scripts": {
+    "dev": "vitepress dev doc",
+    "build": "vitepress build doc",
+    "preview": "vitepress preview doc"
+  }
+}
