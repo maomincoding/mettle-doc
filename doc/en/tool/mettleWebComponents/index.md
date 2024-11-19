@@ -1,14 +1,14 @@
-# strveReactivity
+# mettleWebComponents
 
 ::: tip
 For a better reading experience, the following code examples are written using JSX syntax.
 :::
 
-Standalone responsiveness Strve.
+Fast, lightweight web components for creating web pages.
 
 ## Introduce
 
-Powered by [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) and [strve-js](https://github.com/strveJs/strve) Custom elements JavaScript library.
+Powered by [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) and [mettle](https://github.com/maomincoding/mettle) Custom elements JavaScript library.
 
 The main features are as follows:
 
@@ -25,7 +25,7 @@ The main features are as follows:
 ## API
 
 ```js
-// strve-reactivity API
+// mettle-web-components API
 export {
   resetView,
   createApp,
@@ -47,7 +47,7 @@ export * from './reactivity.js';
 
 ```js
 // main.js
-import { createApp } from 'strve-reactivity';
+import { createApp } from 'mettle-web-components';
 import register from './components/register';
 
 import App from './App';
@@ -67,7 +67,7 @@ export default () => <my-component></my-component>;
 
 ```jsx
 // MyComponent.jsx
-import { ref, defineComponent, reactive } from 'strve-reactivity';
+import { ref, defineComponent, reactive } from 'mettle-web-components';
 
 export const MyComponent = defineComponent(() => {
   const items = reactive([
@@ -110,7 +110,7 @@ export const MyComponent = defineComponent(() => {
 
 ```jsx
 // MyChild.jsx
-import { defineComponent, reactive, onMounted, onUnmounted } from 'strve-reactivity';
+import { defineComponent, reactive, onMounted, onUnmounted } from 'mettle-web-components';
 
 export const MyChild = defineComponent(() => {
   const state = reactive({ count: 0, msg: '' });
@@ -140,7 +140,7 @@ export const MyChild = defineComponent(() => {
 
 ```js
 // register.js
-import { registerComponent } from 'strve-reactivity';
+import { registerComponent } from 'mettle-web-components';
 import { MyComponent } from './MyComponent';
 import { MyChild } from './MyChild';
 
@@ -153,4 +153,4 @@ export default function register() {
 
 ## Other Examples
 
-There are other usages of `strve-reactivity`, you can go to [example](https://github.com/strveJs/strve-reactivity/tree/main/example).
+There are other usages of `mettle-web-components`, you can go to [mettle-web-components-examples](https://github.com/maomincoding/mettle-web-components-examples).

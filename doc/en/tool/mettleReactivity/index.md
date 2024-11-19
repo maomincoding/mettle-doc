@@ -1,4 +1,4 @@
-# strveRv
+# mettleReactivity
 
 ::: tip
 For a better reading experience, the following code examples are written using JSX syntax.
@@ -6,16 +6,16 @@ For a better reading experience, the following code examples are written using J
 
 ## Introduce
 
-Strve-rv is a reactivity library for building user interfaces on the web.
+A reactivity library for building user interfaces on the web.
 
 - Declarative rendering: We can declaratively describe the relationship between the final output HTML and JavaScript state.
 - Responsiveness: Automatically track JavaScript state and responsively update DOM when it changes.
 - Componentization: A function is a component, which can be combined arbitrarily according to the scale of the application. And the "island feature" unique to components makes the level of virtual DOM tree calculation controlled at the component level.
 - Lightweight: The compressed file size is less than 10k.
 - Supports all APIs of [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity).
-- Supports [StrveRouter](/tool/createStrveApp/).
+- Supports [mettleRouter](/tool/mettleRouter/).
 
-Powered by [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) and [strve-js](https://github.com/strveJs/strve). So you must be familiar with the usage of both before using StrveRv.
+Powered by [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) and [mettle](https://github.com/maomincoding/mettle). So you must be familiar with the usage of both before using `mettleReactivity`.
 
 ## API
 
@@ -60,17 +60,17 @@ Among them, we can use content to define data for the component and use it when 
 ```jsx
 const app = defineComponent(({ content }) => {
   content.data = {
-    name: 'Strve',
+    name: 'Mettle',
   };
 
   return () => (
     <div>
-      <h1>Hello Strve</h1>
+      <h1>Hello Mettle</h1>
     </div>
   );
 });
 
-console.log(app.data); // {name:'Strve'}
+console.log(app.data); // {name:'Mettle'}
 ```
 
 ### onMounted
@@ -136,7 +136,7 @@ defineComponent(() => {
 ### Single component environment
 
 ```jsx
-import { defineComponent, ref, reactive, watch, domInfo, computed } from 'strve-rv';
+import { defineComponent, ref, reactive, watch, domInfo, computed } from 'mettle-reactivity';
 
 const Component1 = defineComponent(() => {
   const count = ref(1);
@@ -223,8 +223,8 @@ defineComponent(
 
 ```jsx
 // home.jsx
-import { defineComponent, ref, onMounted, onUnmounted } from 'strve-rv';
-import { linkTo } from 'strve-router';
+import { defineComponent, ref, onMounted, onUnmounted } from 'mettle-reactivity';
+import { linkTo } from 'mettle-router';
 import { useMouse } from './mouse.js';
 
 const component1 = () =>
@@ -293,8 +293,8 @@ export default home;
 
 ```jsx
 // about.jsx
-import { defineComponent, onMounted, onUnmounted, ref } from 'strve-rv';
-import { linkTo, toParse } from 'strve-router';
+import { defineComponent, onMounted, onUnmounted, ref } from 'mettle-reactivity';
+import { linkTo, toParse } from 'mettle-router';
 
 const about = () =>
   defineComponent(({ content }) => {
@@ -341,7 +341,7 @@ export default about;
 
 ```js
 // mouse.js
-import { ref, onMounted, onUnmounted } from 'strve-rv';
+import { ref, onMounted, onUnmounted } from 'mettle-reactivity';
 
 export function useMouse() {
   const x = ref(0);

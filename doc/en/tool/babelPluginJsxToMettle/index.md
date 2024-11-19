@@ -1,15 +1,15 @@
-# babelPluginJsxToStrve
+# babelPluginJsxToMettle
 
-[babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve) is a babel plugin that converts JSX for use with Strve tag template.
+[babelPluginJsxToMettle](https://www.npmjs.com/package/babel-plugin-jsx-to-mettle) is a babel plugin that converts JSX for use with Mettle tag template.
 
 ## Install
 
 ```bash
-npm install babel-plugin-jsx-to-strve
+npm install babel-plugin-jsx-to-mettle
 ```
 
 ::: tip
-[CreateStrveApp](/tool/createStrveApp/) The project scaffolding tool has been installed by default. Select the `strve-jsx` or `strve-jsx-apps` template.
+[createMettleApp](/tool/createMettleApp/) The project scaffolding tool has been installed by default. Select the `mettle-jsx` or `mettle-jsx-apps` template.
 :::
 
 ## Usage
@@ -19,7 +19,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 ```js
 {
   "plugins": [
-    ["babel-plugin-jsx-to-strve"]
+    ["babel-plugin-jsx-to-mettle"]
   ]
 }
 ```
@@ -28,11 +28,11 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 
 ### `tag=html`
 
-By default, [babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve) will handle all functions tagged with the name `html` markup template. To use a different name, use the `tag` option in the Babel configuration:
+By default, [babelPluginJsxToMettle](https://www.npmjs.com/package/babel-plugin-jsx-to-mettle) will handle all functions tagged with the name `html` markup template. To use a different name, use the `tag` option in the Babel configuration:
 
 ```js
 {"plugins":[
-  ["babel-plugin-jsx-to-strve", {
+  ["babel-plugin-jsx-to-mettle", {
     "tag": "html"
   }]
 ]}

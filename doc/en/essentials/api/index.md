@@ -20,7 +20,7 @@ defineComponent(
   () => {
     return () => (
       <div>
-        <h1>Hello Strve</h1>
+        <h1>Hello Mettle</h1>
       </div>
     );
   }
@@ -32,17 +32,17 @@ Among them, we can use `content` to define data for the component and use it whe
 ```jsx
 const app = defineComponent(({ setData, content }) => {
   content.data = {
-    name: 'Strve',
+    name: 'Mettle',
   };
 
   return () => (
     <div>
-      <h1>Hello Strve</h1>
+      <h1>Hello Mettle</h1>
     </div>
   );
 });
 
-console.log(app.data); // {name:'Strve'}
+console.log(app.data); // {name:'Mettle'}
 ```
 
 ## setData
@@ -76,7 +76,7 @@ defineComponent(({ setData }) => {
 **External scope:**
 
 ```jsx
-import { defineComponent, setData } from 'strve-js';
+import { defineComponent, setData } from 'mettle';
 
 let count = 0;
 

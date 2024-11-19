@@ -1,10 +1,10 @@
-# strveRouter
+# mettleRouter
 
 ::: tip
 For a better reading experience, the following code examples are written using JSX syntax.
 :::
 
-StrveRouter is the official routing manager of Strve. It is deeply integrated with Strve’s core to easily build single-page applications.
+`mettleRouter` is the official routing manager of Mettle. It is deeply integrated with Mettle’s core to easily build single-page applications.
 
 ## Started
 
@@ -14,8 +14,8 @@ We can start learning based on the following steps.
 
 ```jsx
 // home.jsx
-import { defineComponent } from 'strve-js';
-import { linkTo } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo } from 'mettle-router';
 import logo from '../assets/logo.png';
 
 const home = () =>
@@ -68,8 +68,8 @@ export default home;
 
 ```jsx
 // about.jsx
-import { defineComponent } from 'strve-js';
-import { linkTo, toParse } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo, toParse } from 'mettle-router';
 
 const about = () =>
   defineComponent(() => {
@@ -98,8 +98,8 @@ export default about;
 
 ```js
 // router/index.js
-import { resetView } from 'strve-js';
-import { initRouter } from 'strve-router';
+import { resetView } from 'mettle';
+import { initRouter } from 'mettle-router';
 
 import home from '../template/home';
 import about from '../template/about';
@@ -125,7 +125,7 @@ export default router;
 
 ```jsx
 // main.js
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import router from './router/index';
 import './styles/app.css';
 
@@ -142,12 +142,12 @@ defineComponent(
 ## Install
 
 ```bash
-npm install strve-router
+npm install mettle-router
 ```
 
 ## Usage
 
-You can use [CreateStrveApp](/tool/createStrveApp/) and choose the **strve-apps** or **strve-jsx-apps** template.
+You can use [createMettleApp](/tool/createMettleApp/) and choose the **mettle-apps** or **mettle-jsx-apps** template.
 
 ## API
 
@@ -159,8 +159,8 @@ The second parameter needs to be passed to the `resetView` API, and the page mat
 
 ```js
 // router/index.js
-import { resetView } from 'strve-js';
-import { initRouter } from 'strve-router';
+import { resetView } from 'mettle';
+import { initRouter } from 'mettle-router';
 
 import home from '../template/home';
 import about from '../template/about';
@@ -186,7 +186,7 @@ Components matching the route will be rendered to where the `view()` method is l
 
 ```jsx
 // main.js
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import router from './router/index';
 import './styles/app.css';
 
@@ -205,8 +205,8 @@ defineComponent(
 If you need to jump to the corresponding page, use the `linkTo()` method. You can pass the corresponding path and parameters to be passed, or you can pass the path string directly.
 
 ```jsx
-import { defineComponent } from 'strve-js';
-import { linkTo } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo } from 'mettle-router';
 
 const about = () =>
   defineComponent(() => {
@@ -243,8 +243,8 @@ Jump n pages within the page.
 If you perform the operation of routing parameters, you need to obtain the parameter object. Directly executing the `toParse()` method can obtain object information.
 
 ```jsx
-import { defineComponent } from 'strve-js';
-import { linkTo, toParse } from 'strve-router';
+import { defineComponent } from 'mettle';
+import { linkTo, toParse } from 'mettle-router';
 
 const about = () =>
   defineComponent(() => {
@@ -271,4 +271,4 @@ export default about;
 
 ### routerVersion
 
-You can get the version information of StrveRouter.
+You can get the version information of `mettleRouter`.

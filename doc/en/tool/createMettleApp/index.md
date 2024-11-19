@@ -1,43 +1,43 @@
-# createStrveApp
+# createMettleApp
 
-A set of command line tools for quickly building Strve projects. CreateStrveApp is built using [Vite](https://vitejs.dev/), a new front-end building tool that significantly improves the front-end development experience.
+A set of command line tools for quickly building Mettle projects. createMettleApp is built using [Vite](https://vitejs.dev/), a new front-end building tool that significantly improves the front-end development experience.
 
-## Scaffolding Your First Strve Project
+## Scaffolding Your First Mettle Project
 
 **npm**
 
 ```bash
-npm create strve-app@latest
+npm create mettle-app@latest
 ```
 
 **yarn**
 
 ```bash
-yarn create strve-app
+yarn create mettle-app
 ```
 
 **pnpm**
 
 ```bash
-pnpm create strve-app
+pnpm create mettle-app
 ```
 
 ## Choose a template
 
 You can choose the corresponding template according to your needs.
 
-- strve
+- mettle
 
-Only contains the basic functions of Strve. This template is suitable for applications that only have a single page in the project and do not jump to other pages.
+Only contains the basic functions of Mettle. This template is suitable for applications that only have a single page in the project and do not jump to other pages.
 
-- strve-apps
+- mettle-apps
 
-Not only includes the basic functions of Strve, but also includes Strve Router, which is suitable for jumping multiple pages and slightly more complex applications.
+Not only includes the basic functions of Mettle, but also includes mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.
 
-- strve-jsx
+- mettle-jsx
 
-Strve is developed using JSX syntax.
+Mettle is developed using JSX syntax.
 
-- strve-jsx-apps
+- mettle-jsx-apps
 
-Use JSX syntax to develop Strve + Strve Router, which is suitable for jumping multiple pages and slightly more complex applications.
+Use JSX syntax to develop Mettle + mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.

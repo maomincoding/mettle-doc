@@ -6,7 +6,7 @@ For a better reading experience, the following code examples are written using J
 
 ## Data Binding
 
-Strve allows developers to declaratively bind the DOM to the underlying instance's data.
+Mettle allows developers to declaratively bind the DOM to the underlying instance's data.
 
 ### Text
 
@@ -83,7 +83,7 @@ defineComponent(({ setData }) => {
   return () => (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Strve.js</p> : <null></null>}</div>
+      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
 });
@@ -118,7 +118,7 @@ defineComponent(({ setData }) => {
 ```
 
 ::: warning
-Child elements under the same parent element must have unique keys. Duplicate keys will cause rendering exceptions. The special attribute key is mainly used as a hint for Strve's virtual DOM algorithm, and is used to identify vnode when comparing the old and new node lists.
+Child elements under the same parent element must have unique keys. Duplicate keys will cause rendering exceptions. The special attribute key is mainly used as a hint for Mettle's virtual DOM algorithm, and is used to identify vnode when comparing the old and new node lists.
 :::
 
 ## Event Handling
@@ -144,9 +144,9 @@ defineComponent(() => {
 
 ## Componentization
 
-Strve applications are composed of components. A component is a part of a UI (user interface) that has its own logic and appearance. Components can be as small as a button or as large as an entire page.
+Mettle applications are composed of components. A component is a part of a UI (user interface) that has its own logic and appearance. Components can be as small as a button or as large as an entire page.
 
-In Strve, a component is a function.
+In Mettle, a component is a function.
 
 ```jsx
 const MyComponent = defineComponent(({ setData }) => {
@@ -190,12 +190,11 @@ defineComponent(
 );
 ```
 
-The internal rendering system of Strve is built based on virtual DOM. Virtual DOM (Virtual DOM, referred to as VDOM) is a programming concept, which means to "virtually" represent the UI required by the target through a data structure and save it in memory. Then use the Diff algorithm to compare the old and new data and synchronize the real DOM with it.
+The internal rendering system of Mettle is built based on virtual DOM. Virtual DOM (Virtual DOM, referred to as VDOM) is a programming concept, which means to "virtually" represent the UI required by the target through a data structure and save it in memory. Then use the Diff algorithm to compare the old and new data and synchronize the real DOM with it.
 
-If the virtual DOM tree is too large and the Diff calculation time is greater than 16.6ms, it may cause performance lag. One characteristic of components is "isolated islands". What is an "isolated island"? An isolated island can be understood as an independent module in the Strve application. Decompose a huge virtual DOM tree into many independent modules, so that the Diff calculation time will be controlled at the module level, greatly reducing the calculation time and improving performance.
+If the virtual DOM tree is too large and the Diff calculation time is greater than 16.6ms, it may cause performance lag. One characteristic of components is "isolated islands". What is an "isolated island"? An isolated island can be understood as an independent module in the Mettle application. Decompose a huge virtual DOM tree into many independent modules, so that the Diff calculation time will be controlled at the module level, greatly reducing the calculation time and improving performance.
 
 ## Built-in Properties
-
 
 ### $is
 
@@ -272,7 +271,7 @@ defineComponent(({ setData }) => {
   return () => (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Strve.js</p> : <null></null>}</div>
+      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
 });

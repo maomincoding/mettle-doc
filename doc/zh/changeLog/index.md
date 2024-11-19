@@ -6,4 +6,4 @@
 
 ## v0.1.2 (Latest)
 
-Newly released!
+全新发布！

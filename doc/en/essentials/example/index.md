@@ -4,12 +4,12 @@
 For a better reading experience, the following code examples are written using JSX syntax.
 :::
 
-If you want to see the page effect, you can visit [source code repository](https://github.com/strveJs/strve-examples).
+If you want to see the page effect, you can visit [source code repository](https://github.com/maomincoding/mettle-examples).
 
 ## TwoWay
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const TwoWay = () => {
   return defineComponent(({ setData }) => {
@@ -35,7 +35,7 @@ export default TwoWay;
 ## FatherToSon
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Son = () => {
   return defineComponent(({ setData, content }) => {
@@ -94,7 +94,7 @@ export default Father;
 ## SonToFather
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Son = () => {
   return defineComponent(({ content }) => {
@@ -136,7 +136,7 @@ export default Father;
 ## Slot
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Son = () => {
   return defineComponent(({ setData, content }) => {
@@ -192,7 +192,7 @@ export default Slot;
 ## NestedComponents
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const NestedComponents = () => {
   const subComponent = defineComponent(({ setData }) => {
@@ -222,7 +222,7 @@ export default NestedComponents;
 ## Timer
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 
 const Timer = () => {
   return defineComponent(({ setData }) => {
@@ -272,7 +272,7 @@ export default Timer;
 ## Store
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import store from './store.js';
 
 const Son = () => {
@@ -409,7 +409,7 @@ export default store;
 ## CircleDrawer
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import './index.less';
 
 function clone(circles) {
@@ -489,7 +489,7 @@ circle {
 ## BlackWhiteGum
 
 ```jsx
-import { defineComponent } from 'strve-js';
+import { defineComponent } from 'mettle';
 import './index.less';
 
 const BlackWhiteGum = () => {

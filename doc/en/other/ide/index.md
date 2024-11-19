@@ -1,7 +1,7 @@
 # IDE support
 
 ::: tip
-If you use tag templates to write Strve applications, the following content will help you.
+If you use tag templates to write Mettle applications, the following content will help you.
 :::
 
 ## Visual Studio Code

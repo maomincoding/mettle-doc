@@ -1,7 +1,7 @@
 # Install
 
 ::: tip
-In the previous article, we briefly and quickly understood the use of Strve, so in this article we will explain in detail the installation methods of Strve.
+In the previous article, we briefly and quickly understood the use of Mettle, so in this article we will explain in detail the installation methods of Mettle.
 :::
 
 ## CDN
@@ -17,7 +17,7 @@ If you open the above index.html directly in the browser, you will find that it 
   import {
     html,
     defineComponent,
-  } from 'https://cdn.jsdelivr.net/npm/strve-js@6.7.1/dist/strve.full-esm.js';
+  } from 'https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full-esm.js';
 
   defineComponent(
     {
@@ -41,13 +41,13 @@ If you open the above index.html directly in the browser, you will find that it 
 If you find the above method a bit troublesome, you can also import it directly in the `<script>` tag.
 
 ::: tip
-All top-level APIs of this version are exposed as properties on the global Strve object.
+All top-level APIs of this version are exposed as properties on the global Mettle object.
 :::
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/strve-js@6.7.1/dist/strve.full.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full.prod.js"></script>
 <script>
-  const { html, defineComponent } = Strve;
+  const { html, defineComponent } = Mettle;
 
   defineComponent(
     {
@@ -74,26 +74,26 @@ The above two methods use the production version by default. If you want to get 
 
 ## Package Manager
 
-When building large applications with Strve, it is recommended to install using a package manager.
+When building large applications with Mettle, it is recommended to install using a package manager.
 
 ```bash
-> npm install strve-js
+> npm install mettle
 ```
 
 ## CLI
 
-When you build a large-scale application, it is recommended to use the official project scaffolding [CreateStrveApp](/tool/createStrveApp/) provided by Strve to build the project. Quickly build complex scaffolding for single page applications (SPA). It provides out-of-the-box build settings for modern front-end workflows.
+When you build a large-scale application, it is recommended to use the official project scaffolding [createMettleApp](/tool/createMettleApp/) provided by Mettle to build the project. Quickly build complex scaffolding for single page applications (SPA). It provides out-of-the-box build settings for modern front-end workflows.
 
 ## Explanation of the different builds
 
-You'll find many different builds of Strve in the `dist/` directory of the NPM package. Here are the differences between them:
+You'll find many different builds of Mettle in the `dist/` directory of the NPM package. Here are the differences between them:
 
-|                                          | ES Module (used based on build tools) | ES Module (directly used in browsers) | UMD                |
-| ---------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------ |
-| Full Version                             | -                                     | strve.full-esm.js                     | strve.full.js      |
-| Full version (production environment)    | -                                     | strve.full-esm.prod.js                | strve.full.prod.js |
-| Runtime version                          | strve.runtime-esm.js                  | -                                     | -                  |
-| Runtime version (production environment) | strve.runtime-esm.prod.js             | -                                     | -                  |
+|                                          | ES Module (used based on build tools) | ES Module (directly used in browsers) | UMD                 |
+| ---------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------- |
+| Full Version                             | -                                     | mettle.full-esm.js                    | mettle.full.js      |
+| Full version (production environment)    | -                                     | mettle.full-esm.prod.js               | mettle.full.prod.js |
+| Runtime version                          | mettle.runtime-esm.js                 | -                                     | -                   |
+| Runtime version (production environment) | mettle.runtime-esm.prod.js            | -                                     | -                   |
 
 Different versions:
 

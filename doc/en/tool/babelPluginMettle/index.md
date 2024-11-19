@@ -1,15 +1,15 @@
-# babelPluginStrve
+# babelPluginMettle
 
-[babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve) is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
+[babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle) is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
 
 ## Install
 
 ```bash
-npm install babel-plugin-strve
+npm install babel-plugin-mettle
 ```
 
 ::: tip
-[CreateStrveApp](/tool/createStrveApp/) The project scaffolding tool is installed by default.
+[createMettleApp](/tool/createMettleApp/) The project scaffolding tool is installed by default.
 :::
 
 ## Usage
@@ -18,7 +18,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 
 ```json
 {
-  "plugins": [["babel-plugin-strve"]]
+  "plugins": [["babel-plugin-mettle"]]
 }
 ```
 
@@ -26,13 +26,13 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 
 ### tag=html
 
-By default, [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve) will process all markup templates with a markup function named `html`. To use a different name, use the `tag` option in your `Babel` configuration:
+By default, [babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle) will process all markup templates with a markup function named `html`. To use a different name, use the `tag` option in your `Babel` configuration:
 
 ```json
 {
   "plugins": [
     [
-      "babel-plugin-strve",
+      "babel-plugin-mettle",
       {
         "tag": "html"
       }
