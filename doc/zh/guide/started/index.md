@@ -36,7 +36,7 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
       import {
         html,
         defineComponent,
-      } from 'https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full-esm.js';
+      } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
       defineComponent(
         {
@@ -75,7 +75,7 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
     <title>Mettle.js</title>
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
     <script>
       const { html, defineComponent } = Mettle;
 

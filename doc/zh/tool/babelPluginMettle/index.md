@@ -9,7 +9,7 @@ npm install babel-plugin-mettle
 ```
 
 ::: tip
-[createMettleApp](/tool/createMettleApp/) 项目脚手架工具已默认安装。
+[createMettleApp](/zh/tool/createMettleApp/) 项目脚手架工具已默认安装。
 :::
 
 ## 用法

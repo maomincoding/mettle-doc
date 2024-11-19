@@ -22,6 +22,12 @@ The main features are as follows:
 - Automatic registration component
 - Virtual DOM
 
+## Install
+
+```bash
+npm install mettle-web-components
+```
+
 ## API
 
 ```js

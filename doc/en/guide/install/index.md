@@ -17,7 +17,7 @@ If you open the above index.html directly in the browser, you will find that it 
   import {
     html,
     defineComponent,
-  } from 'https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full-esm.js';
+  } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
   defineComponent(
     {
@@ -45,7 +45,7 @@ All top-level APIs of this version are exposed as properties on the global Mettl
 :::
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
 <script>
   const { html, defineComponent } = Mettle;
 

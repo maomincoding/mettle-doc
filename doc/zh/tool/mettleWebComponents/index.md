@@ -22,6 +22,12 @@
 - Automatic registration component
 - Virtual DOM
 
+## 安装
+
+```bash
+npm install mettle-web-components
+```
+
 ## API
 
 ```js

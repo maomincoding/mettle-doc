@@ -4,23 +4,21 @@ A set of command line tools for quickly building Mettle projects. createMettleAp
 
 ## Scaffolding Your First Mettle Project
 
-**npm**
+::: code-group
 
-```bash
+```bash [npm]
 npm create mettle-app@latest
 ```
 
-**yarn**
+```bash [pnpm]
+pnpm create mettle-app
+```
 
-```bash
+```bash [yarn]
 yarn create mettle-app
 ```
 
-**pnpm**
-
-```bash
-pnpm create mettle-app
-```
+:::
 
 ## Choose a template
 

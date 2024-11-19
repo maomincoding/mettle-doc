@@ -4,23 +4,21 @@
 
 ## 搭建你的第一个 Mettle 应用
 
-**npm**
+::: code-group
 
-```bash
+```bash [npm]
 npm create mettle-app@latest
 ```
 
-**yarn**
+```bash [pnpm]
+pnpm create mettle-app
+```
 
-```bash
+```bash [yarn]
 yarn create mettle-app
 ```
 
-**pnpm**
-
-```bash
-pnpm create mettle-app
-```
+:::
 
 ## 选择一个模板
 

@@ -13,9 +13,15 @@
 - 组件化： 一个函数就是一个组件，可以根据应用规模任意组合。并且组件特有的 “孤岛特性”，使得将虚拟 DOM 树计算的级别控制在组件级别。
 - 轻量级： 压缩后的文件大小不足 10k。
 - 支持 [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) 所有 API。
-- 支持 [mettleRouter](/tool/mettleRouter/)。
+- 支持 [mettleRouter](/zh/tool/mettleRouter/)。
 
 由 [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) 和 [mettle](https://github.com/maomincoding/mettle) 提供支持。所以在使用 `mettleReactivity` 之前必须熟悉使用两者的用法。
+
+## 安装
+
+```bash
+npm install mettle-reactivity
+```
 
 ## API
 

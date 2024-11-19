@@ -9,7 +9,7 @@ npm install babel-plugin-jsx-to-mettle
 ```
 
 ::: tip
-[createMettleApp](/tool/createMettleApp/) 项目脚手架工具已默认安装，选择`mettle-jsx` 或者 `mettle-jsx-apps` 模版。
+[createMettleApp](/zh/tool/createMettleApp/) 项目脚手架工具已默认安装，选择`mettle-jsx` 或者 `mettle-jsx-apps` 模版。
 :::
 
 ## 用法

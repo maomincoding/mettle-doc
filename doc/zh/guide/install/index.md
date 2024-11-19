@@ -17,7 +17,7 @@
   import {
     html,
     defineComponent,
-  } from 'https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full-esm.js';
+  } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
   defineComponent(
     {
@@ -45,7 +45,7 @@
 :::
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mettle@0.1.2/dist/mettle.full.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
 <script>
   const { html, defineComponent } = Mettle;
 

@@ -17,6 +17,12 @@ A reactivity library for building user interfaces on the web.
 
 Powered by [@vue/reactivity](https://github.com/vuejs/core/tree/main/packages/reactivity) and [mettle](https://github.com/maomincoding/mettle). So you must be familiar with the usage of both before using `mettleReactivity`.
 
+## Install
+
+```bash
+npm install mettle-reactivity
+```
+
 ## API
 
 ### defineComponent
