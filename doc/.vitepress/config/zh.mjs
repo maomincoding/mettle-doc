@@ -26,15 +26,15 @@ export const zh = defineConfig({
         items: [
           {
             text: 'API',
-            link: '/zh/essentials/api',
+            link: '/zh/essentials/api/',
           },
           {
             text: '用法',
-            link: '/zh/essentials/usage',
+            link: '/zh/essentials/usage/',
           },
           {
             text: '案例',
-            link: '/zh/essentials/example',
+            link: '/zh/essentials/example/',
           },
         ],
       },
