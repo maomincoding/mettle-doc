@@ -6,7 +6,7 @@ export const shared = defineConfig({
   rewrites: {
     'en/:rest*': ':rest*',
   },
-  lastUpdated: true,
+  lastUpdated: false,
   cleanUrls: true,
   metaChunk: true,
   markdown: {

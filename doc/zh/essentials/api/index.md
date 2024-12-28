@@ -157,7 +157,7 @@ defineComponent(() => {
 
 ```jsx
 defineComponent(() => {
-  const h1 = ref();
+  const h1 = {};
 
   function getDomInfo() {
     console.log('domInfo', domInfo.get(h1));
