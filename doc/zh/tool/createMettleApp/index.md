@@ -39,3 +39,11 @@ yarn create mettle-app
 - mettle-jsx-apps
 
 使用 JSX 语法开发 Mettle + mettleRouter，适用于跳转多个页面以及稍微复杂一些的应用。
+
+- mettle-tsx
+
+使用 TSX 语法开发 Mettle 应用。
+
+- mettle-tsx-apps
+
+使用 TSX 语法开发 Mettle + mettleRouter，适用于跳转多个页面以及稍微复杂一些的应用。

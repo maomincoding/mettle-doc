@@ -72,6 +72,14 @@ export const en = defineConfig({
             text: 'MettleReactivity',
             link: '/tool/mettleReactivity/',
           },
+          {
+            text: 'BabelPresetMettle',
+            link: '/tool/babelPresetMettle/',
+          },
+          {
+            text: 'VitePluginMettle',
+            link: '/tool/vitePluginMettle/',
+          },
         ],
       },
       {
@@ -81,6 +89,10 @@ export const en = defineConfig({
           {
             text: 'JSX Support',
             link: '/other/jsx/',
+          },
+          {
+            text: 'TSX Support',
+            link: '/other/tsx/',
           },
           {
             text: 'IDE Support',

@@ -8,7 +8,7 @@ Mettle is a JavaScript library for building user interfaces.
 
 - **Smooth user experience:** Template strings are used to write templates. In some scenarios, code intelligent prompts and code formatting are not particularly friendly. Therefore, we provide a new coding method. We can use JSX syntax to write Mettle to improve user development experience.
 
-- **Excellent performance:** Adopts the virtual DOM mode. The virtual DOM uses the diff algorithm to calculate the nodes that really need to be updated, minimizing DOM operations and the typesetting and redrawing losses caused by DOM operations. This significantly improves performance.
+- **Excellent performance:** Adopts the virtual DOM mode. The virtual DOM uses the diff algorithm to calculate the nodes that really need to be updated, minimizing DOM operations and the typesetting and redrawing losses caused by DOM operations. This significantly improves performance. In addition, our JavaScript library has won excellent results on the world-renowned [benchmark list](https://github.com/krausest/js-framework-benchmark).
 
 - **Componentization:** A function is a component, which can be arbitrarily combined according to the size of the application. And the unique "island feature" of the component allows the level of virtual DOM tree calculation to be controlled at the component level.
 

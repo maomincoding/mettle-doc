@@ -4,7 +4,11 @@
 Although the version number uses the version number of Mettle, the content includes not only the updated content of Mettle, but also the updated content of other official tools in the same period.
 :::
 
-## v0.2.1 (Latest)
+## v0.3.1 (Latest)
+
+- Support TSX development applications. TSX provides type safety, better development experience and code maintainability in front-end projects.
+
+## v0.2.1
 
 Newly released!
 

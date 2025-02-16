@@ -89,6 +89,75 @@ defineComponent(({ setData }) => {
 });
 ```
 
+::: warning
+当条件渲染涉及渲染自定义组件时，组件内`onMounted`、`onUnmounted`API 不会触发。可以根据下面方法进行调整：
+:::
+
+```jsx
+import { defineComponent } from 'mettle';
+import Button from '../components/button/index';
+
+defineComponent(({ setData }) => {
+  const ButtonC = Button();
+  let isShow = false;
+  ButtonC.getShow(isShow);
+
+  function show() {
+    setData(() => {
+      isShow = !isShow;
+      if (!isShow) {
+        ButtonC.onUnmount();
+      } else {
+        ButtonC.getShow(isShow);
+      }
+    });
+  }
+
+  return () => (
+    <fragment>
+      <button onClick={show}>show</button>
+      <div>
+        {isShow ? (
+          <div>
+            <component $is={ButtonC}></component>
+          </div>
+        ) : (
+          <null></null>
+        )}
+      </div>
+    </fragment>
+  );
+});
+```
+
+```jsx
+import { defineComponent } from 'mettle';
+
+const Button = () =>
+  defineComponent(({ setData, content }) => {
+    let timer = null;
+    let count = 0;
+
+    content.getShow = (val) => {
+      if (val) {
+        timer = setInterval(() => {
+          setData(() => {
+            count++;
+          });
+        }, 1000);
+      }
+    };
+    content.onUnmount = () => {
+      console.log('clearInterval');
+      clearInterval(timer);
+    };
+
+    return () => <button>{count}</button>;
+  });
+
+export default Button;
+```
+
 ## 列表渲染
 
 渲染基于数组的列表，使用数组的`map`方法来返回一个数组。
@@ -230,6 +299,28 @@ defineComponent(
     );
   }
 );
+```
+
+### $ref
+
+配合 API`domInfo`使用，获取 DOM 信息。
+
+```jsx
+defineComponent(() => {
+  const h1 = {};
+
+  function getDomInfo() {
+    console.log('domInfo', domInfo.get(h1));
+  }
+
+  return () => (
+    <fragment>
+      <h1 $ref={h1} onClick={getDomInfo}>
+        Hello
+      </h1>
+    </fragment>
+  );
+});
 ```
 
 ## 内置标签

@@ -39,3 +39,11 @@ Mettle is developed using JSX syntax.
 - mettle-jsx-apps
 
 Use JSX syntax to develop Mettle + mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.
+
+- mettle-tsx
+
+Mettle is developed using TSX syntax.
+
+- mettle-tsx-apps
+
+Use TSX syntax to develop Mettle + mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.

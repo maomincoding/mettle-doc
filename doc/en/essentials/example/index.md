@@ -564,3 +564,70 @@ export default BlackWhiteGum;
   border: 1px solid #ccc;
 }
 ```
+
+## Toast prompt component
+
+```jsx
+import { defineComponent } from 'mettle';
+import Toast from '../components/toast/index';
+
+defineComponent(() => {
+  const toast = Toast();
+
+  function handleShow() {
+    toast.show('show');
+  }
+
+  return () => (
+    <fragment>
+      <button onClick={handleShow}>show</button>
+      <component $is={toast}></component>
+    </fragment>
+  );
+});
+```
+
+```jsx
+import { defineComponent } from 'mettle';
+
+export default () =>
+  defineComponent(({ setData, content }) => {
+    let isShow = false;
+    let timer = null;
+    let msg = 'Toast';
+
+    content.show = (val) => {
+      clearTimeout(timer);
+      setData(() => {
+        isShow = true;
+        msg = val;
+      });
+      timer = setTimeout(() => {
+        setData(() => {
+          isShow = false;
+        });
+      }, 2000);
+    };
+
+    function toastStyles() {
+      return {
+        position: 'fixed',
+        padding: '8px 20px',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        color: 'white',
+        borderRadius: '4px',
+        fontSize: '14px',
+        zIndex: 9999,
+        top: '20px',
+        left: '50%',
+        opacity: isShow ? 0.8 : 0,
+        visibility: isShow ? 'visible' : 'hidden',
+        transform: isShow ? 'translateY(0)' : 'translateY(-20px)',
+        transition: 'opacity 0.5s ease, transform 0.5s ease',
+        cursor: 'pointer',
+      };
+    }
+
+    return () => <div style={toastStyles()}>{msg}</div>;
+  });
+```

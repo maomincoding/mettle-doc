@@ -66,6 +66,14 @@ export const zh = defineConfig({
             text: 'MettleReactivity',
             link: '/zh/tool/mettleReactivity/',
           },
+          {
+            text: 'BabelPresetMettle',
+            link: '/zh/tool/babelPresetMettle/',
+          },
+          {
+            text: 'VitePluginMettle',
+            link: '/zh/tool/vitePluginMettle/',
+          },
         ],
       },
       {
@@ -75,6 +83,10 @@ export const zh = defineConfig({
           {
             text: 'JSX 支持',
             link: '/zh/other/jsx/',
+          },
+          {
+            text: 'TSX 支持',
+            link: '/zh/other/tsx/',
           },
           {
             text: 'IDE 支持',
