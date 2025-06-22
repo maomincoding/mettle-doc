@@ -631,3 +631,28 @@ export default () =>
     return () => <div style={toastStyles()}>{msg}</div>;
   });
 ```
+
+## 对象转换为字符串
+
+```jsx
+function useObjToStyle(obj: any) {
+  const needUnit = (key: any) => !/[0-9]$/.test(key) && typeof obj[key] === 'number';
+
+  return Object.entries(obj)
+    .map(([key, value]) => {
+      const cssKey = key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
+      const cssValue = needUnit(key) ? `${value}px` : value;
+      return `${cssKey}:${cssValue};`;
+    })
+    .join(' ');
+}
+
+let isShow = true;
+function useShowStyle() {
+  const style = {
+    display: isShow ? 'block' : 'none',
+  };
+
+  return useObjToStyle(style);
+}
+```

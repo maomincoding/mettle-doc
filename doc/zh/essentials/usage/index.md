@@ -323,6 +323,87 @@ defineComponent(() => {
 });
 ```
 
+### $once
+
+仅渲染元素一次，并跳过之后的更新。
+
+```jsx
+defineComponent(({ setData }) => {
+  let count = 0;
+
+  function add() {
+    setData(() => {
+      count++;
+    });
+  }
+
+  return () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1 $once>{count}</h1>
+      <input value={count} />
+    </fragment>
+  );
+});
+```
+
+### $memo
+
+缓存一个模板的子树，跳过子树的更新。
+
+该属性需要传入一个固定长度的数组。数组第一项的值的类型为 `Boolean`，如果值为`false`，那么整个子树的更新将被跳过。数组第二项值的类型为 `Symbol`，与 `setData` 搭配使用。
+
+```jsx
+defineComponent(({ setData }) => {
+  const symbol1 = Symbol();
+  let selected = 0;
+  let arr = [
+    {
+      id: '1',
+      val: 'A',
+    },
+    {
+      id: '2',
+      val: 'B',
+    },
+    {
+      id: '3',
+      val: 'C',
+    },
+  ];
+
+  function handle(event) {
+    const el = event.target;
+    const id = Number(el.dataset.id);
+    setData(
+      () => {
+        selected = id;
+      },
+      null,
+      symbol1
+    );
+    return false;
+  }
+
+  return () => (
+    <fragment>
+      <ul onClick={handle}>
+        {arr.map((todo) => (
+          <li
+            $memo={[todo.id == selected, symbol1]}
+            class={todo.id == selected ? 'danger' : ''}
+            key={todo.id}
+            data-id={todo.id}
+          >
+            {todo.val}
+          </li>
+        ))}
+      </ul>
+    </fragment>
+  );
+});
+```
+
 ## 内置标签
 
 ### component

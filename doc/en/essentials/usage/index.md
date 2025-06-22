@@ -323,6 +323,87 @@ defineComponent(() => {
 });
 ```
 
+### $once
+
+Render the element only once, and skip future updates.
+
+```jsx
+defineComponent(() => {
+  let count = 0;
+
+  function add() {
+    setData(() => {
+      count++;
+    });
+  }
+
+  return () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1 $once>{count}</h1>
+      <input value={count} />
+    </fragment>
+  );
+});
+```
+
+### $memo
+
+Cache a subtree of a template and skip the update of the subtree.
+
+This property requires an array of fixed length. The value of the first item in the array is of type `Boolean`. If the value is `false`, the update of the entire subtree will be skipped. The value of the second item in the array is of type `Symbol`, which is used with `setData`.
+
+```jsx
+defineComponent(({ setData }) => {
+  const symbol1 = Symbol();
+  let selected = 0;
+  let arr = [
+    {
+      id: '1',
+      val: 'A',
+    },
+    {
+      id: '2',
+      val: 'B',
+    },
+    {
+      id: '3',
+      val: 'C',
+    },
+  ];
+
+  function handle(event) {
+    const el = event.target;
+    const id = Number(el.dataset.id);
+    setData(
+      () => {
+        selected = id;
+      },
+      null,
+      symbol1
+    );
+    return false;
+  }
+
+  return () => (
+    <fragment>
+      <ul onClick={handle}>
+        {arr.map((todo) => (
+          <li
+            $memo={[todo.id == selected, symbol1]}
+            class={todo.id == selected ? 'danger' : ''}
+            key={todo.id}
+            data-id={todo.id}
+          >
+            {todo.val}
+          </li>
+        ))}
+      </ul>
+    </fragment>
+  );
+});
+```
+
 ## Built-in Tags
 
 ### component

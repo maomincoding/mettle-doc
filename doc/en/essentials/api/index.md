@@ -96,6 +96,8 @@ function add() {
 }
 ```
 
+The third parameter is optional. Its type is `Symbol` and is used with the built-in attribute `$memo` to indicate updated data.
+
 ## html
 
 ` html`` ` is a tag function. The syntax of the tag function is to directly follow the function name with a template string. For example, you can write HTML tags directly in the template string.
