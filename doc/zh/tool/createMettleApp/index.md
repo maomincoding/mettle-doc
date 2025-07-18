@@ -26,24 +26,16 @@ yarn create mettle-app
 
 - mettle
 
-仅包含 Mettle 的基本功能。 该模板适用于项目中只有一个页面且不跳转到其他页面的应用。
+使用 JSX 语法开发 Mettle 应用。
 
 - mettle-apps
 
-不仅包含了 Mettle 的基本功能，还包含了 mettleRouter，适用于跳转多个页面以及稍微复杂一些的应用。
-
-- mettle-jsx
-
-使用 JSX 语法开发 Mettle 应用。
-
-- mettle-jsx-apps
-
 使用 JSX 语法开发 Mettle + mettleRouter，适用于跳转多个页面以及稍微复杂一些的应用。
 
-- mettle-tsx
+- mettle-ts
 
 使用 TSX 语法开发 Mettle 应用。
 
-- mettle-tsx-apps
+- mettle-apps-ts
 
 使用 TSX 语法开发 Mettle + mettleRouter，适用于跳转多个页面以及稍微复杂一些的应用。

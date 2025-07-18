@@ -1,48 +1,17 @@
 # API
 
-::: tip
-为了更好的阅读体验，下面的代码示例，除了`html` API 使用标签模版编写， 其他都使用 JSX 语法编写。
-:::
+## createApp
 
-## defineComponent
+创建应用。
 
-定义组件。
-
-第一个参数为配置对象，可传。其配置属性为`mount`, 该配置属性用于挂载根组件。接收一个“容器”参数，可以是一个实际的 DOM 元素或是一个 CSS 选择器字符串。
-
-第二个参数为函数，必传。返回 HTML 模版。函数的参数为一个对象，对象的属性分别为`content`、`setData`。
+第一个参数为根组件，必传。第二个参数为用于挂载根组件。接收一个“容器”参数，可以是一个实际的 DOM 元素或是一个 CSS 选择器字符串。
 
 ```jsx
-defineComponent(
-  {
-    mount: '#app',
-  },
-  () => {
-    return () => (
-      <div>
-        <h1>Hello Mettle</h1>
-      </div>
-    );
-  }
-);
-```
+function App() {
+  return () => <h1>Hello</h1>;
+}
 
-其中，我们可以利用`content`给组件定义数据，并且在你需要的时候使用它。
-
-```jsx
-const app = defineComponent(({ setData, content }) => {
-  content.data = {
-    name: 'Mettle',
-  };
-
-  return () => (
-    <div>
-      <h1>Hello Mettle</h1>
-    </div>
-  );
-});
-
-console.log(app.data); // {name:'Mettle'}
+createApp(<App />, '#app');
 ```
 
 ## setData
@@ -55,7 +24,7 @@ console.log(app.data); // {name:'Mettle'}
 **内部作用域：**
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   let count = 0;
 
   function add() {
@@ -70,59 +39,40 @@ defineComponent(({ setData }) => {
       <h1>{count}</h1>
     </fragment>
   );
-});
+}
 ```
 
 **外部作用域：**
 
 ```jsx
-import { defineComponent, setData } from 'mettle';
+import { setData } from 'mettle';
 
 let count = 0;
 
-const app = defineComponent(() => {
+function add() {
+  setData(() => {
+    count++;
+  }, App);
+}
+
+function App() {
   return () => (
     <fragment>
       <button onClick={add}>Add</button>
       <h1>{count}</h1>
     </fragment>
   );
-});
-
-function add() {
-  setData(() => {
-    count++;
-  }, app);
 }
 ```
 
 第三个参数非必传，参数的类型是`Symbol`，与内置属性`$memo`搭配使用，用于标明更新的数据。
-
-## html
-
-` html`` `是一个标签函数，标签函数的语法是直接在函数名后跟一个模板字符串。 例如，你可以直接在模板字符串中编写 HTML 标签。
-
-在 JSX 语法环境下，不会用到此 API。
-
-```js
-defineComponent(() => {
-  let count = 0;
-
-  return () => html`<p>${count}</p>`;
-});
-```
-
-::: tip
-如果你使用的是 VSCode 编辑器，你可以去商店下载 [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) 插件，
-这个插件可以使 HTML 模板字符串高亮显示。
-:::
 
 ## onMounted
 
 注册一个回调函数，在组件挂载完成后执行。
 
 ```jsx
-defineComponent(() => {
+function App() {
   onMounted(() => {
     console.log('onMounted', 'about');
   });
@@ -132,7 +82,7 @@ defineComponent(() => {
       <h1>About</h1>
     </fragment>
   );
-});
+}
 ```
 
 ## onUnmounted
@@ -140,7 +90,7 @@ defineComponent(() => {
 注册一个回调函数，在组件实例被卸载之后调用。
 
 ```jsx
-defineComponent(() => {
+function App() {
   onUnmounted(() => {
     console.log('onUnmounted', 'about');
   });
@@ -150,7 +100,7 @@ defineComponent(() => {
       <h1>About</h1>
     </fragment>
   );
-});
+}
 ```
 
 ## domInfo
@@ -158,7 +108,7 @@ defineComponent(() => {
 获取 DOM 信息。
 
 ```jsx
-defineComponent(() => {
+function App() {
   const h1 = {};
 
   function getDomInfo() {
@@ -172,5 +122,23 @@ defineComponent(() => {
       </h1>
     </fragment>
   );
-});
+}
 ```
+
+## html
+
+` html`` `是一个标签函数，标签函数的语法是直接在函数名后跟一个模板字符串。 例如，你可以直接在模板字符串中编写 HTML 标签。
+
+在 JSX 语法环境下，不会用到此 API。
+
+```js
+function App() {
+  let count = 0;
+  return () => html`<p>${count}</p>`;
+}
+```
+
+::: tip
+如果你使用的是 VSCode 编辑器，你可以去商店下载 [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) 插件，
+这个插件可以使 HTML 模板字符串高亮显示。
+:::

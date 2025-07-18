@@ -4,9 +4,11 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
 
 - **更容易上手：** 只要你对 HTML、CSS 和 JavaScript 已经基本熟悉，就可以直接上手。
 
+- **顺滑的用户体验：** 可以使用 JSX 语法编写 Mettle，大大提升用户开发体验。
+
 - **声明式渲染：** 我们可以声明式地描述最终输出的 HTML 和 JavaScript 状态之间的关系，开发者可以更加专注于业务逻辑的开发，不需要过多地关心 DOM 操作的细节。
 
-- **顺滑的用户体验：** 模板字符串来进行模板的书写，在一些场景中代码智能提示、代码格式化方面不是特别友好。所以，我们提供了新的一种编码方式，我们可以使用 JSX 语法编写 Mettle，提升用户开发体验。
+- **符合直觉：** 使用熟悉的原生 JavaScript 语法，不改变 JavaScript 语义，回归原生 JavaScript 的纯净。
 
 - **性能出色：** 采用了虚拟 DOM 的模式，虚拟 DOM 使用 diff 算法的方法来计算出真正需要更新的节点，最大限度地减少了 DOM 操作以及 DOM 操作带来的排版与重绘损耗，从而显著提高了性能。另外，我们的 JavaScript 库在全球知名的[测评榜单](https://github.com/krausest/js-framework-benchmark)上赢得了优秀的成绩。
 
@@ -14,7 +16,7 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
 
 - **灵活的应用场景：** 有无构建工具都可以使用，并且可以适配到其他前端框架开发的应用项目中去。
 
-- **轻量级：** 压缩后的文件大小不足 **10k**。另外，可以根据不同应用场景，选择[不同类型](https://www.jsdelivr.com/package/npm/mettle?tab=files&path=dist)的文件。
+- **轻量级：** 压缩后的文件大小不足 **12k**。另外，可以根据不同应用场景，选择[不同类型](https://www.jsdelivr.com/package/npm/mettle?tab=files&path=dist)的文件。
 
 ## ES 模块
 
@@ -35,25 +37,21 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
     <script type="module">
       import {
         html,
-        defineComponent,
+        createApp,
       } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
-      defineComponent(
-        {
-          mount: '#app',
-        },
-        ({ setData }) => {
+      function App({ setData }) {
           let count = 0;
 
           function add() {
-            setData(() => {
-              count++;
-            });
+              setData(() => {
+                  count++;
+              });
           }
-
           return () => html`<h1 onClick=${add}>${count}</h1>`;
-        }
-      );
+      }
+
+      createApp(html`<${App}/>`, '#app');
     </script>
   </body>
 </html>
@@ -77,24 +75,20 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
   <body>
     <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
     <script>
-      const { html, defineComponent } = Mettle;
+      const { html, createApp } = Mettle;
 
-      defineComponent(
-        {
-          mount: '#app',
-        },
-        ({ setData }) => {
+      function App({ setData }) {
           let count = 0;
 
           function add() {
-            setData(() => {
-              count++;
-            });
+              setData(() => {
+                  count++;
+              });
           }
-
           return () => html`<h1 onClick=${add}>${count}</h1>`;
-        }
-      );
+      }
+
+      createApp(html`<${App}/>`, '#app');
     </script>
   </body>
 </html>

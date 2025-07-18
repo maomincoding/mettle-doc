@@ -8,4 +8,4 @@
 
 ## 使用
 
-[createMettleApp](/zh/tool/createMettleApp/) 项目脚手架工具已默认安装，选择`mettle-tsx` 或者 `mettle-tsx-apps` 模版即可。
+[createMettleApp](/zh/tool/createMettleApp/) 项目脚手架工具已默认安装，选择`mettle-ts` 或者 `mettle-apps-ts` 模版即可。

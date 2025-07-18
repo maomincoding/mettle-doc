@@ -16,25 +16,21 @@
 <script type="module">
   import {
     html,
-    defineComponent,
+    createApp,
   } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
-  defineComponent(
-    {
-      mount: '#app',
-    },
-    ({ setData }) => {
+  function App({ setData }) {
       let count = 0;
 
       function add() {
-        setData(() => {
-          count++;
-        });
+          setData(() => {
+              count++;
+          });
       }
-
       return () => html`<h1 onClick=${add}>${count}</h1>`;
-    }
-  );
+  }
+
+  createApp(html`<${App}/>`, '#app');
 </script>
 ```
 
@@ -47,24 +43,20 @@
 ```html
 <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
 <script>
-  const { html, defineComponent } = Mettle;
+  const { html, createApp } = Mettle;
 
-  defineComponent(
-    {
-      mount: '#app',
-    },
-    ({ setData }) => {
+  function App({ setData }) {
       let count = 0;
 
       function add() {
-        setData(() => {
-          count++;
-        });
+          setData(() => {
+              count++;
+          });
       }
-
       return () => html`<h1 onClick=${add}>${count}</h1>`;
-    }
-  );
+  }
+
+  createApp(html`<${App}/>`, '#app');
 </script>
 ```
 

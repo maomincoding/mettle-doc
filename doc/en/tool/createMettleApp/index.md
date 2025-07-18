@@ -26,24 +26,16 @@ You can choose the corresponding template according to your needs.
 
 - mettle
 
-Only contains the basic functions of Mettle. This template is suitable for applications that only have a single page in the project and do not jump to other pages.
+Mettle is developed using JSX syntax.
 
 - mettle-apps
 
-Not only includes the basic functions of Mettle, but also includes mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.
-
-- mettle-jsx
-
-Mettle is developed using JSX syntax.
-
-- mettle-jsx-apps
-
 Use JSX syntax to develop Mettle + mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.
 
-- mettle-tsx
+- mettle-ts
 
 Mettle is developed using TSX syntax.
 
-- mettle-tsx-apps
+- mettle-apps-ts
 
 Use TSX syntax to develop Mettle + mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.

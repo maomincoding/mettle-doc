@@ -265,42 +265,6 @@ If the virtual DOM tree is too large and the Diff calculation time is greater th
 
 ## Built-in Properties
 
-### $is
-
-This attribute needs to be used on the built-in tag `component` to render the component.
-
-```jsx
-const MyComponent = defineComponent(({ setData }) => {
-  let count = 0;
-
-  function add() {
-    setData(() => {
-      count++;
-    });
-  }
-
-  return () => (
-    <div class='MyComponent'>
-      <p>{count}</p>
-      <button onClick={add}>MyComponent</button>
-    </div>
-  );
-});
-
-defineComponent(
-  {
-    mount: '#app',
-  },
-  () => {
-    return () => (
-      <div class='App'>
-        <component $is={MyComponent} />
-      </div>
-    );
-  }
-);
-```
-
 ### $ref
 
 Used with API `domInfo` to get DOM information.
@@ -405,25 +369,6 @@ defineComponent(({ setData }) => {
 ```
 
 ## Built-in Tags
-
-### component
-
-Component tag, used to render components.
-
-```jsx
-defineComponent(
-  {
-    mount: '#app',
-  },
-  () => {
-    return () => (
-      <div class='App'>
-        <component $is={MyComponent} />
-      </div>
-    );
-  }
-);
-```
 
 ### null
 

@@ -1,11 +1,11 @@
 # babelPluginMettle
 
-[babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle) is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
+[babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle-html) is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
 
 ## Install
 
 ```bash
-npm install babel-plugin-mettle
+npm install babel-plugin-mettle-html
 ```
 
 ::: tip
@@ -18,7 +18,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 
 ```json
 {
-  "plugins": [["babel-plugin-mettle"]]
+  "plugins": [["babel-plugin-mettle-html"]]
 }
 ```
 
@@ -26,13 +26,13 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 
 ### tag=html
 
-By default, [babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle) will process all markup templates with a markup function named `html`. To use a different name, use the `tag` option in your `Babel` configuration:
+By default, [babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle-html) will process all markup templates with a markup function named `html`. To use a different name, use the `tag` option in your `Babel` configuration:
 
 ```json
 {
   "plugins": [
     [
-      "babel-plugin-mettle",
+      "babel-plugin-mettle-html",
       {
         "tag": "html"
       }

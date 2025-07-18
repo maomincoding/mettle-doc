@@ -1,9 +1,5 @@
 # 用法
 
-::: tip
-为了更好的阅读体验，下面的代码示例都使用 JSX 语法编写。
-:::
-
 ## 数据绑定
 
 Mettle 允许开发人员以声明方式将 DOM 绑定到底层实例的数据。
@@ -11,49 +7,49 @@ Mettle 允许开发人员以声明方式将 DOM 绑定到底层实例的数据�
 ### 文本
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'Hello',
   };
-  return () => h1>{state.msg}</h1>;
-});
+  return () => <h1>{state.msg}</h1>;
+}
 ```
 
 ### 表达式
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     a: 1,
     b: 2,
   };
   return () => <h1>{state.a + state.b}</h1>;
-});
+}
 ```
 
 ## 属性绑定
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'Hello',
   };
   return () => <input type='text' value={state.msg} />;
-});
+}
 ```
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     isRed: true,
     msg: 'Hello',
   };
   return () => <h1 class={state.isRed ? 'red' : ''}>{state.msg}</h1>;
-});
+}
 ```
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'Hello',
     style: {
@@ -62,7 +58,7 @@ defineComponent(() => {
     },
   };
   return () => <p style={state.style}>{state.msg}</p>;
-});
+}
 ```
 
 ## 条件渲染
@@ -70,7 +66,7 @@ defineComponent(() => {
 仅当指令的表达式返回 `true` 值时才会显示标签。
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   const state = {
     isShow: true,
   };
@@ -86,76 +82,7 @@ defineComponent(({ setData }) => {
       <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
-});
-```
-
-::: warning
-当条件渲染涉及渲染自定义组件时，组件内`onMounted`、`onUnmounted`API 不会触发。可以根据下面方法进行调整：
-:::
-
-```jsx
-import { defineComponent } from 'mettle';
-import Button from '../components/button/index';
-
-defineComponent(({ setData }) => {
-  const ButtonC = Button();
-  let isShow = false;
-  ButtonC.getShow(isShow);
-
-  function show() {
-    setData(() => {
-      isShow = !isShow;
-      if (!isShow) {
-        ButtonC.onUnmount();
-      } else {
-        ButtonC.getShow(isShow);
-      }
-    });
-  }
-
-  return () => (
-    <fragment>
-      <button onClick={show}>show</button>
-      <div>
-        {isShow ? (
-          <div>
-            <component $is={ButtonC}></component>
-          </div>
-        ) : (
-          <null></null>
-        )}
-      </div>
-    </fragment>
-  );
-});
-```
-
-```jsx
-import { defineComponent } from 'mettle';
-
-const Button = () =>
-  defineComponent(({ setData, content }) => {
-    let timer = null;
-    let count = 0;
-
-    content.getShow = (val) => {
-      if (val) {
-        timer = setInterval(() => {
-          setData(() => {
-            count++;
-          });
-        }, 1000);
-      }
-    };
-    content.onUnmount = () => {
-      console.log('clearInterval');
-      clearInterval(timer);
-    };
-
-    return () => <button>{count}</button>;
-  });
-
-export default Button;
+}
 ```
 
 ## 列表渲染
@@ -163,7 +90,7 @@ export default Button;
 渲染基于数组的列表，使用数组的`map`方法来返回一个数组。
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   const state = {
     arr: [1, 2],
   };
@@ -183,7 +110,7 @@ defineComponent(({ setData }) => {
       </ul>
     </fragment>
   );
-});
+}
 ```
 
 ::: warning
@@ -195,7 +122,7 @@ defineComponent(({ setData }) => {
 我们可以使用 `on` 指令来监听 DOM 事件并在事件触发时执行一些 JavaScript。 我们推荐使用这种驼峰式命名法，比如`onClick`。
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'sayHello',
   };
@@ -208,7 +135,7 @@ defineComponent(() => {
       <button onClick={useClick}>{state.msg}</button>
     </fragment>
   );
-});
+}
 ```
 
 ## 组件化
@@ -218,7 +145,7 @@ Mettle 应用程序是由 组件 组成的。一个组件是 UI（用户界面�
 在 Mettle 中，组件就是一个函数。
 
 ```jsx
-const MyComponent = defineComponent(({ setData }) => {
+function MyComponent({ setData }) {
   let count = 0;
 
   function add() {
@@ -233,80 +160,77 @@ const MyComponent = defineComponent(({ setData }) => {
       <button onClick={add}>MyComponent</button>
     </div>
   );
-});
+}
 
-defineComponent(
-  {
-    mount: '#app',
-  },
-  ({ setData }) => {
-    let count = 0;
+function App({setData}) {
+  let count = 0;
 
-    const add = () => {
-      setData(() => {
-        count++;
-      });
-    };
+  const add = () => {
+    setData(() => {
+      count++;
+    });
+  };
 
-    return () => (
-      <div class='App'>
-        <p>{count}</p>
-        <button onClick={add}>App</button>
-        <component $is={MyComponent} />
-      </div>
-    );
-  }
-);
+  return () => (
+    <div class='App'>
+      <p>{count}</p>
+      <button onClick={add}>App</button>
+      <MyComponent />
+    </div>
+  );
+}
 ```
 
 Mettle 内部的渲染系统是基于虚拟 DOM 构建的，虚拟 DOM (Virtual DOM，简称 VDOM) 是一种编程概念，意为将目标所需的 UI 通过数据结构“虚拟”地表示出来，保存在内存中，然后利用 Diff 算法来比对新老数据，将真实的 DOM 与之保持同步。
 
 如何虚拟 DOM 树过于庞大，使得 Diff 计算时间大于 16.6ms，那么就可能造成性能的卡顿。组件有一个特性就是 **”孤岛“**。何为“孤岛”，孤岛就是在 Mettle 应用中我们可以理解成一个独立的模块。将一个庞大的虚拟 DOM 树分解成很多独立的模块，这样 Diff 计算时间就会控制在模块级别，大大缩减了计算的时间，提高了性能。
 
-## 内置属性
-
-### $is
-
-该属性需要用在内置标签`component`上，渲染组件。
+另外，我们可以利用函数组件的预定义属性`content`给组件定义数据，并且在你需要的时候使用它。
 
 ```jsx
-const MyComponent = defineComponent(({ setData }) => {
-  let count = 0;
+function Child({ content }) {
+  content.id = 'ChildId';
+  return () => <h1>Child</h1>;
+}
 
-  function add() {
-    setData(() => {
-      count++;
-    });
+function App() {
+  function get() {
+    console.log(Child.id); // ChildId
   }
 
   return () => (
-    <div class='MyComponent'>
-      <p>{count}</p>
-      <button onClick={add}>MyComponent</button>
-    </div>
+    <fragment>
+      <button onClick={get}>Get</button>
+      <Child />
+    </fragment>
   );
-});
-
-defineComponent(
-  {
-    mount: '#app',
-  },
-  () => {
-    return () => (
-      <div class='App'>
-        <component $is={MyComponent} />
-      </div>
-    );
-  }
-);
+}
 ```
+
+如果我们给组件定义一个静态属性，可以利用函数组件的预定义属性`props`获取到它。
+
+```jsx
+function Child({ props }) {
+  function getAge(){
+    console.log(props.age); // 11
+  }
+
+  return () => <h1 onClick={getAge}>Child</h1>;
+}
+
+function App() {
+  return () => <Child age='11'/>
+}
+```
+
+## 内置属性
 
 ### $ref
 
 配合 API`domInfo`使用，获取 DOM 信息。
 
 ```jsx
-defineComponent(() => {
+function App() {
   const h1 = {};
 
   function getDomInfo() {
@@ -320,7 +244,7 @@ defineComponent(() => {
       </h1>
     </fragment>
   );
-});
+}
 ```
 
 ### $once
@@ -328,7 +252,7 @@ defineComponent(() => {
 仅渲染元素一次，并跳过之后的更新。
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   let count = 0;
 
   function add() {
@@ -344,7 +268,7 @@ defineComponent(({ setData }) => {
       <input value={count} />
     </fragment>
   );
-});
+}
 ```
 
 ### $memo
@@ -354,7 +278,7 @@ defineComponent(({ setData }) => {
 该属性需要传入一个固定长度的数组。数组第一项的值的类型为 `Boolean`，如果值为`false`，那么整个子树的更新将被跳过。数组第二项值的类型为 `Symbol`，与 `setData` 搭配使用。
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   const symbol1 = Symbol();
   let selected = 0;
   let arr = [
@@ -401,36 +325,17 @@ defineComponent(({ setData }) => {
       </ul>
     </fragment>
   );
-});
+}
 ```
 
 ## 内置标签
-
-### component
-
-组件标签，用于渲染组件。
-
-```jsx
-defineComponent(
-  {
-    mount: '#app',
-  },
-  () => {
-    return () => (
-      <div class='App'>
-        <component $is={MyComponent} />
-      </div>
-    );
-  }
-);
-```
 
 ### null
 
 空标签，不会显示在页面中。
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({setData}) {
   const state = {
     isShow: true,
   };
@@ -446,7 +351,7 @@ defineComponent(({ setData }) => {
       <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
-});
+}
 ```
 
 ### fragment
@@ -458,7 +363,7 @@ defineComponent(({ setData }) => {
 :::
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     x: 0,
     y: 0,
@@ -466,11 +371,9 @@ defineComponent(() => {
 
   return () => (
     <fragment>
-      <h1>
-        Mouse position is at: {state.x}, {state.y}
-      </h1>
+      <h1>Mettle</h1>
       <h2>Hello!</h2>
     </fragment>
   );
-});
+}
 ```

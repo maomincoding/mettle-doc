@@ -1,9 +1,5 @@
 # mettleRouter
 
-::: tip
-为了更好的阅读体验，下面的代码示例都使用 JSX 语法编写。
-:::
-
 `mettleRouter` 是 Mettle 的官方路由管理器。 它与 Mettle 的核心深度集成，轻松构建单页应用程序。
 
 ## 开始
@@ -14,84 +10,73 @@
 
 ```jsx
 // home.jsx
-import { defineComponent } from 'mettle';
 import { linkTo } from 'mettle-router';
-import logo from '../assets/logo.png';
 
-const home = () =>
-  defineComponent(({ setData }) => {
-    const state = {
-      msg: 'hello',
-      arr: [1, 2],
-      count: 3,
-    };
+export default function Home({ setData }) {
+  const state = {
+    msg: 'hello',
+    arr: [1, 2],
+    count: 3,
+  };
 
-    function goAbout() {
-      linkTo({
-        path: '/about',
-        query: {
-          id: 1,
-          name: 'maomin',
-        },
-      });
-    }
+  function goAbout() {
+    linkTo({
+      path: '/about',
+      query: {
+        id: 1,
+        name: 'maomin',
+      },
+    });
+  }
 
-    function useChange() {
-      setData(() => {
-        state.msg = 'world';
-        state.count++;
-        state.arr.unshift(state.count);
-      });
-    }
+  function useChange() {
+    setData(() => {
+      state.msg = 'world';
+      state.count++;
+      state.arr.unshift(state.count);
+    });
+  }
 
-    return () => (
-      <fragment>
-        <button onClick={goAbout}>goAbout</button>
-        <h1>Home</h1>
-        <div class='logo-inner'>
-          <img src={logo} class='logo' />
-        </div>
-        <p onClick={useChange}>{state.msg}</p>
-        <ul>
-          {state.arr.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </fragment>
-    );
-  });
+  return () => (
+    <fragment>
+      <button onClick={goAbout}>goAbout</button>
+      <h1>Home</h1>
+      <p onClick={useChange}>{state.msg}</p>
+      <ul>
+        {state.arr.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </fragment>
+  );
+}
 
-export default home;
 ```
 
 **2. 创建 about 页面**
 
 ```jsx
 // about.jsx
-import { defineComponent } from 'mettle';
 import { linkTo, toParse } from 'mettle-router';
 
-const about = () =>
-  defineComponent(() => {
-    function goHome() {
-      linkTo({
-        path: '/',
-      });
-    }
+export default function About() {
+  function goHome() {
+    linkTo({
+      path: '/',
+    });
+  }
 
-    function getOption() {
-      console.log(toParse());
-    }
+  function getOption() {
+    console.log(toParse());
+  }
 
-    return () => (
-      <fragment>
-        <button onClick={goHome}>goHome</button>
-        <h1 onClick={getOption}>About</h1>
-      </fragment>
-    );
-  });
-
-export default about;
+  return () => (
+    <fragment>
+      <button onClick={goHome}>goHome</button>
+      <h1 onClick={getOption}>About</h1>
+    </fragment>
+  );
+}
 ```
 
 **3. 配置路由信息**
@@ -101,18 +86,18 @@ export default about;
 import { resetView } from 'mettle';
 import { initRouter } from 'mettle-router';
 
-import home from '../template/home';
-import about from '../template/about';
+import Home from '../template/home';
+import About from '../template/about';
 
 const router = initRouter(
   [
     {
       path: '/',
-      template: home,
+      template: Home,
     },
     {
       path: '/about',
-      template: about,
+      template: About,
     },
   ],
   resetView
@@ -124,19 +109,15 @@ export default router;
 **4. 挂载页面**
 
 ```jsx
-// main.js
-import { defineComponent } from 'mettle';
-import router from './router/index';
-import './styles/app.css';
+// main.jsx
+import { createApp } from 'mettle';
+import Router from './router/index';
 
-defineComponent(
-  {
-    mount: '#app',
-  },
-  () => {
-    return () => <component $is={router.view()}></component>;
-  }
-);
+function App() {
+  return () => <Router></Router>;
+}
+
+createApp(<App />, '#app');
 ```
 
 ## 安装
@@ -147,7 +128,7 @@ npm install mettle-router
 
 ## 使用
 
-你可以使用[createMettleApp](/zh/tool/createMettleApp/)，选择 **mettle-apps** 或者 **mettle-jsx-apps** 模板。
+你可以使用[createMettleApp](/zh/tool/createMettleApp/)，选择带有`apps`标识的模板。
 
 ## API
 
@@ -155,25 +136,25 @@ npm install mettle-router
 
 第一个参数是一个数组对象，即需要注册的路由组件，`path`属性表示组件的路径，`template`属性是导入的组件。
 
-第二个参数需要传递给`resetView` API，匹配到对应路径的页面会相应更新。 例如，在此处的路由器文件夹中创建一个 `index.js` 文件。
+第二个参数需要传递给`resetView` API，匹配到对应路径的页面会相应更新。
 
 ```js
 // router/index.js
 import { resetView } from 'mettle';
 import { initRouter } from 'mettle-router';
 
-import home from '../template/home';
-import about from '../template/about';
+import Home from '../template/home';
+import About from '../template/about';
 
 const router = initRouter(
   [
     {
       path: '/',
-      template: home,
+      template: Home,
     },
     {
       path: '/about',
-      template: about,
+      template: About,
     },
   ],
   resetView
@@ -182,22 +163,18 @@ const router = initRouter(
 export default router;
 ```
 
-路由匹配的组件会被渲染到`view()`方法所在的地方，通常放在主页面入口文件（如`main.js`）下。
+路由匹配的组件会被渲染到`<Router>`组件所在的地方。
 
 ```jsx
-// main.js
-import { defineComponent } from 'mettle';
-import router from './router/index';
-import './styles/app.css';
+// main.jsx
+import { createApp } from 'mettle';
+import Router from './router/index';
 
-defineComponent(
-  {
-    mount: '#app',
-  },
-  () => {
-    return () => <component $is={router.view()}></component>;
-  }
-);
+function App() {
+  return () => <Router></Router>;
+}
+
+createApp(<App />, '#app');
 ```
 
 ### linkTo()
@@ -205,25 +182,26 @@ defineComponent(
 如果需要跳转到对应的页面，使用`linkTo()`方法，可以传递对应的路径和要传递的参数，也可以直接传递路径字符串。
 
 ```jsx
-import { defineComponent } from 'mettle';
-import { linkTo } from 'mettle-router';
+import { linkTo, toParse } from 'mettle-router';
 
-const about = () =>
-  defineComponent(() => {
-    function goHome() {
-      linkTo({
-        path: '/',
-      });
-    }
+export default function About() {
+  function goHome() {
+    linkTo({
+      path: '/',
+    });
+  }
 
-    return () => (
-      <fragment>
-        <button onClick={goHome}>goHome</button>
-      </fragment>
-    );
-  });
+  function getOption() {
+    console.log(toParse());
+  }
 
-export default about;
+  return () => (
+    <fragment>
+      <button onClick={goHome}>goHome</button>
+      <h1 onClick={getOption}>About</h1>
+    </fragment>
+  );
+}
 ```
 
 ### forward()
@@ -241,33 +219,6 @@ export default about;
 ### toParse
 
 如果执行路由参数的操作，则要获取参数对象。 直接执行`toParse()`方法可以获取对象信息。
-
-```jsx
-import { defineComponent } from 'mettle';
-import { linkTo, toParse } from 'mettle-router';
-
-const about = () =>
-  defineComponent(() => {
-    function goHome() {
-      linkTo({
-        path: '/',
-      });
-    }
-
-    function getOption() {
-      console.log(toParse());
-    }
-
-    return () => (
-      <fragment>
-        <button onClick={goHome}>goHome</button>
-        <h1 onClick={getOption}>About</h1>
-      </fragment>
-    );
-  });
-
-export default about;
-```
 
 ### routerVersion
 

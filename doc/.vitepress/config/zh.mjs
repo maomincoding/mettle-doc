@@ -43,36 +43,28 @@ export const zh = defineConfig({
         collapsible: false,
         items: [
           {
-            text: 'CreateMettleApp',
-            link: '/zh/tool/createMettleApp/',
-          },
-          {
             text: 'MettleRouter',
             link: '/zh/tool/mettleRouter/',
           },
           {
-            text: 'BabelPluginMettle',
-            link: '/zh/tool/babelPluginMettle/',
+            text: 'CreateMettleApp',
+            link: '/zh/tool/createMettleApp/',
           },
           {
-            text: 'BabelPluginJsxToMettle',
-            link: '/zh/tool/babelPluginJsxToMettle/',
+            text: 'VitePluginMettle',
+            link: '/zh/tool/vitePluginMettle/',
           },
           {
-            text: 'MettleWebComponents',
-            link: '/zh/tool/mettleWebComponents/',
-          },
-          {
-            text: 'MettleReactivity',
-            link: '/zh/tool/mettleReactivity/',
+            text: 'BabelPluginMettleHtml',
+            link: '/zh/tool/babelPluginMettleHtml/',
           },
           {
             text: 'BabelPresetMettle',
             link: '/zh/tool/babelPresetMettle/',
           },
           {
-            text: 'VitePluginMettle',
-            link: '/zh/tool/vitePluginMettle/',
+            text: 'MettleJsxRuntime',
+            link: '/zh/tool/mettleJsxRuntime/',
           },
         ],
       },

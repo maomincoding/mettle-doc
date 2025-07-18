@@ -49,36 +49,28 @@ export const en = defineConfig({
         collapsible: false,
         items: [
           {
-            text: 'CreateMettleApp',
-            link: '/tool/createMettleApp/',
-          },
-          {
             text: 'MettleRouter',
             link: '/tool/mettleRouter/',
           },
           {
-            text: 'BabelPluginMettle',
-            link: '/tool/babelPluginMettle/',
+            text: 'CreateMettleApp',
+            link: '/tool/createMettleApp/',
           },
           {
-            text: 'BabelPluginJsxToMettle',
-            link: '/tool/babelPluginJsxToMettle/',
+            text: 'VitePluginMettle',
+            link: '/tool/vitePluginMettle/',
           },
           {
-            text: 'MettleWebComponents',
-            link: '/tool/mettleWebComponents/',
-          },
-          {
-            text: 'MettleReactivity',
-            link: '/tool/mettleReactivity/',
+            text: 'BabelPluginMettleHtml',
+            link: '/tool/babelPluginMettleHtml/',
           },
           {
             text: 'BabelPresetMettle',
             link: '/tool/babelPresetMettle/',
           },
           {
-            text: 'VitePluginMettle',
-            link: '/tool/vitePluginMettle/',
+            text: 'MettleJsxRuntime',
+            link: '/tool/mettleJsxRuntime/',
           },
         ],
       },

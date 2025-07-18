@@ -2,7 +2,7 @@
 
 [babelPresetMettle](https://www.npmjs.com/package/babel-preset-mettle) A babel plugin for transforming JSX for Mettle.
 
-## 安装
+## Install
 
 ```bash
 npm install babel-preset-mettle
