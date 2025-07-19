@@ -6,7 +6,7 @@
 
 我们可以根据以下步骤来初步学习。
 
-**1. 创建 home 页面**
+### 创建 home 页面
 
 ```jsx
 // home.jsx
@@ -53,7 +53,7 @@ export default function Home({ setData }) {
 
 ```
 
-**2. 创建 about 页面**
+### 创建 about 页面
 
 ```jsx
 // about.jsx
@@ -79,7 +79,7 @@ export default function About() {
 }
 ```
 
-**3. 配置路由信息**
+### 配置路由信息
 
 ```js
 // router/index.js
@@ -106,7 +106,7 @@ const router = initRouter(
 export default router;
 ```
 
-**4. 挂载页面**
+### 挂载页面
 
 ```jsx
 // main.jsx
@@ -203,18 +203,6 @@ export default function About() {
   );
 }
 ```
-
-### forward()
-
-向前跳转 1 页。
-
-### back()
-
-跳回 1 页。
-
-### go(n)
-
-在页面中跳转 n 页。
 
 ### toParse
 

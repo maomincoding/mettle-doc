@@ -8,4 +8,4 @@ We can not only write Mettle using JSX syntax, but also using TSX syntax.
 
 ## Use
 
-[createMettleApp](/tool/createMettleApp/) The project scaffolding tool is installed by default, just select the `mettle-tsx` or `mettle-tsx-apps` template.
+[createMettleApp](/tool/createMettleApp/) The project scaffolding tool is installed by default, just select the `mettle-ts` or `mettle-apps-ts` template.

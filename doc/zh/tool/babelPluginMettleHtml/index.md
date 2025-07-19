@@ -1,6 +1,6 @@
-# babelPluginMettle
+# babelPluginMettleHtml
 
-[babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle-html) 是一款 babel 插件，将 HTML 模板字符串转化为 Virtual Dom。从之前的运行时转移到编译时，大幅度提高渲染性能。
+`babelPluginMettleHtml` 是一款 babel 插件，将 HTML 模板字符串转化为 Virtual Dom。从之前的运行时转移到编译时，大幅度提高渲染性能。
 
 ## 安装
 

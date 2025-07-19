@@ -1,10 +1,10 @@
 # Change Log
 
-::: tip
-Although the version number uses the version number of Mettle, the content includes not only the updated content of Mettle, but also the updated content of other official tools in the same period.
-:::
+## v1.0.1 (Latest)
 
-## v0.5.0 (Latest)
+- A new form of function component, which is more convenient to write and more flexible.
+
+## v0.5.0
 
 - Added two built-in properties, `$once` and `$memo`, to optimize rendering performance.
 

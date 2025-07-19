@@ -2,19 +2,21 @@
 
 Mettle is a JavaScript library for building user interfaces.
 
-- **Easier to get started:** As long as you are basically familiar with HTML, CSS and JavaScript, you can get started directly.
+- **Easier to get started:** As long as you are familiar with HTML, CSS and JavaScript, you can get started directly.
 
-- **Declarative rendering:** We can declaratively describe the relationship between the final output HTML and JavaScript states. Developers can focus more on the development of business logic and do not need to care too much about the details of DOM operations.
+- **Smooth user experience:** You can use JSX syntax to write Mettle, which greatly improves the user development experience.
 
-- **Smooth user experience:** Template strings are used to write templates. In some scenarios, code intelligent prompts and code formatting are not particularly friendly. Therefore, we provide a new coding method. We can use JSX syntax to write Mettle to improve user development experience.
+- **Declarative rendering:** We can declaratively describe the relationship between the final output HTML and JavaScript status, so that developers can focus more on the development of business logic without worrying too much about the details of DOM operations.
 
-- **Excellent performance:** Adopts the virtual DOM mode. The virtual DOM uses the diff algorithm to calculate the nodes that really need to be updated, minimizing DOM operations and the typesetting and redrawing losses caused by DOM operations. This significantly improves performance. In addition, our JavaScript library has won excellent results on the world-renowned [benchmark list](https://github.com/krausest/js-framework-benchmark).
+- **Intuitive:** Use familiar native JavaScript syntax, do not change JavaScript semantics, and return to the purity of native JavaScript.
 
-- **Componentization:** A function is a component, which can be arbitrarily combined according to the size of the application. And the unique "island feature" of the component allows the level of virtual DOM tree calculation to be controlled at the component level.
+- **Excellent performance:** The virtual DOM mode is adopted. The virtual DOM uses the diff algorithm to calculate the nodes that really need to be updated, which minimizes DOM operations and the layout and redrawing losses caused by DOM operations, thereby significantly improving performance. In addition, our JavaScript library has won excellent results on the world-renowned [evaluation list](https://github.com/krausest/js-framework-benchmark).
+
+- **Componentization:** A function is a component, which can be combined arbitrarily according to the application scale. And the unique **"island feature"** of the component makes the level of virtual DOM tree calculation controlled at the component level.
 
 - **Flexible application scenarios:** It can be used with or without build tools, and can be adapted to application projects developed by other front-end frameworks.
 
-- **Lightweight:** The compressed file size is less than **10k**. In addition, you can choose [different types](https://www.jsdelivr.com/package/npm/mettle?tab=files&path=dist) files according to different application scenarios.
+- **Lightweight:** The compressed file size is less than **12k**. In addition, you can choose [different types](https://www.jsdelivr.com/package/npm/mettle?tab=files&path=dist) of files according to different application scenarios.
 
 ## ES Module
 
@@ -35,25 +37,21 @@ If you open the above index.html directly in the browser, you will find that it 
     <script type="module">
       import {
         html,
-        defineComponent,
+        createApp,
       } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
-      defineComponent(
-        {
-          mount: '#app',
-        },
-        ({ setData }) => {
+      function App({ setData }) {
           let count = 0;
 
           function add() {
-            setData(() => {
-              count++;
-            });
+              setData(() => {
+                  count++;
+              });
           }
-
           return () => html`<h1 onClick=${add}>${count}</h1>`;
-        }
-      );
+      }
+
+      createApp(html`<${App}/>`, '#app');
     </script>
   </body>
 </html>
@@ -77,24 +75,20 @@ All top-level APIs of this version are exposed as properties on the global Mettl
   <body>
     <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
     <script>
-      const { html, defineComponent } = Mettle;
+      const { html, createApp } = Mettle;
 
-      defineComponent(
-        {
-          mount: '#app',
-        },
-        ({ setData }) => {
+      function App({ setData }) {
           let count = 0;
 
           function add() {
-            setData(() => {
-              count++;
-            });
+              setData(() => {
+                  count++;
+              });
           }
-
           return () => html`<h1 onClick=${add}>${count}</h1>`;
-        }
-      );
+      }
+
+      createApp(html`<${App}/>`, '#app');
     </script>
   </body>
 </html>

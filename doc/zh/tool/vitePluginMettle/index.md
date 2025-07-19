@@ -1,6 +1,6 @@
 # vitePluginMettle
 
-[vitePluginMettle](https://www.npmjs.com/package/vite-plugin-mettle) 是 Vite 的 Mettle 集成插件。
+`vitePluginMettle` 是 Vite 的 Mettle 集成插件。
 
 ## 安装
 

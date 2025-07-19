@@ -1,6 +1,6 @@
-# babelPluginMettle
+# babelPluginMettleHtml
 
-[babelPluginMettle](https://www.npmjs.com/package/babel-plugin-mettle-html) is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
+`babelPluginMettleHtml` is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
 
 ## Install
 

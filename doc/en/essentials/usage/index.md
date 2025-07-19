@@ -1,9 +1,5 @@
 # Usage
 
-::: tip
-For a better reading experience, the following code examples are written using JSX syntax.
-:::
-
 ## Data Binding
 
 Mettle allows developers to declaratively bind the DOM to the underlying instance's data.
@@ -11,49 +7,49 @@ Mettle allows developers to declaratively bind the DOM to the underlying instanc
 ### Text
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'Hello',
   };
-  return () => h1>{state.msg}</h1>;
-});
+  return () => <h1>{state.msg}</h1>;
+}
 ```
 
 ### Expression
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     a: 1,
     b: 2,
   };
   return () => <h1>{state.a + state.b}</h1>;
-});
+}
 ```
 
 ## Property Binding
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'Hello',
   };
   return () => <input type='text' value={state.msg} />;
-});
+}
 ```
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     isRed: true,
     msg: 'Hello',
   };
   return () => <h1 class={state.isRed ? 'red' : ''}>{state.msg}</h1>;
-});
+}
 ```
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'Hello',
     style: {
@@ -62,7 +58,7 @@ defineComponent(() => {
     },
   };
   return () => <p style={state.style}>{state.msg}</p>;
-});
+}
 ```
 
 ## Conditional Rendering
@@ -70,7 +66,7 @@ defineComponent(() => {
 The label is only displayed if the directive's expression returns a `true` value.
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   const state = {
     isShow: true,
   };
@@ -86,76 +82,7 @@ defineComponent(({ setData }) => {
       <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
-});
-```
-
-::: warning
-When conditional rendering involves rendering custom components, the `onMounted` and `onUnmounted` APIs in the component will not be triggered. You can adjust it according to the following methods:
-:::
-
-```jsx
-import { defineComponent } from 'mettle';
-import Button from '../components/button/index';
-
-defineComponent(({ setData }) => {
-  const ButtonC = Button();
-  let isShow = false;
-  ButtonC.getShow(isShow);
-
-  function show() {
-    setData(() => {
-      isShow = !isShow;
-      if (!isShow) {
-        ButtonC.onUnmount();
-      } else {
-        ButtonC.getShow(isShow);
-      }
-    });
-  }
-
-  return () => (
-    <fragment>
-      <button onClick={show}>show</button>
-      <div>
-        {isShow ? (
-          <div>
-            <component $is={ButtonC}></component>
-          </div>
-        ) : (
-          <null></null>
-        )}
-      </div>
-    </fragment>
-  );
-});
-```
-
-```jsx
-import { defineComponent } from 'mettle';
-
-const Button = () =>
-  defineComponent(({ setData, content }) => {
-    let timer = null;
-    let count = 0;
-
-    content.getShow = (val) => {
-      if (val) {
-        timer = setInterval(() => {
-          setData(() => {
-            count++;
-          });
-        }, 1000);
-      }
-    };
-    content.onUnmount = () => {
-      console.log('clearInterval');
-      clearInterval(timer);
-    };
-
-    return () => <button>{count}</button>;
-  });
-
-export default Button;
+}
 ```
 
 ## List Rendering
@@ -163,7 +90,7 @@ export default Button;
 To render an array-based list, use the array's map method to return an array.
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   const state = {
     arr: [1, 2],
   };
@@ -183,7 +110,7 @@ defineComponent(({ setData }) => {
       </ul>
     </fragment>
   );
-});
+}
 ```
 
 ::: warning
@@ -195,7 +122,7 @@ Child elements under the same parent element must have unique keys. Duplicate ke
 We can use the `on` directive to listen to DOM events and execute some JavaScript when the event fires. We recommend using this camelCase naming method, such as `onClick`.
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     msg: 'sayHello',
   };
@@ -208,7 +135,7 @@ defineComponent(() => {
       <button onClick={useClick}>{state.msg}</button>
     </fragment>
   );
-});
+}
 ```
 
 ## Componentization
@@ -218,7 +145,7 @@ Mettle applications are composed of components. A component is a part of a UI (u
 In Mettle, a component is a function.
 
 ```jsx
-const MyComponent = defineComponent(({ setData }) => {
+function MyComponent({ setData }) {
   let count = 0;
 
   function add() {
@@ -233,35 +160,68 @@ const MyComponent = defineComponent(({ setData }) => {
       <button onClick={add}>MyComponent</button>
     </div>
   );
-});
+}
 
-defineComponent(
-  {
-    mount: '#app',
-  },
-  ({ setData }) => {
-    let count = 0;
+function App({setData}) {
+  let count = 0;
 
-    const add = () => {
-      setData(() => {
-        count++;
-      });
-    };
+  const add = () => {
+    setData(() => {
+      count++;
+    });
+  };
 
-    return () => (
-      <div class='App'>
-        <p>{count}</p>
-        <button onClick={add}>App</button>
-        <component $is={MyComponent} />
-      </div>
-    );
-  }
-);
+  return () => (
+    <div class='App'>
+      <p>{count}</p>
+      <button onClick={add}>App</button>
+      <MyComponent />
+    </div>
+  );
+}
 ```
 
 The internal rendering system of Mettle is built based on virtual DOM. Virtual DOM (Virtual DOM, referred to as VDOM) is a programming concept, which means to "virtually" represent the UI required by the target through a data structure and save it in memory. Then use the Diff algorithm to compare the old and new data and synchronize the real DOM with it.
 
 If the virtual DOM tree is too large and the Diff calculation time is greater than 16.6ms, it may cause performance lag. One characteristic of components is "isolated islands". What is an "isolated island"? An isolated island can be understood as an independent module in the Mettle application. Decompose a huge virtual DOM tree into many independent modules, so that the Diff calculation time will be controlled at the module level, greatly reducing the calculation time and improving performance.
+
+In addition, we can use the predefined property `content` of the function component to define data for the component and use it when you need it.
+
+```jsx
+function Child({ content }) {
+  content.id = 'ChildId';
+  return () => <h1>Child</h1>;
+}
+
+function App() {
+  function get() {
+    console.log(Child.id); // ChildId
+  }
+
+  return () => (
+    <fragment>
+      <button onClick={get}>Get</button>
+      <Child />
+    </fragment>
+  );
+}
+```
+
+If we define a static property for a component, we can get it using the predefined property `props` of the function component.
+
+```jsx
+function Child({ props }) {
+  function getAge(){
+    console.log(props.age); // 11
+  }
+
+  return () => <h1 onClick={getAge}>Child</h1>;
+}
+
+function App() {
+  return () => <Child age='11'/>
+}
+```
 
 ## Built-in Properties
 
@@ -270,7 +230,7 @@ If the virtual DOM tree is too large and the Diff calculation time is greater th
 Used with API `domInfo` to get DOM information.
 
 ```jsx
-defineComponent(() => {
+function App() {
   const h1 = {};
 
   function getDomInfo() {
@@ -284,7 +244,7 @@ defineComponent(() => {
       </h1>
     </fragment>
   );
-});
+}
 ```
 
 ### $once
@@ -292,7 +252,7 @@ defineComponent(() => {
 Render the element only once, and skip future updates.
 
 ```jsx
-defineComponent(() => {
+function App({ setData }) {
   let count = 0;
 
   function add() {
@@ -308,7 +268,7 @@ defineComponent(() => {
       <input value={count} />
     </fragment>
   );
-});
+}
 ```
 
 ### $memo
@@ -318,7 +278,7 @@ Cache a subtree of a template and skip the update of the subtree.
 This property requires an array of fixed length. The value of the first item in the array is of type `Boolean`. If the value is `false`, the update of the entire subtree will be skipped. The value of the second item in the array is of type `Symbol`, which is used with `setData`.
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({ setData }) {
   const symbol1 = Symbol();
   let selected = 0;
   let arr = [
@@ -365,7 +325,7 @@ defineComponent(({ setData }) => {
       </ul>
     </fragment>
   );
-});
+}
 ```
 
 ## Built-in Tags
@@ -375,7 +335,7 @@ defineComponent(({ setData }) => {
 Empty tags will not be displayed on the page.
 
 ```jsx
-defineComponent(({ setData }) => {
+function App({setData}) {
   const state = {
     isShow: true,
   };
@@ -391,7 +351,7 @@ defineComponent(({ setData }) => {
       <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
-});
+}
 ```
 
 ### fragment
@@ -403,7 +363,7 @@ There is only one root component, so you will see it used as the root component 
 :::
 
 ```jsx
-defineComponent(() => {
+function App() {
   const state = {
     x: 0,
     y: 0,
@@ -411,11 +371,9 @@ defineComponent(() => {
 
   return () => (
     <fragment>
-      <h1>
-        Mouse position is at: {state.x}, {state.y}
-      </h1>
+      <h1>Mettle</h1>
       <h2>Hello!</h2>
     </fragment>
   );
-});
+}
 ```

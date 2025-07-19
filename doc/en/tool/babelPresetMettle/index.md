@@ -1,6 +1,6 @@
 # babelPresetMettle
 
-[babelPresetMettle](https://www.npmjs.com/package/babel-preset-mettle) A babel plugin for transforming JSX for Mettle.
+`babelPresetMettle` is a babel plugin for transforming JSX for Mettle.
 
 ## Install
 

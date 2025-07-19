@@ -1,6 +1,6 @@
 # vitePluginMettle
 
-[vitePluginMettle](https://www.npmjs.com/package/vite-plugin-mettle) is a Mettle integration plugin for Vite.
+`vitePluginMettle` is a Mettle integration plugin for Vite.
 
 ## Install
 

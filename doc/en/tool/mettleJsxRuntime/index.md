@@ -1,6 +1,6 @@
 # mettleJsxRuntime
 
-[mettleJsxRuntime](https://www.npmjs.com/package/mettle-jsx-runtime) Runtime library for compiling jsx templates for mettle.
+`mettleJsxRuntime` is runtime library for compiling jsx templates for mettle.
 
 ## Install
 

@@ -1,6 +1,6 @@
 # babelPresetMettle
 
-[babelPresetMettle](https://www.npmjs.com/package/babel-preset-mettle) 是一款 babel 插件，用于为 Mettle 转换 JSX。
+`babelPresetMettle` 是一款 babel 插件，用于为 Mettle 转换 JSX。
 
 ## 安装
 

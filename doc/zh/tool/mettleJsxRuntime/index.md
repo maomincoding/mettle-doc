@@ -1,6 +1,6 @@
 # mettleJsxRuntime
 
-[mettleJsxRuntime](https://www.npmjs.com/package/mettle-jsx-runtime) 用于编译mettle的jsx模板的运行库。
+`mettleJsxRuntime` 用于编译mettle的jsx模板的运行库。
 
 ## 安装
 
