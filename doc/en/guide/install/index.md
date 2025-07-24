@@ -1,9 +1,5 @@
 # Install
 
-::: tip
-In the previous article, we briefly and quickly understood the use of Mettle, so in this article we will explain in detail the installation methods of Mettle.
-:::
-
 ## CDN
 
 If you want to use ES Module.

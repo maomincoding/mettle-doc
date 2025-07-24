@@ -18,13 +18,46 @@ Mettle is a JavaScript library for building user interfaces.
 
 - **Lightweight:** The compressed file size is less than **12k**. In addition, you can choose [different types](https://www.jsdelivr.com/package/npm/mettle?tab=files&path=dist) of files according to different application scenarios.
 
-## ES Module
+## Quick Start
 
-Most modern browsers already support ES modules, so we can use Mettle through CDN and ES modules like this:
+To quickly experience Mettle, you can try one of the following two methods.
 
-::: warning
-If you open the above index.html directly in the browser, you will find that it throws an error because ES modules cannot work through the `file://` protocol. In order for this to work, you need to use a local HTTP server to serve index.html via the `http://` protocol.
-:::
+### Global Build Version
+
+All top-level APIs in this version are exposed as properties on the global Mettle object.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mettle.js</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
+    <script>
+      const { html, createApp } = Mettle;
+
+      function App({ setData }) {
+          let count = 0;
+
+          function add() {
+              setData(() => {
+                  count++;
+              });
+          }
+          return () => html`<h1 onClick=${add}>${count}</h1>`;
+      }
+
+      createApp(html`<${App}/>`, '#app');
+    </script>
+  </body>
+</html>
+```
+
+### ES Module
+
+Most modern browsers already support ES modules, so we can use Mettle with CDN and ES modules like this.
 
 ```html
 <!DOCTYPE html>
@@ -57,39 +90,4 @@ If you open the above index.html directly in the browser, you will find that it 
 </html>
 ```
 
-## Global Build Version
-
-You can also choose to use the `<script>` tag to import it, so that it can be opened directly in the browser.
-
-::: warning
-All top-level APIs of this version are exposed as properties on the global Mettle object.
-:::
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mettle.js</title>
-  </head>
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
-    <script>
-      const { html, createApp } = Mettle;
-
-      function App({ setData }) {
-          let count = 0;
-
-          function add() {
-              setData(() => {
-                  count++;
-              });
-          }
-          return () => html`<h1 onClick=${add}>${count}</h1>`;
-      }
-
-      createApp(html`<${App}/>`, '#app');
-    </script>
-  </body>
-</html>
-```
+We have a quick and simple introduction to the use of Mettle. In the next article, we will explain in detail how to install Mettle.

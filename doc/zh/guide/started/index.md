@@ -1,5 +1,7 @@
 # 开始
 
+## 什么是Mettle?
+
 Mettle 是一个用于构建用户界面的 JavaScript 库。
 
 - **更容易上手：** 只要你对 HTML、CSS 和 JavaScript 已经基本熟悉，就可以直接上手。
@@ -18,13 +20,46 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
 
 - **轻量级：** 压缩后的文件大小不足 **12k**。另外，可以根据不同应用场景，选择[不同类型](https://www.jsdelivr.com/package/npm/mettle?tab=files&path=dist)的文件。
 
-## ES 模块
+## 快速入手
 
-现代浏览器大多都已支持 ES 模块，因此我们可以像这样通过 CDN 以及 ES 模块使用 Mettle
+想要快速体验 Mettle，你可以直接试试下面两种方式之一。
 
-::: warning
-如果直接在浏览器中打开了上面的 index.html，你会发现它抛出了一个错误，因为 ES 模块不能通过 `file://` 协议工作。为了使其工作，你需要使用本地 HTTP 服务器通过 `http://` 协议提供 index.html。
-:::
+### 全局构建版本
+
+该版本的所有顶层 API 都以属性的形式暴露在了全局的 Mettle 对象上。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mettle.js</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
+    <script>
+      const { html, createApp } = Mettle;
+
+      function App({ setData }) {
+          let count = 0;
+
+          function add() {
+              setData(() => {
+                  count++;
+              });
+          }
+          return () => html`<h1 onClick=${add}>${count}</h1>`;
+      }
+
+      createApp(html`<${App}/>`, '#app');
+    </script>
+  </body>
+</html>
+```
+
+### ES 模块
+
+现代浏览器大多都已支持 ES 模块，因此我们可以像这样通过 CDN 以及 ES 模块使用 Mettle。
 
 ```html
 <!DOCTYPE html>
@@ -57,39 +92,4 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
 </html>
 ```
 
-## 全局构建版本
-
-你也可以选择使用 `<script>` 标签引入，这样就可以直接在浏览器中打开。
-
-::: tip
-该版本的所有顶层 API 都以属性的形式暴露在了全局的 Mettle 对象上。
-:::
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mettle.js</title>
-  </head>
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
-    <script>
-      const { html, createApp } = Mettle;
-
-      function App({ setData }) {
-          let count = 0;
-
-          function add() {
-              setData(() => {
-                  count++;
-              });
-          }
-          return () => html`<h1 onClick=${add}>${count}</h1>`;
-      }
-
-      createApp(html`<${App}/>`, '#app');
-    </script>
-  </body>
-</html>
-```
+我们简单快速地了解 Mettle 的使用，那么我们在下一篇详细说明下 Mettle 有哪些安装方法。
