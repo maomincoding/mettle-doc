@@ -1,3 +1,3 @@
 # mettle-doc
 
-Documentation for mettle.js.
+Documentation for Mettle.js.
