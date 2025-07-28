@@ -1,5 +1,7 @@
 # Started
 
+## What is Mettle?
+
 Mettle is a JavaScript library for building user interfaces.
 
 - **Easier to get started:** As long as you are familiar with HTML, CSS and JavaScript, you can get started directly.

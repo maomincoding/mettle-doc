@@ -328,6 +328,8 @@ function App({ setData }) {
 }
 ```
 
+因为被`$memo`标记命中的元素，默认不会更新其子元素，如果想使其更新，则将数组第三项显式定义为`true`，比如`$memo={[todo.id == selected, symbol1,true]}`。
+
 ## 内置标签
 
 ### null

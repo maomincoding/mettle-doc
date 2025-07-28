@@ -328,6 +328,8 @@ function App({ setData }) {
 }
 ```
 
+Because the element hit by the `$memo` tag will not update its child elements by default, if you want to update it, explicitly define the third item of the array as `true`, such as `$memo={[todo.id == selected, symbol1,true]}`.
+
 ## Built-in Tags
 
 ### null

@@ -1,6 +1,10 @@
 # Change Log
 
-## v1.0.1 (Latest)
+## v1.1.0 (Latest)
+
+- Optimize the underlying code structure.
+
+## v1.0.1
 
 - A new form of function component, which is more convenient to write and more flexible.
 
