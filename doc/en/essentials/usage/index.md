@@ -27,7 +27,7 @@ function App() {
 }
 ```
 
-## Property Binding
+### Property
 
 ```jsx
 function App() {

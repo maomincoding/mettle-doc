@@ -27,7 +27,7 @@ function App() {
 }
 ```
 
-## 属性绑定
+### 属性
 
 ```jsx
 function App() {
