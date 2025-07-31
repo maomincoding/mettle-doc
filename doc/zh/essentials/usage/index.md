@@ -72,9 +72,8 @@ function App({ setData }) {
   };
 
   function useShow() {
-    setData(() => {
-      state.isShow = !state.isShow;
-    });
+    state.isShow = !state.isShow;
+    setData();
   }
   return () => (
     <fragment>
@@ -96,9 +95,8 @@ function App({ setData }) {
   };
 
   function usePush() {
-    setData(() => {
-      state.arr.push(3);
-    });
+    state.arr.push(3);
+    setData();
   }
   return () => (
     <fragment>
@@ -149,9 +147,8 @@ function MyComponent({ setData }) {
   let count = 0;
 
   function add() {
-    setData(() => {
-      count++;
-    });
+    count++;
+    setData();
   }
 
   return () => (
@@ -166,9 +163,8 @@ function App({setData}) {
   let count = 0;
 
   const add = () => {
-    setData(() => {
-      count++;
-    });
+    count++;
+    setData();
   };
 
   return () => (
@@ -256,9 +252,8 @@ function App({ setData }) {
   let count = 0;
 
   function add() {
-    setData(() => {
-      count++;
-    });
+    count++;
+    setData();
   }
 
   return () => (
@@ -299,13 +294,8 @@ function App({ setData }) {
   function handle(event) {
     const el = event.target;
     const id = Number(el.dataset.id);
-    setData(
-      () => {
-        selected = id;
-      },
-      null,
-      symbol1
-    );
+    selected = id;
+    setData(null,symbol1);
     return false;
   }
 
@@ -343,9 +333,8 @@ function App({setData}) {
   };
 
   function useShow() {
-    setData(() => {
-      state.isShow = !state.isShow;
-    });
+    state.isShow = !state.isShow;
+    setData();
   }
   return () => (
     <fragment>

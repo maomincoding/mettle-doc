@@ -1,6 +1,6 @@
 # 开始
 
-## 什么是Mettle?
+## 什么是 Mettle?
 
 Mettle 是一个用于构建用户界面的 JavaScript 库。
 
@@ -44,9 +44,8 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
           let count = 0;
 
           function add() {
-              setData(() => {
-                  count++;
-              });
+              count++;
+              setData();
           }
           return () => html`<h1 onClick=${add}>${count}</h1>`;
       }
@@ -79,9 +78,8 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
           let count = 0;
 
           function add() {
-              setData(() => {
-                  count++;
-              });
+              count++;
+              setData();
           }
           return () => html`<h1 onClick=${add}>${count}</h1>`;
       }

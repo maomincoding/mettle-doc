@@ -6,9 +6,8 @@
 function TwoWay({ setData }) {
   let value = '';
   function useInput(e) {
-    setData(() => {
-      value = e.target.value;
-    });
+    value = e.target.value;
+    setData();
   }
 
   return () => (
@@ -29,9 +28,8 @@ function Son({ setData, content }) {
   };
 
   content.getList = function (val) {
-    setData(() => {
-      props.list = val;
-    });
+    props.list = val;
+    setData();
   };
 
   return () => (
@@ -91,9 +89,8 @@ function Father({ setData }) {
   let msg = '';
 
   Son.getMsg = function (val) {
-    setData(() => {
-      msg = val;
-    });
+    msg = val;
+    setData();
   };
 
   return () => (
@@ -122,14 +119,13 @@ function Timer({ setData }) {
 
   let handle = null;
   function update() {
-    setData(() => {
-      data.elapsed = performance.now() - lastTime;
-      if (data.elapsed >= data.duration) {
-        cancelAnimationFrame(handle);
-      } else {
-        handle = requestAnimationFrame(update);
-      }
-    });
+    data.elapsed = performance.now() - lastTime;
+    if (data.elapsed >= data.duration) {
+      cancelAnimationFrame(handle);
+    } else {
+      handle = requestAnimationFrame(update);
+    }
+    setData();
   }
 
   update();
@@ -160,7 +156,7 @@ function Son({ content, setData }) {
   }
 
   content.update = function () {
-    setData(() => {});
+    setData();
   };
 
   return () => (
@@ -173,18 +169,16 @@ function Son({ content, setData }) {
 
 function Store({ setData }) {
   function getUserInfo() {
-    setData(() => {
-      store.dispatch('fetchUser').then(() => {
-        console.log(store.state.user); // { name: 'John Doe', age: 30 }
-      });
+    store.dispatch('fetchUser').then(() => {
+      console.log(store.state.user); // { name: 'John Doe', age: 30 }
     });
+    setData();
   }
 
   function add() {
-    setData(() => {
-      store.commit('increment');
-      Son.update();
-    });
+    store.commit('increment');
+    Son.update();
+    setData();
   }
 
   return () => (
@@ -287,14 +281,12 @@ function Toast({ setData,content }) {
 
   content.show = (val) => {
     clearTimeout(timer);
-    setData(() => {
-      isShow = true;
-      msg = val;
-    });
+    isShow = true;
+    msg = val;
+    setData();
     timer = setTimeout(() => {
-      setData(() => {
-        isShow = false;
-      });
+      isShow = false;
+      setData();
     }, 2000);
   };
 

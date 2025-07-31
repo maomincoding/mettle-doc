@@ -44,9 +44,8 @@ All top-level APIs in this version are exposed as properties on the global Mettl
           let count = 0;
 
           function add() {
-              setData(() => {
-                  count++;
-              });
+              count++;
+              setData();
           }
           return () => html`<h1 onClick=${add}>${count}</h1>`;
       }
@@ -79,9 +78,8 @@ Most modern browsers already support ES modules, so we can use Mettle with CDN a
           let count = 0;
 
           function add() {
-              setData(() => {
-                  count++;
-              });
+              count++;
+              setData();
           }
           return () => html`<h1 onClick=${add}>${count}</h1>`;
       }

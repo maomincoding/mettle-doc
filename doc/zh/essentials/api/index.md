@@ -16,10 +16,9 @@ createApp(<App />, '#app');
 
 ## setData
 
-修改页面数据。
+修改页面数据，最好在逻辑最后执行。
 
-第一个参数为函数，必传。执行回调函数，进而修改关联的页面数据。
-第二个参数为上下文环境，在外部作用域必传，在内部作用域不传。
+第一个参数为上下文环境，在外部作用域必传，在内部作用域不传。内部作用域下，可直接在函数组件中引用。
 
 **内部作用域：**
 
@@ -28,9 +27,8 @@ function App({ setData }) {
   let count = 0;
 
   function add() {
-    setData(() => {
-      count++;
-    });
+    count++;
+    setData();
   }
 
   return () => (
@@ -50,9 +48,8 @@ import { setData } from 'mettle';
 let count = 0;
 
 function add() {
-  setData(() => {
-    count++;
-  }, App);
+  count++;
+  setData(App);
 }
 
 function App() {
@@ -65,7 +62,7 @@ function App() {
 }
 ```
 
-第三个参数非必传，参数的类型是`Symbol`，与内置属性`$memo`搭配使用，用于标明更新的数据。
+第二个参数非必传，参数的类型是`Symbol`，与内置属性`$memo`搭配使用，用于标明更新的数据。
 
 ## onMounted
 

@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.1.0 (Latest)
+## v1.1.2 (Latest)
 
 - Optimize the underlying code structure.
 

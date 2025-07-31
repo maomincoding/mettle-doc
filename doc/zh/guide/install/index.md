@@ -19,9 +19,8 @@
       let count = 0;
 
       function add() {
-          setData(() => {
-              count++;
-          });
+          count++;
+          setData();
       }
       return () => html`<h1 onClick=${add}>${count}</h1>`;
   }
@@ -45,9 +44,8 @@
       let count = 0;
 
       function add() {
-          setData(() => {
-              count++;
-          });
+          count++;
+          setData();
       }
       return () => html`<h1 onClick=${add}>${count}</h1>`;
   }

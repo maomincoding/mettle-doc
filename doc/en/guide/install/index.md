@@ -19,9 +19,8 @@ If you open the above index.html directly in the browser, you will find that it 
       let count = 0;
 
       function add() {
-          setData(() => {
-              count++;
-          });
+          count++;
+          setData();
       }
       return () => html`<h1 onClick=${add}>${count}</h1>`;
   }
@@ -45,9 +44,8 @@ All top-level APIs of this version are exposed as properties on the global Mettl
       let count = 0;
 
       function add() {
-          setData(() => {
-              count++;
-          });
+          count++;
+          setData();
       }
       return () => html`<h1 onClick=${add}>${count}</h1>`;
   }

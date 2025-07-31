@@ -16,10 +16,9 @@ createApp(<App />, '#app');
 
 ## setData
 
-Modify page data.
+Modifying page data is best performed at the end of the logic.
 
-The first parameter is a function, which must be passed. Execute the callback function to modify the associated page data.
-The second parameter is the context, which must be passed in the outer scope and not in the inner scope.
+The first parameter is the context, which is required in the outer scope but not in the inner scope. In the inner scope, it can be referenced directly in the function component.
 
 **Internal scope:**
 
@@ -28,9 +27,8 @@ function App({ setData }) {
   let count = 0;
 
   function add() {
-    setData(() => {
-      count++;
-    });
+    count++;
+    setData();
   }
 
   return () => (
@@ -50,9 +48,8 @@ import { setData } from 'mettle';
 let count = 0;
 
 function add() {
-  setData(() => {
-    count++;
-  }, App);
+  count++;
+  setData(App);
 }
 
 function App() {
@@ -65,7 +62,7 @@ function App() {
 }
 ```
 
-The third parameter is optional. Its type is `Symbol` and is used with the built-in attribute `$memo` to indicate updated data.
+The second parameter is optional and is of type `Symbol`. It is used with the built-in property `$memo` to indicate updated data.
 
 ## onMounted
 
