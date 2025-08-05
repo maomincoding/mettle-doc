@@ -1,10 +1,9 @@
 :root {
     --color: #8a4dfd;
     --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #6c2de4 30%, #f4f4f4);
-
-    --vp-home-hero-image-background-image: linear-gradient(-45deg, #6c2de4 50%, #f4f4f4 50%);
-    --vp-home-hero-image-filter: blur(44px);
+    --vp-home-hero-name-background: -webkit-linear-gradient(150deg, #6c2de4 30%, #3e3939 40%);
+    --vp-home-hero-image-background-image: linear-gradient(-45deg, #6c2de4 60%, #3e3939 30%);
+    --vp-home-hero-image-filter: blur(150px);
     --vp-button-brand-bg: #6c2de4;
     --vp-c-indigo-1: var(--color);
     --vp-c-indigo-2: var(--color);
@@ -13,13 +12,13 @@
 
 @media (min-width: 640px) {
     :root {
-        --vp-home-hero-image-filter: blur(56px);
+        --vp-home-hero-image-filter: blur(150px);
     }
 }
 
 @media (min-width: 960px) {
     :root {
-        --vp-home-hero-image-filter: blur(68px);
+        --vp-home-hero-image-filter: blur(150px);
     }
 }
 
@@ -36,13 +35,16 @@
 
 /* 自定义样式 */
 
-.VPHero {
-    margin-top: calc((var(--vp-nav-height) + var(--vp-layout-top-height, 0px)) * -1);
-    padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 48px) 24px 48px !important;
+@media (max-width: 640px) {
+    .VPHome .container {
+        padding-top: 150px;
+    }
 }
 
-.VPHome .container {
-    flex-direction: column !important;
+@media (min-width: 960px) {
+    .VPHome .container {
+        padding-top: 110px;
+    }
 }
 
 .VPHome .container .heading {
@@ -57,6 +59,25 @@
 
 .VPHome .container .image {
     order: 1 !important;
+    display: none;
+}
+
+.VPHome .container .text {
+    text-align: center;
+}
+
+.dark .VPHome .container .text {
+    background: -webkit-linear-gradient(315deg, #6c2de4 25%, #647eff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.VPHome .container .actions,
+.VPHome .text .actions,
+.VPHome .container .tagline {
+    width: 100%;
 }
 
 .VPHome .container .main .name {
@@ -73,4 +94,25 @@
 
 .VPHome {
     margin-bottom: 0 !important;
+}
+
+
+.VPHome .container {
+    animation: popIn 1.2s;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.1);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
