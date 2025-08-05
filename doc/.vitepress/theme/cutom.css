@@ -66,12 +66,12 @@
     text-align: center;
 }
 
-.dark .VPHome .container .text {
+/* .dark .VPHome .container .text {
     background: -webkit-linear-gradient(315deg, #6c2de4 25%, #647eff);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
+} */
 
 
 .VPHome .container .actions,
