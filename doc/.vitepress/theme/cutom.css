@@ -33,3 +33,44 @@
     transition: all 1s;
     transform: rotate(360deg);
 }
+
+/* 自定义样式 */
+
+.VPHero {
+    margin-top: calc((var(--vp-nav-height) + var(--vp-layout-top-height, 0px)) * -1);
+    padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 48px) 24px 48px !important;
+}
+
+.VPHome .container {
+    flex-direction: column !important;
+}
+
+.VPHome .container .heading {
+    display: block;
+    text-align: center !important;
+}
+
+.VPHome .container .main {
+    margin: 0 auto;
+    order: 2 !important;
+}
+
+.VPHome .container .image {
+    order: 1 !important;
+}
+
+.VPHome .container .main .name {
+    display: none;
+}
+
+.VPHome .container .main .actions {
+    justify-content: center !important;
+}
+
+.tagline {
+    text-align: center;
+}
+
+.VPHome {
+    margin-bottom: 0 !important;
+}
