@@ -55,16 +55,16 @@ export const zh = defineConfig({
             link: '/zh/tool/vitePluginMettle/',
           },
           {
+            text: 'MettleJsxRuntime',
+            link: '/zh/tool/mettleJsxRuntime/',
+          },
+          {
             text: 'BabelPluginMettleHtml',
             link: '/zh/tool/babelPluginMettleHtml/',
           },
           {
             text: 'BabelPresetMettle',
             link: '/zh/tool/babelPresetMettle/',
-          },
-          {
-            text: 'MettleJsxRuntime',
-            link: '/zh/tool/mettleJsxRuntime/',
           },
         ],
       },
@@ -85,8 +85,8 @@ export const zh = defineConfig({
             link: '/zh/other/ide/',
           },
           {
-            text: '浏览器兼容性',
-            link: '/zh/other/browser/',
+            text: '适配',
+            link: '/zh/other/adapt/',
           },
           {
             text: '关于',

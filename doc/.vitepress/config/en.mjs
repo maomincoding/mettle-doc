@@ -61,16 +61,16 @@ export const en = defineConfig({
             link: '/tool/vitePluginMettle/',
           },
           {
+            text: 'MettleJsxRuntime',
+            link: '/tool/mettleJsxRuntime/',
+          },
+          {
             text: 'BabelPluginMettleHtml',
             link: '/tool/babelPluginMettleHtml/',
           },
           {
             text: 'BabelPresetMettle',
             link: '/tool/babelPresetMettle/',
-          },
-          {
-            text: 'MettleJsxRuntime',
-            link: '/tool/mettleJsxRuntime/',
           },
         ],
       },
@@ -91,8 +91,8 @@ export const en = defineConfig({
             link: '/other/ide/',
           },
           {
-            text: 'Browser Compatibility',
-            link: '/other/browser/',
+            text: 'Adapt',
+            link: '/other/adapt/',
           },
           {
             text: 'About',
