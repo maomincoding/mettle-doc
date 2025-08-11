@@ -185,13 +185,13 @@ In addition, we can use the predefined property `content` of the function compon
 
 ```jsx
 function Child({ content }) {
-  content.id = 'ChildId';
+  content.msg = 'hello';
   return () => <h1>Child</h1>;
 }
 
 function App() {
   function get() {
-    console.log(Child.id); // ChildId
+    console.log(Child.msg); // hello
   }
 
   return () => (

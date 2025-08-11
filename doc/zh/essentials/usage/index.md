@@ -185,13 +185,13 @@ Mettle 内部的渲染系统是基于虚拟 DOM 构建的，虚拟 DOM (Virtual 
 
 ```jsx
 function Child({ content }) {
-  content.id = 'ChildId';
+  content.msg = 'hello';
   return () => <h1>Child</h1>;
 }
 
 function App() {
   function get() {
-    console.log(Child.id); // ChildId
+    console.log(Child.msg); // hello
   }
 
   return () => (
