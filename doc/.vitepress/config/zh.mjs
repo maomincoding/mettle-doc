@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 export const zh = defineConfig({
   lang: 'zh-Hans',
-  description: '一个易用、快速、灵活且轻量级的JavaScript库',
+  description: '一个易用、快速、灵活的JavaScript库',
   themeConfig: {
     nav: [
       {

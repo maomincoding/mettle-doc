@@ -1,6 +1,6 @@
 # 安装
 
-## CDN
+## 无构建版本
 
 如果你想使用 ES 模块。
 
@@ -9,53 +9,71 @@
 :::
 
 ```html
-<script type="module">
-  import {
-    html,
-    createApp,
-  } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
+<html>
+  <body>
+    <script type="module">
+      import {
+        html,
+        createApp,
+        signal
+      } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
-  function App({ setData }) {
-      let count = 0;
+      function App() {
+          const count = signal(0);
 
-      function add() {
-          count++;
-          setData();
+          function add() {
+              count.value++;
+          }
+
+          return () => html`<h1 onClick=${add}>${count.value}</h1>`;
       }
-      return () => html`<h1 onClick=${add}>${count}</h1>`;
-  }
 
-  createApp(html`<${App}/>`, '#app');
-</script>
+      createApp(html`<${App}/>`, '#app');
+    </script>
+  </body>
+</html>
 ```
 
-如果你觉得上述方式有点麻烦，也可以直接在 `<script>` 标签中导入。
+另外，也可以直接在 `<script>` 标签中导入。
 
 ::: tip
 该版本的所有顶层 API 都以属性的形式暴露在了全局的 Mettle 对象上。
 :::
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
-<script>
-  const { html, createApp } = Mettle;
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
+    <script>
+      const { html, createApp, signal } = Mettle;
 
-  function App({ setData }) {
-      let count = 0;
+      function App() {
+          const count = signal(0);
 
-      function add() {
-          count++;
-          setData();
+          function add() {
+              count.value++;
+          }
+
+          return () => html`<h1 onClick=${add}>${count.value}</h1>`;
       }
-      return () => html`<h1 onClick=${add}>${count}</h1>`;
-  }
 
-  createApp(html`<${App}/>`, '#app');
-</script>
+      createApp(html`<${App}/>`, '#app');
+    </script>
+  </body>
+</html>
 ```
 
 ::: tip
 上面两种方式，默认都使用了生产版本。如果你想在开发中获得更精准的代码定位，那么可以用开发版本，只需要把文件后缀`*.prod.js`中`prod`字段删除即可。
+:::
+
+::: tip
+无构建的优势伴随着权衡：
+
+- 无法使用 JSX 语法
+- 需要`return () =>`
+- 无法自动解包，必须手动`.value`
+
 :::
 
 ## 包管理器

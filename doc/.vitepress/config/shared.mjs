@@ -33,7 +33,7 @@ export const shared = defineConfig({
     ['meta', { name: 'theme-color', content: '#6c2de4' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'en' }],
-    ['meta', { property: 'og:title', content: 'Mettle | A approachable, fast, flexible and lightweight JavaScript library' }],
+    ['meta', { property: 'og:title', content: 'Mettle | A approachable, fast, flexible JavaScript library' }],
     ['meta', { property: 'og:site_name', content: 'Mettle' }],
     ['meta', { property: 'og:image', content: '/mettle-doc/logo.png' }],
     ['meta', { property: 'og:url', content: 'https://vitepress.dev/' }],

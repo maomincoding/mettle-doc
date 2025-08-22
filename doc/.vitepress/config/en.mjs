@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 export const en = defineConfig({
   lang: 'en-US',
-  description: 'A approachable, fast, flexible and lightweight JavaScript library',
+  description: 'A approachable, fast, flexible JavaScript library',
   themeConfig: {
     nav: [
       {
