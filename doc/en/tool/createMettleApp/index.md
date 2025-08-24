@@ -4,30 +4,26 @@ A set of command line tools for quickly building Mettle projects. createMettleAp
 
 ## Scaffolding Your First Mettle Project
 
-::: code-group
-
-```bash [npm]
+```bash
 npm create mettle-app@latest
 ```
-
-:::
 
 ## Choose a template
 
 You can choose the corresponding template according to your needs.
 
-- mettle
+- **mettle**
 
 Mettle is developed using JSX syntax.
 
-- mettle-apps
+- **mettle-apps**
 
 Use JSX syntax to develop Mettle + mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.
 
-- mettle-ts
+- **mettle-ts**
 
 Mettle is developed using TSX syntax.
 
-- mettle-apps-ts
+- **mettle-apps-ts**
 
 Use TSX syntax to develop Mettle + mettleRouter, which is suitable for jumping multiple pages and slightly more complex applications.

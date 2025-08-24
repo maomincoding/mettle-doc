@@ -177,7 +177,6 @@ function App() {
 
   return <Child count={count} />;
 }
-
 ```
 
 ## 内置属性

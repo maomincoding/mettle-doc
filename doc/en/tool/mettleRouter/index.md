@@ -2,123 +2,6 @@
 
 `mettleRouter` is the official routing manager for Mettle. It is deeply integrated with the core of Mettle and makes it easy to build single-page applications.
 
-## Start
-
-We can learn it initially according to the following steps.
-
-### Creating the home page
-
-```jsx
-// home.jsx
-import { linkTo } from 'mettle-router';
-
-export default function Home({ setData }) {
-  const state = {
-    msg: 'hello',
-    arr: [1, 2],
-    count: 3,
-  };
-
-  function goAbout() {
-    linkTo({
-      path: '/about',
-      query: {
-        id: 1,
-        name: 'maomin',
-      },
-    });
-  }
-
-  function useChange() {
-    state.msg = 'world';
-    state.count++;
-    state.arr.unshift(state.count);
-    setData();
-  }
-
-  return () => (
-    <fragment>
-      <button onClick={goAbout}>goAbout</button>
-      <h1>Home</h1>
-      <p onClick={useChange}>{state.msg}</p>
-      <ul>
-        {state.arr.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </fragment>
-  );
-}
-
-```
-
-### Creating an about page
-
-```jsx
-// about.jsx
-import { linkTo, toParse } from 'mettle-router';
-
-export default function About() {
-  function goHome() {
-    linkTo({
-      path: '/',
-    });
-  }
-
-  function getOption() {
-    console.log(toParse());
-  }
-
-  return () => (
-    <fragment>
-      <button onClick={goHome}>goHome</button>
-      <h1 onClick={getOption}>About</h1>
-    </fragment>
-  );
-}
-```
-
-### Configuring routing information
-
-```js
-// router/index.js
-import { resetView } from 'mettle';
-import { initRouter } from 'mettle-router';
-
-import Home from '../template/home';
-import About from '../template/about';
-
-const router = initRouter(
-  [
-    {
-      path: '/',
-      template: Home,
-    },
-    {
-      path: '/about',
-      template: About,
-    },
-  ],
-  resetView
-);
-
-export default router;
-```
-
-### Mounting page
-
-```jsx
-// main.jsx
-import { createApp } from 'mettle';
-import Router from './router/index';
-
-function App() {
-  return () => <Router></Router>;
-}
-
-createApp(<App />, '#app');
-```
-
 ## Install
 
 ```bash
@@ -170,7 +53,7 @@ import { createApp } from 'mettle';
 import Router from './router/index';
 
 function App() {
-  return () => <Router></Router>;
+  return <Router></Router>;
 }
 
 createApp(<App />, '#app');
@@ -183,7 +66,7 @@ If you need to jump to the corresponding page, use the `linkTo()` method, you ca
 ```jsx
 import { linkTo, toParse } from 'mettle-router';
 
-export default function About() {
+function About() {
   function goHome() {
     linkTo({
       path: '/',
@@ -194,7 +77,7 @@ export default function About() {
     console.log(toParse());
   }
 
-  return () => (
+  return (
     <fragment>
       <button onClick={goHome}>goHome</button>
       <h1 onClick={getOption}>About</h1>

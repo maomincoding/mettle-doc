@@ -4,69 +4,189 @@
 
 Create an application.
 
-The first parameter is the root component, which is required. The second parameter is used to mount the root component. Receive a "container" parameter, which can be an actual DOM element or a CSS selector string.
+The first parameter is the root component, required. The second parameter is used to mount the root component. Receives a "container" parameter, which can be an actual DOM element or a CSS selector string.
 
 ```jsx
 function App() {
-  return () => <h1>Hello</h1>;
+  return <h1>Hello</h1>;
 }
 
 createApp(<App />, '#app');
 ```
 
-## setData
+## signal
 
-Modifying page data is best performed at the end of the logic.
-
-The first parameter is the context, which is required in the outer scope but not in the inner scope. In the inner scope, it can be referenced directly in the function component.
-
-**Internal scope:**
+Creates a new signal with the given parameters as the initial value.
 
 ```jsx
-function App({ setData }) {
-  let count = 0;
+function App() {
+  const count = signal(0);
 
   function add() {
-    count++;
-    setData();
+    count.value++;
   }
 
-  return () => (
+  return (
     <fragment>
-      <button onClick={add}>Add</button>
-      <h1>{count}</h1>
+      <button onClick={add}>add</button>
+      <p>{count}</p>
     </fragment>
   );
 }
 ```
 
-**External scope:**
+## computed
+
+Creates a new signal that is computed based on the value of another signal. The returned computed signal is read-only and its value is automatically updated when any signal accessed within the callback function changes.
 
 ```jsx
-import { setData } from 'mettle';
-
-let count = 0;
-
-function add() {
-  count++;
-  setData(App);
-}
-
 function App() {
-  return () => (
+  const count = signal(0);
+  const double = computed(() => count.value * 2);
+
+  function add() {
+    count.value++;
+  }
+
+  return (
     <fragment>
-      <button onClick={add}>Add</button>
-      <h1>{count}</h1>
+      <button onClick={add}>add</button>
+      <p>{count}</p>
+      <p>{double}</p>
     </fragment>
   );
 }
 ```
 
-The second parameter is optional and is of type `Symbol`. It is used with the built-in property `$memo` to indicate updated data.
+## effect
+
+To run arbitrary code based on a signal change, use `effect(fn)`. Similar to `computed`, `effect` keeps track of which signals are accessed and reruns its callback when those signals change. Unlike `computed`, `effect()` does not return a signal.
+
+```jsx
+function App() {
+  const name = signal('Hello');
+
+  effect(() => console.log('Hello', name.value)); // Hello -> hello111
+
+  function change() {
+    name.value = 'hello111';
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{name}</p>
+    </fragment>
+  );
+}
+```
+
+## batch
+
+The `batch(fn)` function can be used to combine multiple value updates into a single "commit" at the end of the provided callback.
+
+```jsx
+function App() {
+  const name = signal('hello');
+  const surname = signal('dog');
+
+  function change() {
+    batch(() => {
+      name.value = 'Hello';
+      surname.value = 'cat';
+    });
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{name}</p>
+      <p>{surname}</p>
+    </fragment>
+  );
+}
+```
+
+## untracked
+
+`untracked(fn)` can be used to access the values ​​of multiple signals without subscribing to them.
+
+```jsx
+function App() {
+  const name = signal('hello');
+  const surname = signal('dog');
+
+  effect(() => {
+    untracked(() => {
+      console.log(`${name.value} ${surname.value}`);
+    });
+  });
+
+  function change() {
+    surname.value = 'cat';
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{name}</p>
+      <p>{surname}</p>
+    </fragment>
+  );
+}
+```
+
+## produce
+
+Provides responsive management of complex objects.
+
+```jsx
+function handleArr() {
+  const arr = signal([1]);
+
+  function push() {
+    arr.value = produce(arr.value, (item) => {
+      item.push(new Date().getTime());
+    });
+  }
+
+  return (
+    <fragment>
+      <button onClick={push}>push</button>
+      <ul>
+        {arr.value.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </fragment>
+  );
+}
+```
+
+```jsx
+function handleObj() {
+  const obj = signal({
+    name: 'hello',
+  });
+
+  function change() {
+    obj.value = produce(obj.value, (item) => {
+      item.name = 'world';
+    });
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{obj.value.name}</p>
+    </fragment>
+  );
+}
+```
 
 ## onMounted
 
-Register a callback function to be executed after the component is mounted.
+Registers a callback function to be executed after the component is mounted.
 
 ```jsx
 function App() {
@@ -74,11 +194,7 @@ function App() {
     console.log('onMounted', 'about');
   });
 
-  return () => (
-    <fragment>
-      <h1>About</h1>
-    </fragment>
-  );
+  return <h1>About</h1>
 }
 ```
 
@@ -92,11 +208,7 @@ function App() {
     console.log('onUnmounted', 'about');
   });
 
-  return () => (
-    <fragment>
-      <h1>About</h1>
-    </fragment>
-  );
+  return <h1>About</h1>
 }
 ```
 
@@ -112,30 +224,30 @@ function App() {
     console.log('domInfo', domInfo.get(h1));
   }
 
-  return () => (
-    <fragment>
-      <h1 $ref={h1} onClick={getDomInfo}>
-        Hello
-      </h1>
-    </fragment>
+  return (
+    <h1 $ref={h1} onClick={getDomInfo}>
+      Hello
+    </h1>
   );
 }
 ```
 
 ## html
 
-` html`` ` is a tag function. The syntax of the tag function is to directly follow the function name with a template string. For example, you can write HTML tags directly in the template string.
+` html`` ` is a tag function. The syntax for a tag function is to directly follow the function name with a template string. For example, you can write HTML tags directly in the template string.
 
-In the JSX syntax environment, this API will not be used.
+::: warning
+This API is only used in the unbuilt version.
+:::
 
 ```js
 function App() {
-  let count = 0;
+  const count = 0;
   return () => html`<p>${count}</p>`;
 }
 ```
 
 ::: tip
-If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plug-in,
-This plugin enables HTML template string highlighting.
+If you're using the VS Code editor, you can download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin from the store.
+This plugin will highlight HTML template strings.
 :::

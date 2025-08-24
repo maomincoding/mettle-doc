@@ -1,70 +1,74 @@
 # Install
 
-## CDN
+## No build
 
-If you want to use ES Module.
+If you need or prefer to use `mettle` in a non-compiled environment, such as a plain `HTML` file.
 
-::: warning
-If you open the above index.html directly in the browser, you will find that it throws an error because ES modules cannot work through the `file://` protocol. In order for this to work, you need to use a local HTTP server to serve index.html via the `http://` protocol.
-:::
+If you want to use ES modules.
 
 ```html
-<script type="module">
-  import {
-    html,
-    createApp,
-  } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
+<html>
+  <body>
+    <script type="module">
+      import {
+        html,
+        createApp,
+        signal
+      } from 'https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full-esm.js';
 
-  function App({ setData }) {
-      let count = 0;
+      function App() {
+          const count = signal(0);
 
-      function add() {
-          count++;
-          setData();
+          function add() {
+              count.value++;
+          }
+
+          return () => html`<h1 onClick=${add}>${count.value}</h1>`;
       }
-      return () => html`<h1 onClick=${add}>${count}</h1>`;
-  }
 
-  createApp(html`<${App}/>`, '#app');
-</script>
+      createApp(html`<${App}/>`, '#app');
+    </script>
+  </body>
+</html>
 ```
 
-If you find the above method a bit troublesome, you can also import it directly in the `<script>` tag.
-
-::: tip
-All top-level APIs of this version are exposed as properties on the global Mettle object.
-:::
+Alternatively, you can also import directly in the `<script>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
-<script>
-  const { html, createApp } = Mettle;
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mettle@latest/dist/mettle.full.prod.js"></script>
+    <script>
+      const { html, createApp, signal } = Mettle;
 
-  function App({ setData }) {
-      let count = 0;
+      function App() {
+          const count = signal(0);
 
-      function add() {
-          count++;
-          setData();
+          function add() {
+              count.value++;
+          }
+
+          return () => html`<h1 onClick=${add}>${count.value}</h1>`;
       }
-      return () => html`<h1 onClick=${add}>${count}</h1>`;
-  }
 
-  createApp(html`<${App}/>`, '#app');
-</script>
+      createApp(html`<${App}/>`, '#app');
+    </script>
+  </body>
+</html>
 ```
 
 ::: tip
-The above two methods use the production version by default. If you want to get more accurate code positioning during development, you can use the development version. You only need to delete the `prod` field in the file suffix `*.prod.js`.
+Both methods above use the production version by default. If you want more accurate code location during development, you can use the development version by removing the `prod` field from the `*.prod.js` file suffix.
 :::
 
-## Package Manager
+::: tip
+The advantages of no builds come with tradeoffs:
 
-When building large applications with Mettle, it is recommended to install using a package manager.
+- Unable to use `JSX` syntax
+- Component functions must `return` a template function
+- Signal mechanisms cannot be automatically unwrapped; `.value` must be used manually
 
-```bash
-> npm install mettle
-```
+:::
 
 ## CLI
 

@@ -8,22 +8,9 @@ Mettle allows developers to declaratively bind the DOM to the underlying instanc
 
 ```jsx
 function App() {
-  const state = {
-    msg: 'Hello',
-  };
-  return () => <h1>{state.msg}</h1>;
-}
-```
+  const msg = signal('Hello');
 
-### Expression
-
-```jsx
-function App() {
-  const state = {
-    a: 1,
-    b: 2,
-  };
-  return () => <h1>{state.a + state.b}</h1>;
+  return <h1>{msg}</h1>;
 }
 ```
 
@@ -31,33 +18,9 @@ function App() {
 
 ```jsx
 function App() {
-  const state = {
-    msg: 'Hello',
-  };
-  return () => <input type='text' value={state.msg} />;
-}
-```
+  const msg = signal('Hello');
 
-```jsx
-function App() {
-  const state = {
-    isRed: true,
-    msg: 'Hello',
-  };
-  return () => <h1 class={state.isRed ? 'red' : ''}>{state.msg}</h1>;
-}
-```
-
-```jsx
-function App() {
-  const state = {
-    msg: 'Hello',
-    style: {
-      color: 'red',
-      fontSize: '40px',
-    },
-  };
-  return () => <p style={state.style}>{state.msg}</p>;
+  return <input type='text' value={msg} />;
 }
 ```
 
@@ -66,19 +29,19 @@ function App() {
 The label is only displayed if the directive's expression returns a `true` value.
 
 ```jsx
-function App({ setData }) {
-  const state = {
-    isShow: true,
-  };
+function App() {
+  const isShow = signal(true);
 
   function useShow() {
-    state.isShow = !state.isShow;
-    setData();
+    isShow.value = !isShow.value;
   }
-  return () => (
+
+  const showHtm = computed(() => (isShow.value ? <p>Mettle.js</p> : <null></null>));
+
+  return (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{showHtm}</div>
     </fragment>
   );
 }
@@ -89,21 +52,21 @@ function App({ setData }) {
 To render an array-based list, use the array's map method to return an array.
 
 ```jsx
-function App({ setData }) {
-  const state = {
-    arr: [1, 2],
-  };
+function handleArr() {
+  const arr = signal([1]);
 
-  function usePush() {
-    state.arr.push(3);
-    setData();
+  function push() {
+    arr.value = produce(arr.value, (item) => {
+      item.push(new Date().getTime());
+    });
   }
-  return () => (
+
+  return (
     <fragment>
-      <button onClick={usePush}>push</button>
+      <button onClick={push}>push</button>
       <ul>
-        {state.arr.map((todo) => (
-          <li key={todo}>{todo}</li>
+        {arr.value.map((item) => (
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </fragment>
@@ -121,18 +84,7 @@ We can use the `on` directive to listen to DOM events and execute some JavaScrip
 
 ```jsx
 function App() {
-  const state = {
-    msg: 'sayHello',
-  };
-
-  function useClick() {
-    alert('hello');
-  }
-  return () => (
-    <fragment>
-      <button onClick={useClick}>{state.msg}</button>
-    </fragment>
-  );
+  return <button onClick={() => alert('hello')}>alert</button>;
 }
 ```
 
@@ -143,36 +95,34 @@ Mettle applications are composed of components. A component is a part of a UI (u
 In Mettle, a component is a function.
 
 ```jsx
-function MyComponent({ setData }) {
-  let count = 0;
+function MyComponent() {
+  const count = signal(0);
 
   function add() {
-    count++;
-    setData();
+    count.value++;
   }
 
-  return () => (
-    <div class='MyComponent'>
+  return (
+    <fragment>
       <p>{count}</p>
       <button onClick={add}>MyComponent</button>
-    </div>
+    </fragment>
   );
 }
 
-function App({setData}) {
-  let count = 0;
+function App() {
+  const count = signal(0);
 
-  const add = () => {
-    count++;
-    setData();
-  };
+  function add() {
+    count.value++;
+  }
 
-  return () => (
-    <div class='App'>
+  return (
+    <fragment>
       <p>{count}</p>
       <button onClick={add}>App</button>
       <MyComponent />
-    </div>
+    </fragment>
   );
 }
 ```
@@ -185,16 +135,24 @@ In addition, we can use the predefined property `content` of the function compon
 
 ```jsx
 function Child({ content }) {
-  content.msg = 'hello';
-  return () => <h1>Child</h1>;
+  content.getName = () => {
+    console.log('child');
+  };
+
+  return (
+    <fragment>
+      <button onClick={post}>Post</button>
+      <Child />
+    </fragment>
+  );
 }
 
 function App() {
   function get() {
-    console.log(Child.msg); // hello
+    Child.getName(); // child
   }
 
-  return () => (
+  return (
     <fragment>
       <button onClick={get}>Get</button>
       <Child />
@@ -207,15 +165,17 @@ If we define a static property for a component, we can get it using the predefin
 
 ```jsx
 function Child({ props }) {
-  function getAge(){
-    console.log(props.age); // 11
+  function getCount() {
+    console.log(props.count.value); // 1
   }
 
-  return () => <h1 onClick={getAge}>Child</h1>;
+  return <h1 onClick={getCount}>Child</h1>;
 }
 
 function App() {
-  return () => <Child age='11'/>
+  const count = signal(1);
+
+  return <Child count={count} />;
 }
 ```
 
@@ -233,7 +193,7 @@ function App() {
     console.log('domInfo', domInfo.get(h1));
   }
 
-  return () => (
+  return (
     <fragment>
       <h1 $ref={h1} onClick={getDomInfo}>
         Hello
@@ -248,19 +208,18 @@ function App() {
 Render the element only once, and skip future updates.
 
 ```jsx
-function App({ setData }) {
-  let count = 0;
+function App() {
+  const count = signal(1);
 
   function add() {
-    count++;
-    setData();
+    count.value++;
   }
 
-  return () => (
+  return (
     <fragment>
       <button onClick={add}>Add</button>
       <h1 $once>{count}</h1>
-      <input value={count} />
+      <h2>{count}</h2>
     </fragment>
   );
 }
@@ -268,15 +227,15 @@ function App({ setData }) {
 
 ### $memo
 
-Cache a subtree of a template and skip the update of the subtree.
+Caches a template subtree, skipping updates to the subtree.
 
-This property requires an array of fixed length. The value of the first item in the array is of type `Boolean`. If the value is `false`, the update of the entire subtree will be skipped. The value of the second item in the array is of type `Symbol`, which is used with `setData`.
+This property requires a fixed-length array. The first item in the array is of type `Boolean`; if the value is `false`, updates to the entire subtree are skipped. The second item in the array is of type `Symbol` and is used in conjunction with `memo`.
 
 ```jsx
-function App({ setData }) {
+function App({ memo }) {
   const symbol1 = Symbol();
-  let selected = 0;
-  let arr = [
+  let selected = signal(0);
+  const arr = signal([
     {
       id: '1',
       val: 'A',
@@ -289,20 +248,20 @@ function App({ setData }) {
       id: '3',
       val: 'C',
     },
-  ];
+  ]);
 
   function handle(event) {
-    const el = event.target;
-    const id = Number(el.dataset.id);
-    selected = id;
-    setData(null,symbol1);
-    return false;
+    memo(() => {
+      const el = event.target;
+      const id = Number(el.dataset.id);
+      selected.value = id;
+    }, symbol1);
   }
 
-  return () => (
+  return (
     <fragment>
       <ul onClick={handle}>
-        {arr.map((todo) => (
+        {arr.value.map((todo) => (
           <li
             $memo={[todo.id == selected, symbol1]}
             class={todo.id == selected ? 'danger' : ''}
@@ -327,19 +286,17 @@ Because the element hit by the `$memo` tag will not update its child elements by
 Empty tags will not be displayed on the page.
 
 ```jsx
-function App({setData}) {
-  const state = {
-    isShow: true,
-  };
+function App() {
+  const isShow = signal(true);
 
   function useShow() {
-    state.isShow = !state.isShow;
-    setData();
+    isShow.value = !isShow.value;
   }
-  return () => (
+
+  return (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
 }
@@ -355,12 +312,7 @@ There is only one root component, so you will see it used as the root component 
 
 ```jsx
 function App() {
-  const state = {
-    x: 0,
-    y: 0,
-  };
-
-  return () => (
+  return (
     <fragment>
       <h1>Mettle</h1>
       <h2>Hello!</h2>

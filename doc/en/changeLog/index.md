@@ -1,6 +1,10 @@
 # Change Log
 
-## v1.1.2 (Latest)
+## v1.7.0 (Latest)
+
+- Introducing the `Signals` mechanism, which automatically updates components and the UI when state changes, ensuring the most efficient operation possible.
+
+## v1.1.2
 
 - Optimize the underlying code structure.
 
