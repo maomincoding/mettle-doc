@@ -32,10 +32,6 @@ export const zh = defineConfig({
             text: '用法',
             link: '/zh/essentials/usage/',
           },
-          {
-            text: '案例',
-            link: '/zh/essentials/example/',
-          },
         ],
       },
       {
@@ -50,22 +46,6 @@ export const zh = defineConfig({
             text: 'CreateMettleApp',
             link: '/zh/tool/createMettleApp/',
           },
-          {
-            text: 'VitePluginMettle',
-            link: '/zh/tool/vitePluginMettle/',
-          },
-          {
-            text: 'MettleJsxRuntime',
-            link: '/zh/tool/mettleJsxRuntime/',
-          },
-          {
-            text: 'BabelPluginMettleHtml',
-            link: '/zh/tool/babelPluginMettleHtml/',
-          },
-          {
-            text: 'BabelPresetMettle',
-            link: '/zh/tool/babelPresetMettle/',
-          },
         ],
       },
       {
@@ -79,14 +59,6 @@ export const zh = defineConfig({
           {
             text: 'TSX 支持',
             link: '/zh/other/tsx/',
-          },
-          {
-            text: 'IDE 支持',
-            link: '/zh/other/ide/',
-          },
-          {
-            text: '适配',
-            link: '/zh/other/adapt/',
           },
           {
             text: '关于',

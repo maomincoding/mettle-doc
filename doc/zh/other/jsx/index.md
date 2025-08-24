@@ -1,6 +1,6 @@
 # JSX 支持
 
-可以使用 JSX 语法编写 Mettle。JSX 是 JavaScript 语法扩展，可以让你在 JavaScript 文件中书写类似 HTML 的标签。
+可以使用 JSX 语法编写 Mettle。JSX 是 JavaScript 语法扩展，可以让您在 JavaScript 文件中书写类似 HTML 的标签。
 
 ## 使用
 

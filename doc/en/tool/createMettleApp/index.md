@@ -10,14 +10,6 @@ A set of command line tools for quickly building Mettle projects. createMettleAp
 npm create mettle-app@latest
 ```
 
-```bash [pnpm]
-pnpm create mettle-app
-```
-
-```bash [yarn]
-yarn create mettle-app
-```
-
 :::
 
 ## Choose a template

@@ -38,10 +38,6 @@ export const en = defineConfig({
             text: 'Usage',
             link: '/essentials/usage/',
           },
-          {
-            text: 'Example',
-            link: '/essentials/example/',
-          },
         ],
       },
       {
@@ -56,22 +52,6 @@ export const en = defineConfig({
             text: 'CreateMettleApp',
             link: '/tool/createMettleApp/',
           },
-          {
-            text: 'VitePluginMettle',
-            link: '/tool/vitePluginMettle/',
-          },
-          {
-            text: 'MettleJsxRuntime',
-            link: '/tool/mettleJsxRuntime/',
-          },
-          {
-            text: 'BabelPluginMettleHtml',
-            link: '/tool/babelPluginMettleHtml/',
-          },
-          {
-            text: 'BabelPresetMettle',
-            link: '/tool/babelPresetMettle/',
-          },
         ],
       },
       {
@@ -85,14 +65,6 @@ export const en = defineConfig({
           {
             text: 'TSX Support',
             link: '/other/tsx/',
-          },
-          {
-            text: 'IDE Support',
-            link: '/other/ide/',
-          },
-          {
-            text: 'Adapt',
-            link: '/other/adapt/',
           },
           {
             text: 'About',

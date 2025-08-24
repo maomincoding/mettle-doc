@@ -21,7 +21,7 @@ hero:
 ---
 
 ```jsx
-function App() {
+function Counter() {
   const count = signal(0);
 
   return <button onClick={() => count.value++}>{count}</button>;

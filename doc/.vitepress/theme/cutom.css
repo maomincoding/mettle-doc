@@ -26,17 +26,17 @@
 
 @media (max-width: 640px) {
     .VPHome .container {
-        padding-top: 70px;
+        padding-top: 30px;
     }
 }
 
 @media (min-width: 960px) {
     .VPHome .container {
-        padding-top: 80px;
+        padding-top: 50px;
     }
 
     .VPHome .vp-doc {
-        width: 760px;
+        width: 710px;
     }
 
     .VPHero.has-image .image-container {

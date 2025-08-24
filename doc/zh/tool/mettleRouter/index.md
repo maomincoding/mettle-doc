@@ -2,123 +2,6 @@
 
 `mettleRouter` 是 Mettle 的官方路由管理器。 它与 Mettle 的核心深度集成，轻松构建单页应用程序。
 
-## 开始
-
-我们可以根据以下步骤来初步学习。
-
-### 创建 home 页面
-
-```jsx
-// home.jsx
-import { linkTo } from 'mettle-router';
-
-export default function Home({ setData }) {
-  const state = {
-    msg: 'hello',
-    arr: [1, 2],
-    count: 3,
-  };
-
-  function goAbout() {
-    linkTo({
-      path: '/about',
-      query: {
-        id: 1,
-        name: 'maomin',
-      },
-    });
-  }
-
-  function useChange() {
-    state.msg = 'world';
-    state.count++;
-    state.arr.unshift(state.count);
-    setData();
-  }
-
-  return () => (
-    <fragment>
-      <button onClick={goAbout}>goAbout</button>
-      <h1>Home</h1>
-      <p onClick={useChange}>{state.msg}</p>
-      <ul>
-        {state.arr.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </fragment>
-  );
-}
-
-```
-
-### 创建 about 页面
-
-```jsx
-// about.jsx
-import { linkTo, toParse } from 'mettle-router';
-
-export default function About() {
-  function goHome() {
-    linkTo({
-      path: '/',
-    });
-  }
-
-  function getOption() {
-    console.log(toParse());
-  }
-
-  return () => (
-    <fragment>
-      <button onClick={goHome}>goHome</button>
-      <h1 onClick={getOption}>About</h1>
-    </fragment>
-  );
-}
-```
-
-### 配置路由信息
-
-```js
-// router/index.js
-import { resetView } from 'mettle';
-import { initRouter } from 'mettle-router';
-
-import Home from '../template/home';
-import About from '../template/about';
-
-const router = initRouter(
-  [
-    {
-      path: '/',
-      template: Home,
-    },
-    {
-      path: '/about',
-      template: About,
-    },
-  ],
-  resetView
-);
-
-export default router;
-```
-
-### 挂载页面
-
-```jsx
-// main.jsx
-import { createApp } from 'mettle';
-import Router from './router/index';
-
-function App() {
-  return () => <Router></Router>;
-}
-
-createApp(<App />, '#app');
-```
-
 ## 安装
 
 ```bash
@@ -127,7 +10,7 @@ npm install mettle-router
 
 ## 使用
 
-你可以使用[createMettleApp](/zh/tool/createMettleApp/)，选择带有`apps`标识的模板。
+您可以使用[createMettleApp](/zh/tool/createMettleApp/)，选择带有`apps`标识的模板。
 
 ## API
 
@@ -170,7 +53,7 @@ import { createApp } from 'mettle';
 import Router from './router/index';
 
 function App() {
-  return () => <Router></Router>;
+  return <Router></Router>;
 }
 
 createApp(<App />, '#app');
@@ -183,7 +66,7 @@ createApp(<App />, '#app');
 ```jsx
 import { linkTo, toParse } from 'mettle-router';
 
-export default function About() {
+function About() {
   function goHome() {
     linkTo({
       path: '/',
@@ -194,7 +77,7 @@ export default function About() {
     console.log(toParse());
   }
 
-  return () => (
+  return (
     <fragment>
       <button onClick={goHome}>goHome</button>
       <h1 onClick={getOption}>About</h1>

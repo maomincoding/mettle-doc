@@ -8,61 +8,181 @@
 
 ```jsx
 function App() {
-  return () => <h1>Hello</h1>;
+  return <h1>Hello</h1>;
 }
 
 createApp(<App />, '#app');
 ```
 
-## setData
+## signal
 
-修改页面数据，最好在逻辑最后执行。
-
-第一个参数为上下文环境，在外部作用域必传，在内部作用域不传。内部作用域下，可直接在函数组件中引用。
-
-**内部作用域：**
+以给定参数为初始值创建一个新的信号。
 
 ```jsx
-function App({ setData }) {
-  let count = 0;
+function App() {
+  const count = signal(0);
 
   function add() {
-    count++;
-    setData();
+    count.value++;
   }
 
-  return () => (
+  return (
     <fragment>
-      <button onClick={add}>Add</button>
-      <h1>{count}</h1>
+      <button onClick={add}>add</button>
+      <p>{count}</p>
     </fragment>
   );
 }
 ```
 
-**外部作用域：**
+## computed
+
+创建一个根据其他信号的值计算的新信号。返回的计算信号是只读的，当回调函数内访问的任何信号发生变化时，其值会自动更新。
 
 ```jsx
-import { setData } from 'mettle';
-
-let count = 0;
-
-function add() {
-  count++;
-  setData(App);
-}
-
 function App() {
-  return () => (
+  const count = signal(0);
+  const double = computed(() => count.value * 2);
+
+  function add() {
+    count.value++;
+  }
+
+  return (
     <fragment>
-      <button onClick={add}>Add</button>
-      <h1>{count}</h1>
+      <button onClick={add}>add</button>
+      <p>{count}</p>
+      <p>{double}</p>
     </fragment>
   );
 }
 ```
 
-第二个参数非必传，参数的类型是`Symbol`，与内置属性`$memo`搭配使用，用于标明更新的数据。
+## effect
+
+要根据信号变化运行任意代码，可以使用`effect(fn)`。与`computed`类似，`effect` 会跟踪哪些信号被访问，并在这些信号发生变化时重新运行其回调。与`computed`不同的是，`effect()`不返回信号。
+
+```jsx
+function App() {
+  const name = signal('Hello');
+
+  effect(() => console.log('Hello', name.value)); // Hello -> hello111
+
+  function change() {
+    name.value = 'hello111';
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{name}</p>
+    </fragment>
+  );
+}
+```
+
+## batch
+
+`batch(fn)`函数可用于在提供的回调结束时将多个值更新合并为一个“提交”。
+
+```jsx
+function App() {
+  const name = signal('hello');
+  const surname = signal('dog');
+
+  function change() {
+    batch(() => {
+      name.value = 'Hello';
+      surname.value = 'cat';
+    });
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{name}</p>
+      <p>{surname}</p>
+    </fragment>
+  );
+}
+```
+
+## untracked
+
+`untracked(fn)`可用于访问多个信号的值而无需订阅它们。
+
+```jsx
+function App() {
+  const name = signal('hello');
+  const surname = signal('dog');
+
+  effect(() => {
+    untracked(() => {
+      console.log(`${name.value} ${surname.value}`);
+    });
+  });
+
+  function change() {
+    surname.value = 'cat';
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{name}</p>
+      <p>{surname}</p>
+    </fragment>
+  );
+}
+```
+
+## produce
+
+提供了复杂对象的响应式管理能力。
+
+```jsx
+function handleArr() {
+  const arr = signal([1]);
+
+  function push() {
+    arr.value = produce(arr.value, (item) => {
+      item.push(new Date().getTime());
+    });
+  }
+
+  return (
+    <fragment>
+      <button onClick={push}>push</button>
+      <ul>
+        {arr.value.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </fragment>
+  );
+}
+```
+
+```jsx
+function handleObj() {
+  const obj = signal({
+    name: 'hello',
+  });
+
+  function change() {
+    obj.value = produce(obj.value, (item) => {
+      item.name = 'world';
+    });
+  }
+
+  return (
+    <fragment>
+      <button onClick={change}>change</button>
+      <p>{obj.value.name}</p>
+    </fragment>
+  );
+}
+```
 
 ## onMounted
 
@@ -74,11 +194,7 @@ function App() {
     console.log('onMounted', 'about');
   });
 
-  return () => (
-    <fragment>
-      <h1>About</h1>
-    </fragment>
-  );
+  return <h1>About</h1>
 }
 ```
 
@@ -92,11 +208,7 @@ function App() {
     console.log('onUnmounted', 'about');
   });
 
-  return () => (
-    <fragment>
-      <h1>About</h1>
-    </fragment>
-  );
+  return <h1>About</h1>
 }
 ```
 
@@ -112,30 +224,30 @@ function App() {
     console.log('domInfo', domInfo.get(h1));
   }
 
-  return () => (
-    <fragment>
-      <h1 $ref={h1} onClick={getDomInfo}>
-        Hello
-      </h1>
-    </fragment>
+  return (
+    <h1 $ref={h1} onClick={getDomInfo}>
+      Hello
+    </h1>
   );
 }
 ```
 
 ## html
 
-` html`` `是一个标签函数，标签函数的语法是直接在函数名后跟一个模板字符串。 例如，你可以直接在模板字符串中编写 HTML 标签。
+` html`` `是一个标签函数，标签函数的语法是直接在函数名后跟一个模板字符串。 例如，您可以直接在模板字符串中编写 HTML 标签。
 
-在 JSX 语法环境下，不会用到此 API。
+::: warning
+此 API 仅在无构建版本下使用。
+:::
 
 ```js
 function App() {
-  let count = 0;
+  const count = 0;
   return () => html`<p>${count}</p>`;
 }
 ```
 
 ::: tip
-如果你使用的是 VSCode 编辑器，你可以去商店下载 [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) 插件，
+如果您使用的是 VSCode 编辑器，您可以去商店下载 [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) 插件，
 这个插件可以使 HTML 模板字符串高亮显示。
 :::

@@ -8,22 +8,9 @@ Mettle 允许开发人员以声明方式将 DOM 绑定到底层实例的数据�
 
 ```jsx
 function App() {
-  const state = {
-    msg: 'Hello',
-  };
-  return () => <h1>{state.msg}</h1>;
-}
-```
+  const msg = signal('Hello');
 
-### 表达式
-
-```jsx
-function App() {
-  const state = {
-    a: 1,
-    b: 2,
-  };
-  return () => <h1>{state.a + state.b}</h1>;
+  return <h1>{msg}</h1>;
 }
 ```
 
@@ -31,33 +18,9 @@ function App() {
 
 ```jsx
 function App() {
-  const state = {
-    msg: 'Hello',
-  };
-  return () => <input type='text' value={state.msg} />;
-}
-```
+  const msg = signal('Hello');
 
-```jsx
-function App() {
-  const state = {
-    isRed: true,
-    msg: 'Hello',
-  };
-  return () => <h1 class={state.isRed ? 'red' : ''}>{state.msg}</h1>;
-}
-```
-
-```jsx
-function App() {
-  const state = {
-    msg: 'Hello',
-    style: {
-      color: 'red',
-      fontSize: '40px',
-    },
-  };
-  return () => <p style={state.style}>{state.msg}</p>;
+  return <input type='text' value={msg} />;
 }
 ```
 
@@ -66,19 +29,19 @@ function App() {
 仅当指令的表达式返回 `true` 值时才会显示标签。
 
 ```jsx
-function App({ setData }) {
-  const state = {
-    isShow: true,
-  };
+function App() {
+  const isShow = signal(true);
 
   function useShow() {
-    state.isShow = !state.isShow;
-    setData();
+    isShow.value = !isShow.value;
   }
-  return () => (
+
+  const showHtm = computed(() => (isShow.value ? <p>Mettle.js</p> : <null></null>));
+
+  return (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{showHtm}</div>
     </fragment>
   );
 }
@@ -89,21 +52,21 @@ function App({ setData }) {
 渲染基于数组的列表，使用数组的`map`方法来返回一个数组。
 
 ```jsx
-function App({ setData }) {
-  const state = {
-    arr: [1, 2],
-  };
+function handleArr() {
+  const arr = signal([1]);
 
-  function usePush() {
-    state.arr.push(3);
-    setData();
+  function push() {
+    arr.value = produce(arr.value, (item) => {
+      item.push(new Date().getTime());
+    });
   }
-  return () => (
+
+  return (
     <fragment>
-      <button onClick={usePush}>push</button>
+      <button onClick={push}>push</button>
       <ul>
-        {state.arr.map((todo) => (
-          <li key={todo}>{todo}</li>
+        {arr.value.map((item) => (
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </fragment>
@@ -121,18 +84,7 @@ function App({ setData }) {
 
 ```jsx
 function App() {
-  const state = {
-    msg: 'sayHello',
-  };
-
-  function useClick() {
-    alert('hello');
-  }
-  return () => (
-    <fragment>
-      <button onClick={useClick}>{state.msg}</button>
-    </fragment>
-  );
+  return <button onClick={() => alert('hello')}>alert</button>;
 }
 ```
 
@@ -143,36 +95,34 @@ Mettle 应用程序是由 组件 组成的。一个组件是 UI（用户界面�
 在 Mettle 中，组件就是一个函数。
 
 ```jsx
-function MyComponent({ setData }) {
-  let count = 0;
+function MyComponent() {
+  const count = signal(0);
 
   function add() {
-    count++;
-    setData();
+    count.value++;
   }
 
-  return () => (
-    <div class='MyComponent'>
+  return (
+    <fragment>
       <p>{count}</p>
       <button onClick={add}>MyComponent</button>
-    </div>
+    </fragment>
   );
 }
 
-function App({setData}) {
-  let count = 0;
+function App() {
+  const count = signal(0);
 
-  const add = () => {
-    count++;
-    setData();
-  };
+  function add() {
+    count.value++;
+  }
 
-  return () => (
-    <div class='App'>
+  return (
+    <fragment>
       <p>{count}</p>
       <button onClick={add}>App</button>
       <MyComponent />
-    </div>
+    </fragment>
   );
 }
 ```
@@ -181,20 +131,28 @@ Mettle 内部的渲染系统是基于虚拟 DOM 构建的，虚拟 DOM (Virtual 
 
 如何虚拟 DOM 树过于庞大，使得 Diff 计算时间大于 16.6ms，那么就可能造成性能的卡顿。组件有一个特性就是 **”孤岛“**。何为“孤岛”，孤岛就是在 Mettle 应用中我们可以理解成一个独立的模块。将一个庞大的虚拟 DOM 树分解成很多独立的模块，这样 Diff 计算时间就会控制在模块级别，大大缩减了计算的时间，提高了性能。
 
-另外，我们可以利用函数组件的预定义属性`content`给组件定义数据，并且在你需要的时候使用它。
+另外，我们可以利用函数组件的预定义属性`content`给组件定义数据，并且在您需要的时候使用它。
 
 ```jsx
 function Child({ content }) {
-  content.msg = 'hello';
-  return () => <h1>Child</h1>;
+  content.getName = () => {
+    console.log('child');
+  };
+
+  return (
+    <fragment>
+      <button onClick={post}>Post</button>
+      <Child />
+    </fragment>
+  );
 }
 
 function App() {
   function get() {
-    console.log(Child.msg); // hello
+    Child.getName(); // child
   }
 
-  return () => (
+  return (
     <fragment>
       <button onClick={get}>Get</button>
       <Child />
@@ -207,16 +165,19 @@ function App() {
 
 ```jsx
 function Child({ props }) {
-  function getAge(){
-    console.log(props.age); // 11
+  function getCount() {
+    console.log(props.count.value); // 1
   }
 
-  return () => <h1 onClick={getAge}>Child</h1>;
+  return <h1 onClick={getCount}>Child</h1>;
 }
 
 function App() {
-  return () => <Child age='11'/>
+  const count = signal(1);
+
+  return <Child count={count} />;
 }
+
 ```
 
 ## 内置属性
@@ -233,7 +194,7 @@ function App() {
     console.log('domInfo', domInfo.get(h1));
   }
 
-  return () => (
+  return (
     <fragment>
       <h1 $ref={h1} onClick={getDomInfo}>
         Hello
@@ -248,19 +209,18 @@ function App() {
 仅渲染元素一次，并跳过之后的更新。
 
 ```jsx
-function App({ setData }) {
-  let count = 0;
+function App() {
+  const count = signal(1);
 
   function add() {
-    count++;
-    setData();
+    count.value++;
   }
 
-  return () => (
+  return (
     <fragment>
       <button onClick={add}>Add</button>
       <h1 $once>{count}</h1>
-      <input value={count} />
+      <h2>{count}</h2>
     </fragment>
   );
 }
@@ -270,13 +230,13 @@ function App({ setData }) {
 
 缓存一个模板的子树，跳过子树的更新。
 
-该属性需要传入一个固定长度的数组。数组第一项的值的类型为 `Boolean`，如果值为`false`，那么整个子树的更新将被跳过。数组第二项值的类型为 `Symbol`，与 `setData` 搭配使用。
+该属性需要传入一个固定长度的数组。数组第一项的值的类型为 `Boolean`，如果值为`false`，那么整个子树的更新将被跳过。数组第二项值的类型为 `Symbol`，与 `memo` 搭配使用。
 
 ```jsx
-function App({ setData }) {
+function App({ memo }) {
   const symbol1 = Symbol();
-  let selected = 0;
-  let arr = [
+  let selected = signal(0);
+  const arr = signal([
     {
       id: '1',
       val: 'A',
@@ -289,20 +249,20 @@ function App({ setData }) {
       id: '3',
       val: 'C',
     },
-  ];
+  ]);
 
   function handle(event) {
-    const el = event.target;
-    const id = Number(el.dataset.id);
-    selected = id;
-    setData(null,symbol1);
-    return false;
+    memo(() => {
+      const el = event.target;
+      const id = Number(el.dataset.id);
+      selected.value = id;
+    }, symbol1);
   }
 
-  return () => (
+  return (
     <fragment>
       <ul onClick={handle}>
-        {arr.map((todo) => (
+        {arr.value.map((todo) => (
           <li
             $memo={[todo.id == selected, symbol1]}
             class={todo.id == selected ? 'danger' : ''}
@@ -327,19 +287,17 @@ function App({ setData }) {
 空标签，不会显示在页面中。
 
 ```jsx
-function App({setData}) {
-  const state = {
-    isShow: true,
-  };
+function App() {
+  const isShow = signal(true);
 
   function useShow() {
-    state.isShow = !state.isShow;
-    setData();
+    isShow.value = !isShow.value;
   }
-  return () => (
+
+  return (
     <fragment>
       <button onClick={useShow}>show</button>
-      <div>{state.isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
     </fragment>
   );
 }
@@ -350,17 +308,12 @@ function App({setData}) {
 创建一个文档片段标签。它不是真实 DOM 树的一部分，它的变化不会触发 DOM 树的重新渲染，且不会对性能产生影响。
 
 ::: warning
-根组件仅且只有一个，所以你会在文档中很多地方看到它，被用作根组件。
+根组件仅且只有一个，所以您会在文档中很多地方看到它，被用作根组件。
 :::
 
 ```jsx
 function App() {
-  const state = {
-    x: 0,
-    y: 0,
-  };
-
-  return () => (
+  return (
     <fragment>
       <h1>Mettle</h1>
       <h2>Hello!</h2>

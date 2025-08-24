@@ -4,7 +4,7 @@
 
 Mettle 是一个用于构建用户界面的 JavaScript 库。
 
-- **更容易上手：** 只要你对 HTML、CSS 和 JavaScript 已经基本熟悉，就可以直接上手。
+- **更容易上手：** 只要您对 HTML、CSS 和 JavaScript 已经基本熟悉，就可以直接上手。
 
 - **顺滑的用户体验：** 可以使用 JSX 语法编写 Mettle，大大提升用户开发体验。
 
@@ -17,3 +17,19 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
 - **组件化：** 一个函数就是一个组件，可以根据应用规模任意组合。并且组件特有的 **“孤岛特性”**，使得将虚拟 DOM 树计算的级别控制在组件级别。
 
 - **灵活的应用场景：** 有无构建工具都可以使用。另外，可以根据不同应用场景，选择[不同类型](https://www.jsdelivr.com/package/npm/mettle?tab=files&path=dist)的文件。
+
+## 简单了解 Mettle
+
+我们开发一个简单的计数器应用，仅仅一个函数即可。
+
+1. 创建一个名为 `count` 的响应式变量，初始值为 `0`，可以通过 `signal` 随时更新。
+2. 返回一个按钮，按钮上显示 `count` 的当前值。
+3. 当点击按钮时，`count` 的值会加 `1`。
+
+```jsx
+function Counter() {
+  const count = signal(0);
+
+  return <button onClick={() => count.value++}>{count}</button>;
+}
+```
