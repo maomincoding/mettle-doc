@@ -306,7 +306,7 @@ function App() {
 
 Create a document fragment tag. It is not part of the real DOM tree, its changes will not trigger a re-rendering of the DOM tree, and will not have an impact on performance.
 
-Typically `<>...</>` is used instead.
+Typically `<></>` is used instead.
 
 ::: warning
 There is only one root component, so you will see it used as the root component in many places in the documentation.
