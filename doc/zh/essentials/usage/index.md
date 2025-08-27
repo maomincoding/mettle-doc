@@ -39,10 +39,10 @@ function App() {
   const showHtm = computed(() => (isShow.value ? <p>Mettle.js</p> : <null></null>));
 
   return (
-    <fragment>
+    <>
       <button onClick={useShow}>show</button>
       <div>{showHtm}</div>
-    </fragment>
+    </>
   );
 }
 ```
@@ -62,14 +62,14 @@ function handleArr() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={push}>push</button>
       <ul>
         {arr.value.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
-    </fragment>
+    </>
   );
 }
 ```
@@ -103,10 +103,10 @@ function MyComponent() {
   }
 
   return (
-    <fragment>
+    <>
       <p>{count}</p>
       <button onClick={add}>MyComponent</button>
-    </fragment>
+    </>
   );
 }
 
@@ -118,11 +118,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <p>{count}</p>
       <button onClick={add}>App</button>
       <MyComponent />
-    </fragment>
+    </>
   );
 }
 ```
@@ -140,10 +140,10 @@ function Child({ content }) {
   };
 
   return (
-    <fragment>
+    <>
       <button onClick={post}>Post</button>
       <Child />
-    </fragment>
+    </>
   );
 }
 
@@ -153,10 +153,10 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={get}>Get</button>
       <Child />
-    </fragment>
+    </>
   );
 }
 ```
@@ -194,11 +194,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <h1 $ref={h1} onClick={getDomInfo}>
         Hello
       </h1>
-    </fragment>
+    </>
   );
 }
 ```
@@ -216,11 +216,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={add}>Add</button>
       <h1 $once>{count}</h1>
       <h2>{count}</h2>
-    </fragment>
+    </>
   );
 }
 ```
@@ -259,7 +259,7 @@ function App({ memo }) {
   }
 
   return (
-    <fragment>
+    <>
       <ul onClick={handle}>
         {arr.value.map((todo) => (
           <li
@@ -272,7 +272,7 @@ function App({ memo }) {
           </li>
         ))}
       </ul>
-    </fragment>
+    </>
   );
 }
 ```
@@ -294,10 +294,10 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={useShow}>show</button>
       <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
-    </fragment>
+    </>
   );
 }
 ```
@@ -306,6 +306,8 @@ function App() {
 
 创建一个文档片段标签。它不是真实 DOM 树的一部分，它的变化不会触发 DOM 树的重新渲染，且不会对性能产生影响。
 
+通常使用 `<>...</>` 代替。
+
 ::: warning
 根组件仅且只有一个，所以您会在文档中很多地方看到它，被用作根组件。
 :::
@@ -313,10 +315,10 @@ function App() {
 ```jsx
 function App() {
   return (
-    <fragment>
+    <>
       <h1>Mettle</h1>
       <h2>Hello!</h2>
-    </fragment>
+    </>
   );
 }
 ```

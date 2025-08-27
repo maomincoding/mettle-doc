@@ -39,10 +39,10 @@ function App() {
   const showHtm = computed(() => (isShow.value ? <p>Mettle.js</p> : <null></null>));
 
   return (
-    <fragment>
+    <>
       <button onClick={useShow}>show</button>
       <div>{showHtm}</div>
-    </fragment>
+    </>
   );
 }
 ```
@@ -62,14 +62,14 @@ function handleArr() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={push}>push</button>
       <ul>
         {arr.value.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
-    </fragment>
+    </>
   );
 }
 ```
@@ -103,10 +103,10 @@ function MyComponent() {
   }
 
   return (
-    <fragment>
+    <>
       <p>{count}</p>
       <button onClick={add}>MyComponent</button>
-    </fragment>
+    </>
   );
 }
 
@@ -118,11 +118,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <p>{count}</p>
       <button onClick={add}>App</button>
       <MyComponent />
-    </fragment>
+    </>
   );
 }
 ```
@@ -140,10 +140,10 @@ function Child({ content }) {
   };
 
   return (
-    <fragment>
+    <>
       <button onClick={post}>Post</button>
       <Child />
-    </fragment>
+    </>
   );
 }
 
@@ -153,10 +153,10 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={get}>Get</button>
       <Child />
-    </fragment>
+    </>
   );
 }
 ```
@@ -194,11 +194,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <h1 $ref={h1} onClick={getDomInfo}>
         Hello
       </h1>
-    </fragment>
+    </>
   );
 }
 ```
@@ -216,11 +216,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={add}>Add</button>
       <h1 $once>{count}</h1>
       <h2>{count}</h2>
-    </fragment>
+    </>
   );
 }
 ```
@@ -259,7 +259,7 @@ function App({ memo }) {
   }
 
   return (
-    <fragment>
+    <>
       <ul onClick={handle}>
         {arr.value.map((todo) => (
           <li
@@ -272,7 +272,7 @@ function App({ memo }) {
           </li>
         ))}
       </ul>
-    </fragment>
+    </>
   );
 }
 ```
@@ -294,10 +294,10 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={useShow}>show</button>
       <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
-    </fragment>
+    </>
   );
 }
 ```
@@ -306,6 +306,8 @@ function App() {
 
 Create a document fragment tag. It is not part of the real DOM tree, its changes will not trigger a re-rendering of the DOM tree, and will not have an impact on performance.
 
+Typically `<>...</>` is used instead.
+
 ::: warning
 There is only one root component, so you will see it used as the root component in many places in the documentation.
 :::
@@ -313,10 +315,10 @@ There is only one root component, so you will see it used as the root component 
 ```jsx
 function App() {
   return (
-    <fragment>
+    <>
       <h1>Mettle</h1>
       <h2>Hello!</h2>
-    </fragment>
+    </>
   );
 }
 ```

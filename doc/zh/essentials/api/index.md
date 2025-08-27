@@ -27,10 +27,10 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={add}>add</button>
       <p>{count}</p>
-    </fragment>
+    </>
   );
 }
 ```
@@ -49,11 +49,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={add}>add</button>
       <p>{count}</p>
       <p>{double}</p>
-    </fragment>
+    </>
   );
 }
 ```
@@ -73,10 +73,10 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={change}>change</button>
       <p>{name}</p>
-    </fragment>
+    </>
   );
 }
 ```
@@ -98,11 +98,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={change}>change</button>
       <p>{name}</p>
       <p>{surname}</p>
-    </fragment>
+    </>
   );
 }
 ```
@@ -127,11 +127,11 @@ function App() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={change}>change</button>
       <p>{name}</p>
       <p>{surname}</p>
-    </fragment>
+    </>
   );
 }
 ```
@@ -151,14 +151,14 @@ function handleArr() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={push}>push</button>
       <ul>
         {arr.value.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
-    </fragment>
+    </>
   );
 }
 ```
@@ -176,10 +176,10 @@ function handleObj() {
   }
 
   return (
-    <fragment>
+    <>
       <button onClick={change}>change</button>
       <p>{obj.value.name}</p>
-    </fragment>
+    </>
   );
 }
 ```
