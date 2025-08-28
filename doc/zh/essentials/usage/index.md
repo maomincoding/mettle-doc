@@ -367,7 +367,7 @@ function App() {
 }
 ```
 
-- 深层解包不支持表达式
+- 深层解包不支持
 
 ```jsx
   const obj = signal({
@@ -378,7 +378,7 @@ function App() {
     },
   });
 
- <p>{obj.obj1.age}</p> // Support
+ <p>{obj.name}</p> // Support
 
- <div>{obj.obj1.show ? <p>Mettle.js</p> : <null></null>}</div> // Not supported
+ <p>{obj.obj1.age}</p> // Not supported
 ```

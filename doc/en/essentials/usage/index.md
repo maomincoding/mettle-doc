@@ -367,7 +367,7 @@ function App() {
 }
 ```
 
-- Deep unwrapping does not support expressions
+- Deep unpacking is not supported
 
 ```jsx
   const obj = signal({
@@ -378,7 +378,7 @@ function App() {
     },
   });
 
- <p>{obj.obj1.age}</p> // Support
+ <p>{obj.name}</p> // Support
 
- <div>{obj.obj1.show ? <p>Mettle.js</p> : <null></null>}</div> // Not supported
+ <p>{obj.obj1.age}</p> // Not supported
 ```
