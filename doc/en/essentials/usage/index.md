@@ -36,12 +36,10 @@ function App() {
     isShow.value = !isShow.value;
   }
 
-  const showHtm = computed(() => (isShow.value ? <p>Mettle.js</p> : <null></null>));
-
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{showHtm}</div>
+      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -65,7 +63,7 @@ function handleArr() {
     <>
       <button onClick={push}>push</button>
       <ul>
-        {arr.value.map((item) => (
+        {arr.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
@@ -261,7 +259,7 @@ function App({ memo }) {
   return (
     <>
       <ul onClick={handle}>
-        {arr.value.map((todo) => (
+        {arr.map((todo) => (
           <li
             $memo={[todo.id == selected, symbol1]}
             class={todo.id == selected ? 'danger' : ''}
@@ -296,7 +294,7 @@ function App() {
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -321,4 +319,66 @@ function App() {
     </>
   );
 }
+```
+
+## Auto-unwrapping
+
+When `Signals` is accessed in a `JSX` template, it is automatically unwrapped, so you no longer need to write `.value` for it in the `JSX` template.
+
+```jsx
+function App() {
+  const count = signal(0);
+
+  function add() {
+    count.value++;
+  }
+
+  return (
+    <>
+      <button onClick={add}>add</button>
+      <p>{count}</p>
+    </>
+  );
+}
+```
+
+However, please note that auto-unwrapping is not possible in the following cases.
+
+- Component communication
+
+```jsx
+function Child({ props }) {
+  return <h4>{props.count.value}</h4>;
+}
+
+function App() {
+  const count = signal(2);
+
+  function increment() {
+    count.value++;
+  }
+
+  return (
+    <>
+      <button onClick={increment}>add</button>
+      <Child count={count}></Child>
+    </>
+  );
+}
+```
+
+- Deep unwrapping does not support expressions
+
+```jsx
+  const obj = signal({
+    name: 'hello',
+    obj1: {
+      age: 10,
+      show:true
+    },
+  });
+
+ <p>{obj.obj1.age}</p> // Support
+
+ <div>{obj.obj1.show ? <p>Mettle.js</p> : <null></null>}</div> // Not supported
 ```

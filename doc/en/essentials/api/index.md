@@ -154,7 +154,7 @@ function handleArr() {
     <>
       <button onClick={push}>push</button>
       <ul>
-        {arr.value.map((item) => (
+        {arr.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
@@ -178,7 +178,7 @@ function handleObj() {
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{obj.value.name}</p>
+      <p>{obj.name}</p>
     </>
   );
 }

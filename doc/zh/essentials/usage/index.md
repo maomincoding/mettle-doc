@@ -36,12 +36,10 @@ function App() {
     isShow.value = !isShow.value;
   }
 
-  const showHtm = computed(() => (isShow.value ? <p>Mettle.js</p> : <null></null>));
-
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{showHtm}</div>
+      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -65,7 +63,7 @@ function handleArr() {
     <>
       <button onClick={push}>push</button>
       <ul>
-        {arr.value.map((item) => (
+        {arr.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
@@ -261,7 +259,7 @@ function App({ memo }) {
   return (
     <>
       <ul onClick={handle}>
-        {arr.value.map((todo) => (
+        {arr.map((todo) => (
           <li
             $memo={[todo.id == selected, symbol1]}
             class={todo.id == selected ? 'danger' : ''}
@@ -296,7 +294,7 @@ function App() {
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -321,4 +319,66 @@ function App() {
     </>
   );
 }
+```
+
+## 自动解包
+
+在 `JSX` 模板中访问 `Signals` 时，它会自动解包，因此你无须再在`JSX` 模板中为它写 `.value`。
+
+```jsx
+function App() {
+  const count = signal(0);
+
+  function add() {
+    count.value++;
+  }
+
+  return (
+    <>
+      <button onClick={add}>add</button>
+      <p>{count}</p>
+    </>
+  );
+}
+```
+
+但是，要注意下面几种情况不能自动解包。
+
+- 组件通信
+
+```jsx
+function Child({ props }) {
+  return <h4>{props.count.value}</h4>;
+}
+
+function App() {
+  const count = signal(2);
+
+  function increment() {
+    count.value++;
+  }
+
+  return (
+    <>
+      <button onClick={increment}>add</button>
+      <Child count={count}></Child>
+    </>
+  );
+}
+```
+
+- 深层解包不支持表达式
+
+```jsx
+  const obj = signal({
+    name: 'hello',
+    obj1: {
+      age: 10,
+      show:true
+    },
+  });
+
+ <p>{obj.obj1.age}</p> // Support
+
+ <div>{obj.obj1.show ? <p>Mettle.js</p> : <null></null>}</div> // Not supported
 ```
