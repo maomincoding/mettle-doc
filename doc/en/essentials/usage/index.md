@@ -50,7 +50,7 @@ function App() {
 To render an array-based list, use the array's map method to return an array.
 
 ```jsx
-function handleArr() {
+function HandleArr() {
   const arr = signal([1]);
 
   function push() {
@@ -91,6 +91,10 @@ function App() {
 Mettle applications are composed of components. A component is a part of a UI (user interface) that has its own logic and appearance. Components can be as small as a button or as large as an entire page.
 
 In Mettle, a component is a function.
+
+::: tip
+The first letter of the component name must be capitalized.
+:::
 
 ```jsx
 function MyComponent() {
@@ -370,15 +374,21 @@ function App() {
 - Deep unpacking is not supported
 
 ```jsx
-  const obj = signal({
-    name: 'hello',
-    obj1: {
-      age: 10,
-      show:true
-    },
-  });
+const obj = signal({
+  name: 'hello',
+  obj1: {
+    age: 10,
+    show:true
+  },
+});
 
- <p>{obj.name}</p> // Support
+<p>{obj.name}</p> // Support
 
- <p>{obj.obj1.age}</p> // Not supported
+<p>{obj.obj1.age}</p> // Not supported
+```
+
+- Attribute expressions are not supported.
+
+```jsx
+<tr class={item.id === selected.value ? 'danger' : ''}>
 ```

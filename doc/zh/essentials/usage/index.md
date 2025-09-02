@@ -50,7 +50,7 @@ function App() {
 渲染基于数组的列表，使用数组的`map`方法来返回一个数组。
 
 ```jsx
-function handleArr() {
+function HandleArr() {
   const arr = signal([1]);
 
   function push() {
@@ -91,6 +91,10 @@ function App() {
 Mettle 应用程序是由 组件 组成的。一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。
 
 在 Mettle 中，组件就是一个函数。
+
+::: tip
+组件名称首字母必须大写。
+:::
 
 ```jsx
 function MyComponent() {
@@ -370,15 +374,21 @@ function App() {
 - 深层解包不支持
 
 ```jsx
-  const obj = signal({
-    name: 'hello',
-    obj1: {
-      age: 10,
-      show:true
-    },
-  });
+const obj = signal({
+  name: 'hello',
+  obj1: {
+    age: 10,
+    show:true
+  },
+});
 
- <p>{obj.name}</p> // Support
+<p>{obj.name}</p> // Support
 
- <p>{obj.obj1.age}</p> // Not supported
+<p>{obj.obj1.age}</p> // Not supported
+```
+
+- 属性表达式不支持
+
+```jsx
+<tr class={item.id === selected.value ? 'danger' : ''}>
 ```

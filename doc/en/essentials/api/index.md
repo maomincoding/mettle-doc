@@ -141,7 +141,7 @@ function App() {
 Provides responsive management of complex objects.
 
 ```jsx
-function handleArr() {
+function HandleArr() {
   const arr = signal([1]);
 
   function push() {
@@ -164,7 +164,7 @@ function handleArr() {
 ```
 
 ```jsx
-function handleObj() {
+function HandleObj() {
   const obj = signal({
     name: 'hello',
   });
