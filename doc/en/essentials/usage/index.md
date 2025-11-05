@@ -10,7 +10,7 @@ Mettle allows developers to declaratively bind the DOM to the underlying instanc
 function App() {
   const msg = signal('Hello');
 
-  return <h1>{msg}</h1>;
+  return <h1>{msg.value}</h1>;
 }
 ```
 
@@ -20,7 +20,7 @@ function App() {
 function App() {
   const msg = signal('Hello');
 
-  return <input type='text' value={msg} />;
+  return <input type='text' value={msg.value} />;
 }
 ```
 
@@ -39,7 +39,7 @@ function App() {
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -63,7 +63,7 @@ function HandleArr() {
     <>
       <button onClick={push}>push</button>
       <ul>
-        {arr.map((item) => (
+        {arr.value.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
@@ -106,7 +106,7 @@ function MyComponent() {
 
   return (
     <>
-      <p>{count}</p>
+      <p>{count.value}</p>
       <button onClick={add}>MyComponent</button>
     </>
   );
@@ -121,7 +121,7 @@ function App() {
 
   return (
     <>
-      <p>{count}</p>
+      <p>{count.value}</p>
       <button onClick={add}>App</button>
       <MyComponent />
     </>
@@ -220,8 +220,8 @@ function App() {
   return (
     <>
       <button onClick={add}>Add</button>
-      <h1 $once>{count}</h1>
-      <h2>{count}</h2>
+      <h1 $once>{count.value}</h1>
+      <h2>{count.value}</h2>
     </>
   );
 }
@@ -263,10 +263,10 @@ function App({ memo }) {
   return (
     <>
       <ul onClick={handle}>
-        {arr.map((todo) => (
+        {arr.value.map((todo) => (
           <li
-            $memo={[todo.id == selected, symbol1]}
-            class={todo.id == selected ? 'danger' : ''}
+            $memo={[todo.id == selected.value, symbol1]}
+            class={todo.id == selected.value ? 'danger' : ''}
             key={todo.id}
             data-id={todo.id}
           >
@@ -279,7 +279,7 @@ function App({ memo }) {
 }
 ```
 
-Because the element hit by the `$memo` tag will not update its child elements by default, if you want to update it, explicitly define the third item of the array as `true`, such as `$memo={[todo.id == selected, symbol1,true]}`.
+Because the element hit by the `$memo` tag will not update its child elements by default, if you want to update it, explicitly define the third item of the array as `true`, such as `$memo={[todo.id == selected.value, symbol1,true]}`.
 
 ## Built-in Tags
 
@@ -298,7 +298,7 @@ function App() {
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -323,72 +323,4 @@ function App() {
     </>
   );
 }
-```
-
-## Auto-unwrapping
-
-When `Signals` is accessed in a `JSX` template, it is automatically unwrapped, so you no longer need to write `.value` for it in the `JSX` template.
-
-```jsx
-function App() {
-  const count = signal(0);
-
-  function add() {
-    count.value++;
-  }
-
-  return (
-    <>
-      <button onClick={add}>add</button>
-      <p>{count}</p>
-    </>
-  );
-}
-```
-
-However, please note that auto-unwrapping is not possible in the following cases.
-
-- Component communication
-
-```jsx
-function Child({ props }) {
-  return <h4>{props.count.value}</h4>;
-}
-
-function App() {
-  const count = signal(2);
-
-  function increment() {
-    count.value++;
-  }
-
-  return (
-    <>
-      <button onClick={increment}>add</button>
-      <Child count={count}></Child>
-    </>
-  );
-}
-```
-
-- Deep unpacking is not supported
-
-```jsx
-const obj = signal({
-  name: 'hello',
-  obj1: {
-    age: 10,
-    show:true
-  },
-});
-
-<p>{obj.name}</p> // Support
-
-<p>{obj.obj1.age}</p> // Not supported
-```
-
-- Attribute expressions are not supported.
-
-```jsx
-<tr class={item.id === selected.value ? 'danger' : ''}>
 ```

@@ -29,7 +29,8 @@ Mettle 是一个用于构建用户界面的 JavaScript 库。
 ```jsx
 function Counter() {
   const count = signal(0);
+  const add = () => count.value++;
 
-  return <button onClick={() => count.value++}>{count}</button>;
+  return <button onClick={add}>{count.value}</button>;
 }
 ```

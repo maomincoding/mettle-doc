@@ -66,7 +66,6 @@ The advantages of no builds come with tradeoffs:
 
 - Unable to use `JSX` syntax
 - Component functions must `return` a template function
-- Signal mechanisms cannot be automatically unwrapped; `.value` must be used manually
 
 :::
 

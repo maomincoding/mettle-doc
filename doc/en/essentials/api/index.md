@@ -29,7 +29,7 @@ function App() {
   return (
     <>
       <button onClick={add}>add</button>
-      <p>{count}</p>
+      <p>{count.value}</p>
     </>
   );
 }
@@ -51,8 +51,8 @@ function App() {
   return (
     <>
       <button onClick={add}>add</button>
-      <p>{count}</p>
-      <p>{double}</p>
+      <p>{count.value}</p>
+      <p>{double.value}</p>
     </>
   );
 }
@@ -75,7 +75,7 @@ function App() {
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name}</p>
+      <p>{name.value}</p>
     </>
   );
 }
@@ -100,8 +100,8 @@ function App() {
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name}</p>
-      <p>{surname}</p>
+      <p>{name.value}</p>
+      <p>{surname.value}</p>
     </>
   );
 }
@@ -129,8 +129,8 @@ function App() {
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name}</p>
-      <p>{surname}</p>
+      <p>{name.value}</p>
+      <p>{surname.value}</p>
     </>
   );
 }
@@ -154,7 +154,7 @@ function HandleArr() {
     <>
       <button onClick={push}>push</button>
       <ul>
-        {arr.map((item) => (
+        {arr.value.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
@@ -178,7 +178,7 @@ function HandleObj() {
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{obj.name}</p>
+      <p>{obj.value.name}</p>
     </>
   );
 }
@@ -243,7 +243,7 @@ This API is only used in the unbuilt version.
 ```js
 function App() {
   const count = 0;
-  return () => html`<p>${count}</p>`;
+  return () => html`<p>${count.value}</p>`;
 }
 ```
 

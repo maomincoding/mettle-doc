@@ -10,7 +10,7 @@ Mettle 允许开发人员以声明方式将 DOM 绑定到底层实例的数据�
 function App() {
   const msg = signal('Hello');
 
-  return <h1>{msg}</h1>;
+  return <h1>{msg.value}</h1>;
 }
 ```
 
@@ -20,7 +20,7 @@ function App() {
 function App() {
   const msg = signal('Hello');
 
-  return <input type='text' value={msg} />;
+  return <input type='text' value={msg.value} />;
 }
 ```
 
@@ -39,7 +39,7 @@ function App() {
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -63,7 +63,7 @@ function HandleArr() {
     <>
       <button onClick={push}>push</button>
       <ul>
-        {arr.map((item) => (
+        {arr.value.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
@@ -106,7 +106,7 @@ function MyComponent() {
 
   return (
     <>
-      <p>{count}</p>
+      <p>{count.value}</p>
       <button onClick={add}>MyComponent</button>
     </>
   );
@@ -121,7 +121,7 @@ function App() {
 
   return (
     <>
-      <p>{count}</p>
+      <p>{count.value}</p>
       <button onClick={add}>App</button>
       <MyComponent />
     </>
@@ -220,8 +220,8 @@ function App() {
   return (
     <>
       <button onClick={add}>Add</button>
-      <h1 $once>{count}</h1>
-      <h2>{count}</h2>
+      <h1 $once>{count.value}</h1>
+      <h2>{count.value}</h2>
     </>
   );
 }
@@ -263,10 +263,10 @@ function App({ memo }) {
   return (
     <>
       <ul onClick={handle}>
-        {arr.map((todo) => (
+        {arr.value.map((todo) => (
           <li
-            $memo={[todo.id == selected, symbol1]}
-            class={todo.id == selected ? 'danger' : ''}
+            $memo={[todo.id == selected.value, symbol1]}
+            class={todo.id == selected.value ? 'danger' : ''}
             key={todo.id}
             data-id={todo.id}
           >
@@ -279,7 +279,7 @@ function App({ memo }) {
 }
 ```
 
-因为被`$memo`标记命中的元素，默认不会更新其子元素，如果想使其更新，则将数组第三项显式定义为`true`，比如`$memo={[todo.id == selected, symbol1,true]}`。
+因为被`$memo`标记命中的元素，默认不会更新其子元素，如果想使其更新，则将数组第三项显式定义为`true`，比如`$memo={[todo.id == selected.value, symbol1,true]}`。
 
 ## 内置标签
 
@@ -298,7 +298,7 @@ function App() {
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -323,72 +323,4 @@ function App() {
     </>
   );
 }
-```
-
-## 自动解包
-
-在 `JSX` 模板中访问 `Signals` 时，它会自动解包，因此你无须再在`JSX` 模板中为它写 `.value`。
-
-```jsx
-function App() {
-  const count = signal(0);
-
-  function add() {
-    count.value++;
-  }
-
-  return (
-    <>
-      <button onClick={add}>add</button>
-      <p>{count}</p>
-    </>
-  );
-}
-```
-
-但是，要注意下面几种情况不能自动解包。
-
-- 组件通信
-
-```jsx
-function Child({ props }) {
-  return <h4>{props.count.value}</h4>;
-}
-
-function App() {
-  const count = signal(2);
-
-  function increment() {
-    count.value++;
-  }
-
-  return (
-    <>
-      <button onClick={increment}>add</button>
-      <Child count={count}></Child>
-    </>
-  );
-}
-```
-
-- 深层解包不支持
-
-```jsx
-const obj = signal({
-  name: 'hello',
-  obj1: {
-    age: 10,
-    show:true
-  },
-});
-
-<p>{obj.name}</p> // Support
-
-<p>{obj.obj1.age}</p> // Not supported
-```
-
-- 属性表达式不支持
-
-```jsx
-<tr class={item.id === selected.value ? 'danger' : ''}>
 ```
