@@ -1,6 +1,10 @@
 # 更新日志
 
-## v1.7.0 (Latest)
+## v1.7.1 (Latest)
+
+- 增强与[mettleRouter](/zh/tool/mettleRouter/)的集成。
+
+## v1.7.0
 
 - 引入 `Signals` 机制，状态变化会自动更新组件和 UI，以实现尽可能高效的操作。
 

@@ -232,6 +232,10 @@ function App() {
 }
 ```
 
+## resetView
+
+Integrate [mettleRouter](/tool/mettleRouter/) to reset the current routing view.
+
 ## html
 
 ` html`` ` is a tag function. The syntax for a tag function is to directly follow the function name with a template string. For example, you can write HTML tags directly in the template string.

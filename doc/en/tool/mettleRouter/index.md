@@ -20,6 +20,8 @@ The first parameter is an array object, which is the routing component to be reg
 
 The second parameter needs to be passed to the `resetView` API, and the page matching the corresponding path will be updated accordingly.
 
+The first two parameters must be passed, and the third parameter is optional and is used to configure the selector of the root node of the routing page.
+
 ```js
 // router/index.js
 import { resetView } from 'mettle';
@@ -39,7 +41,8 @@ const router = initRouter(
       template: About,
     },
   ],
-  resetView
+  resetView,
+  '#router',
 );
 
 export default router;
@@ -56,6 +59,23 @@ function App() {
   return <Router></Router>;
 }
 
+createApp(<App />, '#app');
+```
+
+If you configure the third parameter, the `<Router>` component must set a parent node.
+
+```jsx
+// main.jsx
+import { createApp } from 'mettle';
+import Router from './router/index';
+
+function App() {
+  return (
+    <div id='router'>
+      <Router></Router>
+    </div>
+  );
+}
 createApp(<App />, '#app');
 ```
 
@@ -90,6 +110,40 @@ function About() {
 
 If you perform a route parameter operation, you need to obtain the parameter object. You can directly execute the `toParse()` method to obtain the object information.
 
+```jsx
+console.log(toParse());
+```
+
+### hashChange
+
+When the route changes, the `hashChange` event is triggered. You can listen to this event and perform custom actions.
+
+```jsx
+import { hashChange } from 'mettle-router';
+
+hashChange(() => {
+  if (location.hash === '#/login') {
+    isLogin.value = true;
+  } else {
+    isLogin.value = false;
+  }
+});
+```
+
+Returns the function to cancel listening.
+
+```jsx
+const removeListener = hashchange(() => {
+  console.log('Hash变化:', location.hash);
+});
+
+// removeListener();
+```
+
 ### routerVersion
 
 You can get the version information of `mettleRouter`.
+
+```
+
+```

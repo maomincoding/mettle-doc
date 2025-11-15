@@ -1,6 +1,10 @@
 # Change Log
 
-## v1.7.0 (Latest)
+## v1.7.1 (Latest)
+
+- Enhanced integration with [mettleRouter](/tool/mettleRouter/).
+
+## v1.7.0
 
 - Introducing the `Signals` mechanism, which automatically updates components and the UI when state changes, ensuring the most efficient operation possible.
 

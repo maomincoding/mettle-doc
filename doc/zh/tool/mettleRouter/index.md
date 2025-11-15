@@ -20,6 +20,8 @@ npm install mettle-router
 
 第二个参数需要传递给`resetView` API，匹配到对应路径的页面会相应更新。
 
+前两个参数是必须要传的，第三个参数是可选的，用于配置路由页面根节点的选择器。
+
 ```js
 // router/index.js
 import { resetView } from 'mettle';
@@ -39,7 +41,8 @@ const router = initRouter(
       template: About,
     },
   ],
-  resetView
+  resetView,
+  '#router',
 );
 
 export default router;
@@ -56,6 +59,23 @@ function App() {
   return <Router></Router>;
 }
 
+createApp(<App />, '#app');
+```
+
+如果你配置了第三个参数，那么`<Router>`组件必须设置一个父节点。
+
+```jsx
+// main.jsx
+import { createApp } from 'mettle';
+import Router from './router/index';
+
+function App() {
+  return (
+    <div id='router'>
+      <Router></Router>
+    </div>
+  );
+}
 createApp(<App />, '#app');
 ```
 
@@ -89,6 +109,36 @@ function About() {
 ### toParse
 
 如果执行路由参数的操作，则要获取参数对象。 直接执行`toParse()`方法可以获取对象信息。
+
+```jsx
+console.log(toParse());
+```
+
+### hashChange
+
+当路由发生变化时，会触发`hashChange`事件。 您可以监听该事件，执行自定义操作。
+
+```jsx
+import { hashChange } from 'mettle-router';
+
+hashChange(() => {
+  if (location.hash === '#/login') {
+    isLogin.value = true;
+  } else {
+    isLogin.value = false;
+  }
+});
+```
+
+返回取消监听的函数。
+
+```jsx
+const removeListener = hashchange(() => {
+  console.log('Hash变化:', location.hash);
+});
+
+// removeListener();
+```
 
 ### routerVersion
 

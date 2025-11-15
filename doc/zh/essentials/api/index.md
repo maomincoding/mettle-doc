@@ -232,6 +232,10 @@ function App() {
 }
 ```
 
+## resetView
+
+集成[mettleRouter](/zh/tool/mettleRouter/)，用于重置当前路由视图。
+
 ## html
 
 ` html`` `是一个标签函数，标签函数的语法是直接在函数名后跟一个模板字符串。 例如，您可以直接在模板字符串中编写 HTML 标签。
