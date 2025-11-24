@@ -1,6 +1,10 @@
 # 更新日志
 
-## v1.7.1 (Latest)
+## v1.7.3 (Latest)
+
+- 在编译阶段对静态节点进行优化，减少 Diff 对比。
+
+## v1.7.1
 
 - 增强与[mettleRouter](/zh/tool/mettleRouter/)的集成。
 
