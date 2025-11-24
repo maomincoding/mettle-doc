@@ -1,10 +1,6 @@
 # Change Log
 
-## v1.7.3 (Latest)
-
-- Optimize static nodes during the compilation phase to reduce diff comparisons.
-
-## v1.7.1
+## v1.7.5 (Latest)
 
 - Enhanced integration with [mettleRouter](/tool/mettleRouter/).
 
