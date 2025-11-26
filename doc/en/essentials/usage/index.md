@@ -136,7 +136,7 @@ If the virtual DOM tree is too large and the Diff calculation time is greater th
 In addition, we can use the predefined property `content` of the function component to define data for the component and use it when you need it.
 
 ```jsx
-function Child({ content }) {
+function Child(props, content) {
   content.getName = () => {
     console.log('child');
   };
@@ -166,7 +166,7 @@ function App() {
 If we define a static property for a component, we can get it using the predefined property `props` of the function component.
 
 ```jsx
-function Child({ props }) {
+function Child(props) {
   function getCount() {
     console.log(props.count.value); // 1
   }
@@ -234,7 +234,7 @@ Caches a template subtree, skipping updates to the subtree.
 This property requires a fixed-length array. The first item in the array is of type `Boolean`; if the value is `false`, updates to the entire subtree are skipped. The second item in the array is of type `Symbol` and is used in conjunction with `memo`.
 
 ```jsx
-function App({ memo }) {
+function App(props, content, memo) {
   const symbol1 = Symbol();
   let selected = signal(0);
   const arr = signal([

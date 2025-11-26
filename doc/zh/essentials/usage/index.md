@@ -136,7 +136,7 @@ Mettle 内部的渲染系统是基于虚拟 DOM 构建的，虚拟 DOM (Virtual 
 另外，我们可以利用函数组件的预定义属性`content`给组件定义数据，并且在您需要的时候使用它。
 
 ```jsx
-function Child({ content }) {
+function Child(props, content) {
   content.getName = () => {
     console.log('child');
   };
@@ -166,7 +166,7 @@ function App() {
 如果我们给组件定义一个静态属性，可以利用函数组件的预定义属性`props`获取到它。
 
 ```jsx
-function Child({ props }) {
+function Child(props) {
   function getCount() {
     console.log(props.count.value); // 1
   }
@@ -234,7 +234,7 @@ function App() {
 该属性需要传入一个固定长度的数组。数组第一项的值的类型为 `Boolean`，如果值为`false`，那么整个子树的更新将被跳过。数组第二项值的类型为 `Symbol`，与 `memo` 搭配使用。
 
 ```jsx
-function App({ memo }) {
+function App(props, content, memo) {
   const symbol1 = Symbol();
   let selected = signal(0);
   const arr = signal([

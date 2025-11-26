@@ -1,6 +1,6 @@
 # 更新日志
 
-## v1.7.5 (Latest)
+## v1.7.6 (Latest)
 
 - 增强与[mettleRouter](/zh/tool/mettleRouter/)的集成。
 

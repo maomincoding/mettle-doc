@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.7.5 (Latest)
+## v1.7.6 (Latest)
 
 - Enhanced integration with [mettleRouter](/tool/mettleRouter/).
 
