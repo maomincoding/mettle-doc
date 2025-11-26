@@ -143,8 +143,7 @@ function Child(props, content) {
 
   return (
     <>
-      <button onClick={post}>Post</button>
-      <Child />
+      <h1>Child</h1>
     </>
   );
 }
