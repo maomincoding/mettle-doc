@@ -136,54 +136,6 @@ function App() {
 }
 ```
 
-## produce
-
-提供了复杂对象的响应式管理能力。
-
-```jsx
-function HandleArr() {
-  const arr = signal([1]);
-
-  function push() {
-    arr.value = produce(arr.value, (item) => {
-      item.push(new Date().getTime());
-    });
-  }
-
-  return (
-    <>
-      <button onClick={push}>push</button>
-      <ul>
-        {arr.value.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </>
-  );
-}
-```
-
-```jsx
-function HandleObj() {
-  const obj = signal({
-    name: 'hello',
-  });
-
-  function change() {
-    obj.value = produce(obj.value, (item) => {
-      item.name = 'world';
-    });
-  }
-
-  return (
-    <>
-      <button onClick={change}>change</button>
-      <p>{obj.value.name}</p>
-    </>
-  );
-}
-```
-
 ## onMounted
 
 注册一个回调函数，在组件挂载完成后执行。

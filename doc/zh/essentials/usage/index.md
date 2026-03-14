@@ -54,9 +54,7 @@ function HandleArr() {
   const arr = signal([1]);
 
   function push() {
-    arr.value = produce(arr.value, (item) => {
-      item.push(new Date().getTime());
-    });
+    arr.value = [...arr.value, new Date().getTime()];
   }
 
   return (
