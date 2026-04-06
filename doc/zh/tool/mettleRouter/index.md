@@ -123,9 +123,9 @@ import { hashChange } from 'mettle-router';
 
 hashChange(() => {
   if (location.hash === '#/login') {
-    isLogin.value = true;
+    isLogin = true;
   } else {
-    isLogin.value = false;
+    isLogin = false;
   }
 });
 ```

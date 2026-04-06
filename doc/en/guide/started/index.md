@@ -30,9 +30,8 @@ Let's develop a simple counter application using just one function.
 
 ```jsx
 function Counter() {
-  const count = signal(0);
-  const add = () => count.value++;
-
-  return <button onClick={add}>{count.value}</button>;
+  const count = $signal(0);
+  const add = () => count++;
+  return <button onClick={add}>{count}</button>;
 }
 ```

@@ -64,8 +64,9 @@ Both methods above use the production version by default. If you want more accur
 ::: tip
 The advantages of no builds come with tradeoffs:
 
-- Unable to use `JSX` syntax
-- Component functions must `return` a template function
+- Unable to use `JSX` syntax;
+- Component functions must `return` a template function;
+- Cannot omit `.value`;
 
 :::
 

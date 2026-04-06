@@ -18,18 +18,21 @@ createApp(<App />, '#app');
 
 Creates a new signal with the given parameters as the initial value.
 
+`$signal` is compile-time syntactic sugar provided by Mettle for writing reactive states more naturally.
+What you're writing is "ordinary variable assignment/increment," which will automatically be converted to `.value` reads and writes for a signal after compilation.
+
 ```jsx
 function App() {
-  const count = signal(0);
+  let count = $signal(0);
 
   function add() {
-    count.value++;
+    count++;
   }
 
   return (
     <>
       <button onClick={add}>add</button>
-      <p>{count.value}</p>
+      <p>{count}</p>
     </>
   );
 }
@@ -41,18 +44,18 @@ Creates a new signal that is computed based on the value of another signal. The 
 
 ```jsx
 function App() {
-  const count = signal(0);
-  const double = computed(() => count.value * 2);
+  let count = $signal(0);
+  const double = computed(() => count * 2);
 
   function add() {
-    count.value++;
+    count++;
   }
 
   return (
     <>
       <button onClick={add}>add</button>
-      <p>{count.value}</p>
-      <p>{double.value}</p>
+      <p>{count}</p>
+      <p>{double}</p>
     </>
   );
 }
@@ -64,18 +67,18 @@ To run arbitrary code based on a signal change, use `effect(fn)`. Similar to `co
 
 ```jsx
 function App() {
-  const name = signal('Hello');
+  const name = $signal('Hello');
 
-  effect(() => console.log('Hello', name.value)); // Hello -> hello111
+  effect(() => console.log('Hello', name)); // Hello -> hello111
 
   function change() {
-    name.value = 'hello111';
+    name = 'hello111';
   }
 
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name.value}</p>
+      <p>{name}</p>
     </>
   );
 }
@@ -87,21 +90,21 @@ The `batch(fn)` function can be used to combine multiple value updates into a si
 
 ```jsx
 function App() {
-  const name = signal('hello');
-  const surname = signal('dog');
+  let name = $signal('hello');
+  let surname = $signal('dog');
 
   function change() {
     batch(() => {
-      name.value = 'Hello';
-      surname.value = 'cat';
+      name = 'Hello';
+      surname = 'cat';
     });
   }
 
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name.value}</p>
-      <p>{surname.value}</p>
+      <p>{name}</p>
+      <p>{surname}</p>
     </>
   );
 }
@@ -113,24 +116,24 @@ function App() {
 
 ```jsx
 function App() {
-  const name = signal('hello');
-  const surname = signal('dog');
+  let name = $signal('hello');
+  let surname = $signal('dog');
 
   effect(() => {
     untracked(() => {
-      console.log(`${name.value} ${surname.value}`);
+      console.log(`${name} ${surname}`);
     });
   });
 
   function change() {
-    surname.value = 'cat';
+    surname = 'cat';
   }
 
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name.value}</p>
-      <p>{surname.value}</p>
+      <p>{name}</p>
+      <p>{surname}</p>
     </>
   );
 }
@@ -199,7 +202,7 @@ This API is only used in the unbuilt version.
 ```js
 function App() {
   const count = 0;
-  return () => html`<p>${count.value}</p>`;
+  return () => html`<p>${count}</p>`;
 }
 ```
 

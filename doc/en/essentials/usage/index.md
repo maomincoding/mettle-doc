@@ -8,9 +8,9 @@ Mettle allows developers to declaratively bind the DOM to the underlying instanc
 
 ```jsx
 function App() {
-  const msg = signal('Hello');
+  const msg = $signal('Hello');
 
-  return <h1>{msg.value}</h1>;
+  return <h1>{msg}</h1>;
 }
 ```
 
@@ -18,9 +18,9 @@ function App() {
 
 ```jsx
 function App() {
-  const msg = signal('Hello');
+  const msg = $signal('Hello');
 
-  return <input type='text' value={msg.value} />;
+  return <input type='text' value={msg} />;
 }
 ```
 
@@ -30,16 +30,16 @@ The label is only displayed if the directive's expression returns a `true` value
 
 ```jsx
 function App() {
-  const isShow = signal(true);
+  let isShow = $signal(true);
 
   function useShow() {
-    isShow.value = !isShow.value;
+    isShow = !isShow;
   }
 
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }
@@ -51,23 +51,33 @@ To render an array-based list, use the array's map method to return an array.
 
 ```jsx
 function HandleArr() {
-  const arr = signal([1]);
+  let arr = $signal([1]);
 
   function push() {
-    arr.value = [...arr.value, new Date().getTime()];
+    arr = [...arr, new Date().getTime()];
   }
 
   return (
     <>
       <button onClick={push}>push</button>
       <ul>
-        {arr.value.map((item) => (
+        {arr.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
     </>
   );
 }
+```
+
+When the state is a complex type such as an object or array, it is recommended to use `immer` to simplify immutable updates. `Immer` allows you to modify drafts in a "mutable" manner and automatically return new immutable results, significantly reducing the mental burden of deep copy and expand operators.
+
+```js
+import { produce } from 'immer';
+
+arr = produce(arr, (draft) => {
+  draft.push(new Date().getTime());
+});
 ```
 
 ::: warning
@@ -96,30 +106,30 @@ The first letter of the component name must be capitalized.
 
 ```jsx
 function MyComponent() {
-  const count = signal(0);
+  let count = $signal(0);
 
   function add() {
-    count.value++;
+    count++;
   }
 
   return (
     <>
-      <p>{count.value}</p>
+      <p>{count}</p>
       <button onClick={add}>MyComponent</button>
     </>
   );
 }
 
 function App() {
-  const count = signal(0);
+  let count = $signal(0);
 
   function add() {
-    count.value++;
+    count++;
   }
 
   return (
     <>
-      <p>{count.value}</p>
+      <p>{count}</p>
       <button onClick={add}>App</button>
       <MyComponent />
     </>
@@ -165,14 +175,14 @@ If we define a static property for a component, we can get it using the predefin
 ```jsx
 function Child(props) {
   function getCount() {
-    console.log(props.count.value); // 1
+    console.log(props.count); // 1
   }
 
   return <h1 onClick={getCount}>Child</h1>;
 }
 
 function App() {
-  const count = signal(1);
+  const count = $signal(1);
 
   return <Child count={count} />;
 }
@@ -208,17 +218,17 @@ Render the element only once, and skip future updates.
 
 ```jsx
 function App() {
-  const count = signal(1);
+  let count = $signal(1);
 
   function add() {
-    count.value++;
+    count++;
   }
 
   return (
     <>
       <button onClick={add}>Add</button>
-      <h1 $once>{count.value}</h1>
-      <h2>{count.value}</h2>
+      <h1 $once>{count}</h1>
+      <h2>{count}</h2>
     </>
   );
 }
@@ -233,8 +243,8 @@ This property requires a fixed-length array. The first item in the array is of t
 ```jsx
 function App(props, content, memo) {
   const symbol1 = Symbol();
-  let selected = signal(0);
-  const arr = signal([
+  let selected = $signal(0);
+  const arr = $signal([
     {
       id: '1',
       val: 'A',
@@ -253,17 +263,17 @@ function App(props, content, memo) {
     memo(() => {
       const el = event.target;
       const id = Number(el.dataset.id);
-      selected.value = id;
+      selected = id;
     }, symbol1);
   }
 
   return (
     <>
       <ul onClick={handle}>
-        {arr.value.map((todo) => (
+        {arr.map((todo) => (
           <li
-            $memo={[todo.id == selected.value, symbol1]}
-            class={todo.id == selected.value ? 'danger' : ''}
+            $memo={[todo.id == selected, symbol1]}
+            class={todo.id == selected ? 'danger' : ''}
             key={todo.id}
             data-id={todo.id}
           >
@@ -276,7 +286,7 @@ function App(props, content, memo) {
 }
 ```
 
-Because the element hit by the `$memo` tag will not update its child elements by default, if you want to update it, explicitly define the third item of the array as `true`, such as `$memo={[todo.id == selected.value, symbol1,true]}`.
+Because the element hit by the `$memo` tag will not update its child elements by default, if you want to update it, explicitly define the third item of the array as `true`, such as `$memo={[todo.id == selected, symbol1,true]}`.
 
 ## Built-in Tags
 
@@ -286,16 +296,16 @@ Empty tags will not be displayed on the page.
 
 ```jsx
 function App() {
-  const isShow = signal(true);
+  let isShow = $signal(true);
 
   function useShow() {
-    isShow.value = !isShow.value;
+    isShow = !isShow;
   }
 
   return (
     <>
       <button onClick={useShow}>show</button>
-      <div>{isShow.value ? <p>Mettle.js</p> : <null></null>}</div>
+      <div>{isShow ? <p>Mettle.js</p> : <null></null>}</div>
     </>
   );
 }

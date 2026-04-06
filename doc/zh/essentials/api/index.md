@@ -18,18 +18,21 @@ createApp(<App />, '#app');
 
 以给定参数为初始值创建一个新的信号。
 
+`$signal` 是 Mettle 提供的编译期语法糖，用于更自然地编写响应式状态。
+你写的是“普通变量赋值/自增”，编译后会自动转换为 signal 的 `.value` 读写。
+
 ```jsx
 function App() {
-  const count = signal(0);
+  let count = $signal(0);
 
   function add() {
-    count.value++;
+    count++;
   }
 
   return (
     <>
       <button onClick={add}>add</button>
-      <p>{count.value}</p>
+      <p>{count}</p>
     </>
   );
 }
@@ -41,18 +44,18 @@ function App() {
 
 ```jsx
 function App() {
-  const count = signal(0);
-  const double = computed(() => count.value * 2);
+  let count = $signal(0);
+  const double = computed(() => count * 2);
 
   function add() {
-    count.value++;
+    count++;
   }
 
   return (
     <>
       <button onClick={add}>add</button>
-      <p>{count.value}</p>
-      <p>{double.value}</p>
+      <p>{count}</p>
+      <p>{double}</p>
     </>
   );
 }
@@ -64,18 +67,18 @@ function App() {
 
 ```jsx
 function App() {
-  const name = signal('Hello');
+  let name = $signal('Hello');
 
-  effect(() => console.log('Hello', name.value)); // Hello -> hello111
+  effect(() => console.log('Hello', name)); // Hello -> hello111
 
   function change() {
-    name.value = 'hello111';
+    name = 'hello111';
   }
 
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name.value}</p>
+      <p>{name}</p>
     </>
   );
 }
@@ -87,21 +90,21 @@ function App() {
 
 ```jsx
 function App() {
-  const name = signal('hello');
-  const surname = signal('dog');
+  let name = $signal('hello');
+  let surname = $signal('dog');
 
   function change() {
     batch(() => {
-      name.value = 'Hello';
-      surname.value = 'cat';
+      name = 'Hello';
+      surname = 'cat';
     });
   }
 
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name.value}</p>
-      <p>{surname.value}</p>
+      <p>{name}</p>
+      <p>{surname}</p>
     </>
   );
 }
@@ -113,24 +116,24 @@ function App() {
 
 ```jsx
 function App() {
-  const name = signal('hello');
-  const surname = signal('dog');
+  let name = $signal('hello');
+  let surname = $signal('dog');
 
   effect(() => {
     untracked(() => {
-      console.log(`${name.value} ${surname.value}`);
+      console.log(`${name} ${surname}`);
     });
   });
 
   function change() {
-    surname.value = 'cat';
+    surname = 'cat';
   }
 
   return (
     <>
       <button onClick={change}>change</button>
-      <p>{name.value}</p>
-      <p>{surname.value}</p>
+      <p>{name}</p>
+      <p>{surname}</p>
     </>
   );
 }
@@ -199,7 +202,7 @@ function App() {
 ```js
 function App() {
   const count = 0;
-  return () => html`<p>${count.value}</p>`;
+  return () => html`<p>${count}</p>`;
 }
 ```
 
